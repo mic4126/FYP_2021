@@ -1,0 +1,825 @@
+{
+  "uuid": "bb9c6167-0feb-48bf-9f2e-5a851b10157c",
+  "lastMigration": 19,
+  "name": "New environment",
+  "endpointPrefix": "",
+  "latency": 0,
+  "port": 3001,
+  "hostname": "0.0.0.0",
+  "routes": [
+    {
+      "uuid": "bb15ee83-7d4b-4d7a-ac62-0ea90104e984",
+      "documentation": "",
+      "method": "post",
+      "endpoint": "admin/login",
+      "responses": [
+        {
+          "uuid": "d9900ba6-9440-411e-8156-462310801027",
+          "body": "{}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "body",
+              "modifier": "username",
+              "value": "\\S+",
+              "operator": "regex"
+            },
+            {
+              "target": "body",
+              "modifier": "password",
+              "value": "\\S+",
+              "operator": "regex"
+            }
+          ],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false
+        }
+      ],
+      "enabled": true,
+      "randomResponse": false,
+      "sequentialResponse": false
+    },
+    {
+      "uuid": "39564d7e-7429-4afa-886f-8840d6ea119b",
+      "documentation": "",
+      "method": "put",
+      "endpoint": "admin/password/:username",
+      "responses": [
+        {
+          "uuid": "76a393fc-2a15-4941-8340-14de48926aca",
+          "body": "{}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "body",
+              "modifier": "username",
+              "value": "\\S+",
+              "operator": "regex"
+            },
+            {
+              "target": "body",
+              "modifier": "oldpw",
+              "value": "\\S+",
+              "operator": "regex"
+            },
+            {
+              "target": "body",
+              "modifier": "newpw",
+              "value": "\\S+",
+              "operator": "regex"
+            }
+          ],
+          "rulesOperator": "AND",
+          "disableTemplating": false,
+          "fallbackTo404": false
+        }
+      ],
+      "enabled": true,
+      "randomResponse": false,
+      "sequentialResponse": false
+    },
+    {
+      "uuid": "93f75b9d-fe90-4e48-8888-da7bc918b80e",
+      "documentation": "",
+      "method": "post",
+      "endpoint": "admin/password/:username",
+      "responses": [
+        {
+          "uuid": "67c01bb6-d673-4ad0-9b41-a769f4d611ab",
+          "body": "{}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "body",
+              "modifier": "username",
+              "value": "\\S+",
+              "operator": "regex"
+            },
+            {
+              "target": "body",
+              "modifier": "email",
+              "value": "\\S+",
+              "operator": "regex"
+            }
+          ],
+          "rulesOperator": "AND",
+          "disableTemplating": false,
+          "fallbackTo404": false
+        }
+      ],
+      "enabled": true,
+      "randomResponse": false,
+      "sequentialResponse": false
+    },
+    {
+      "uuid": "fa56cfc8-0de2-49ad-b199-118a8881636c",
+      "documentation": "",
+      "method": "post",
+      "endpoint": "admin/user",
+      "responses": [
+        {
+          "uuid": "6c7f49bc-b9d5-406d-9308-5db1ef75a8e8",
+          "body": "{}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "body",
+              "modifier": "username",
+              "value": "\\S+",
+              "operator": "regex"
+            },
+            {
+              "target": "body",
+              "modifier": "firstname",
+              "value": "\\S+",
+              "operator": "regex"
+            },
+            {
+              "target": "body",
+              "modifier": "email",
+              "value": "\\S+",
+              "operator": "regex"
+            },
+            {
+              "target": "body",
+              "modifier": "usertype",
+              "value": "\\S+",
+              "operator": "regex"
+            }
+          ],
+          "rulesOperator": "AND",
+          "disableTemplating": false,
+          "fallbackTo404": false
+        }
+      ],
+      "enabled": true,
+      "randomResponse": false,
+      "sequentialResponse": false
+    },
+    {
+      "uuid": "1d2d4842-deab-4f8c-8777-6a3fa35bd141",
+      "documentation": "",
+      "method": "delete",
+      "endpoint": "admin/user/:username",
+      "responses": [
+        {
+          "uuid": "1eb11e80-297a-4971-be8b-90f02e3a4c92",
+          "body": "{}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false
+        }
+      ],
+      "enabled": true,
+      "randomResponse": false,
+      "sequentialResponse": false
+    },
+    {
+      "uuid": "0ac26fed-c9b3-4048-99a3-b9f0483bd480",
+      "documentation": "",
+      "method": "put",
+      "endpoint": "admin/user/:username",
+      "responses": [
+        {
+          "uuid": "727f9092-20be-45fb-812b-c907e4b2c7ed",
+          "body": "{}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "body",
+              "modifier": "username",
+              "value": "\\S+",
+              "operator": "regex"
+            },
+            {
+              "target": "body",
+              "modifier": "firstname",
+              "value": "\\S+",
+              "operator": "regex"
+            },
+            {
+              "target": "body",
+              "modifier": "lastname",
+              "value": "\\S+",
+              "operator": "regex"
+            },
+            {
+              "target": "body",
+              "modifier": "email",
+              "value": "\\S+",
+              "operator": "regex"
+            }
+          ],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false
+        }
+      ],
+      "enabled": true,
+      "randomResponse": false,
+      "sequentialResponse": false
+    },
+    {
+      "uuid": "31dd29fe-9e48-44fb-8499-d48793567548",
+      "documentation": "",
+      "method": "post",
+      "endpoint": "project",
+      "responses": [
+        {
+          "uuid": "2750c691-4181-4022-a812-6c9f5c6f6e22",
+          "body": "{}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [
+            {
+              "target": "body",
+              "modifier": "projectName",
+              "value": "\\S+",
+              "operator": "regex"
+            },
+            {
+              "target": "body",
+              "modifier": "usernames",
+              "value": "",
+              "operator": "empty_array"
+            }
+          ],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false
+        }
+      ],
+      "enabled": true,
+      "randomResponse": false,
+      "sequentialResponse": false
+    },
+    {
+      "uuid": "d362539a-683c-4056-b62c-e2da24201b3c",
+      "documentation": "",
+      "method": "delete",
+      "endpoint": "project/:projectID",
+      "responses": [
+        {
+          "uuid": "6719cff9-0946-4790-b64f-6beb6462ded2",
+          "body": "{}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false
+        }
+      ],
+      "enabled": true,
+      "randomResponse": false,
+      "sequentialResponse": false
+    },
+    {
+      "uuid": "6df52f29-0a9d-4954-a808-1a0a6846f7b0",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "projects",
+      "responses": [
+        {
+          "uuid": "efa8ca74-2de1-4270-9662-4c6f838b13eb",
+          "body": "{\n  [\n    {\n      \"projecIid\":1,\n      \"projectName\": \"Carplate Recongition\"\n    }\n  ]\n}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false
+        }
+      ],
+      "enabled": true,
+      "randomResponse": false,
+      "sequentialResponse": false
+    },
+    {
+      "uuid": "863df847-e8f9-4ef3-8ae9-1502d100c84e",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "project/:projectID/user",
+      "responses": [
+        {
+          "uuid": "6885371c-3572-4128-91cc-f2380b270b2d",
+          "body": "{}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false
+        }
+      ],
+      "enabled": true,
+      "randomResponse": false,
+      "sequentialResponse": false
+    },
+    {
+      "uuid": "980ea45d-9d1f-4439-adf4-e4bdfbbdce93",
+      "documentation": "",
+      "method": "put",
+      "endpoint": "project/:projectID/user",
+      "responses": [
+        {
+          "uuid": "35c69f05-0694-4c2e-a5a6-8fb7f3d3d658",
+          "body": "{}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false
+        }
+      ],
+      "enabled": true,
+      "randomResponse": false,
+      "sequentialResponse": false
+    },
+    {
+      "uuid": "46995308-4232-407d-b594-125d7da5b0f1",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "project/:projectID/photos",
+      "responses": [
+        {
+          "uuid": "d38a048b-0932-4cd6-b71e-43b734417360",
+          "body": "{}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false
+        }
+      ],
+      "enabled": true,
+      "randomResponse": false,
+      "sequentialResponse": false
+    },
+    {
+      "uuid": "91593563-6d8a-43e6-8a7c-907f91498892",
+      "documentation": "",
+      "method": "post",
+      "endpoint": "project/:projectID/photos",
+      "responses": [
+        {
+          "uuid": "0da0410e-ec05-4ff5-a246-45d77e444a38",
+          "body": "12",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false
+        }
+      ],
+      "enabled": true,
+      "randomResponse": false,
+      "sequentialResponse": false
+    },
+    {
+      "uuid": "c60a876a-e747-4c7b-94a8-70267f87b6c6",
+      "documentation": "",
+      "method": "delete",
+      "endpoint": "project/:projectID/photos",
+      "responses": [
+        {
+          "uuid": "64f815b0-768c-4635-9f93-1160c72c1fe7",
+          "body": "12",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false
+        }
+      ],
+      "enabled": true,
+      "randomResponse": false,
+      "sequentialResponse": false
+    },
+    {
+      "uuid": "be82eab2-c3ae-4246-a99e-77b7b6bdd8ee",
+      "documentation": "",
+      "method": "post",
+      "endpoint": "project/:projectID/photos/order",
+      "responses": [
+        {
+          "uuid": "9f501b7c-6caa-464c-ac56-b7e3166d01aa",
+          "body": "",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false
+        }
+      ],
+      "enabled": true,
+      "randomResponse": false,
+      "sequentialResponse": false
+    },
+    {
+      "uuid": "5c06f3b9-9a6e-4697-b04f-e9aec83a5271",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "project/:projectID/description",
+      "responses": [
+        {
+          "uuid": "b3a70051-51f5-4a6d-874a-8e19404e3fbc",
+          "body": "Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.\r\n\r\n",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false
+        }
+      ],
+      "enabled": true,
+      "randomResponse": false,
+      "sequentialResponse": false
+    },
+    {
+      "uuid": "7f4b86ba-817a-4b06-b039-e0d722679cfe",
+      "documentation": "",
+      "method": "put",
+      "endpoint": "project/:projectID/description",
+      "responses": [
+        {
+          "uuid": "9f39253e-66c1-4be6-8e88-861212aa73a8",
+          "body": "{}\r\n",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false
+        }
+      ],
+      "enabled": true,
+      "randomResponse": false,
+      "sequentialResponse": false
+    },
+    {
+      "uuid": "73026d3f-e8ad-4412-a64a-9ddebfc7d479",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "project/:projectID/tag",
+      "responses": [
+        {
+          "uuid": "cc176e3d-2742-44e6-a1a9-f8aac47bee33",
+          "body": "{}\r\n",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false
+        }
+      ],
+      "enabled": true,
+      "randomResponse": false,
+      "sequentialResponse": false
+    },
+    {
+      "uuid": "0e45ea40-cc6b-4e9d-9943-11dbd96387f7",
+      "documentation": "",
+      "method": "post",
+      "endpoint": "project/:projectID/tag",
+      "responses": [
+        {
+          "uuid": "56f41232-de9f-4bce-990f-881551368043",
+          "body": "{}\r\n",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false
+        }
+      ],
+      "enabled": true,
+      "randomResponse": false,
+      "sequentialResponse": false
+    },
+    {
+      "uuid": "3551d230-7d8f-47a3-9725-089833baf51b",
+      "documentation": "",
+      "method": "delete",
+      "endpoint": "project/:projectID/tag",
+      "responses": [
+        {
+          "uuid": "3c292036-49ee-4dce-8112-5390917cbba7",
+          "body": "{}\r\n",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false
+        }
+      ],
+      "enabled": true,
+      "randomResponse": false,
+      "sequentialResponse": false
+    },
+    {
+      "uuid": "8d78242c-b473-4651-a3a3-6fb19710e7b3",
+      "documentation": "Get detail with all section data",
+      "method": "get",
+      "endpoint": "project/<project id>/detail",
+      "responses": [
+        {
+          "uuid": "ec041fde-37c2-4f88-b5bb-88e8262b05eb",
+          "body": "{}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false
+        }
+      ],
+      "enabled": true,
+      "randomResponse": false,
+      "sequentialResponse": false
+    },
+    {
+      "uuid": "8920c1ee-8b40-4249-a9ec-ea4718808f33",
+      "documentation": "Get detail with all section data",
+      "method": "post",
+      "endpoint": "project/<project id>/detail",
+      "responses": [
+        {
+          "uuid": "c942de69-f2b1-427a-a064-4e25eb1ee2da",
+          "body": "{}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false
+        }
+      ],
+      "enabled": true,
+      "randomResponse": false,
+      "sequentialResponse": false
+    },
+    {
+      "uuid": "d4c05515-3db8-4f46-ab2b-8bb35328f5c1",
+      "documentation": "Get detail with all section data",
+      "method": "put",
+      "endpoint": "project/<project id>/detail",
+      "responses": [
+        {
+          "uuid": "905bfa9f-fcee-4f0c-b41d-95dd297a98ed",
+          "body": "{}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false
+        }
+      ],
+      "enabled": true,
+      "randomResponse": false,
+      "sequentialResponse": false
+    },
+    {
+      "uuid": "9ee3d06d-7730-4f5e-a58b-dddf531fe1ef",
+      "documentation": "Get detail with all section data",
+      "method": "delete",
+      "endpoint": "project/<project id>/detail",
+      "responses": [
+        {
+          "uuid": "786f23a3-8a40-4bb7-9c9e-ecf5eb55b0ac",
+          "body": "{}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false
+        }
+      ],
+      "enabled": true,
+      "randomResponse": false,
+      "sequentialResponse": false
+    },
+    {
+      "uuid": "f16b0591-27a0-4a0f-a195-6086a0046f85",
+      "documentation": "",
+      "method": "post",
+      "endpoint": "project/:projectID/attachment",
+      "responses": [
+        {
+          "uuid": "9b02ce93-19d9-4d34-ab81-07c8b91f6e5d",
+          "body": "13",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false
+        }
+      ],
+      "enabled": true,
+      "randomResponse": false,
+      "sequentialResponse": false
+    },
+    {
+      "uuid": "a6d4cc1b-9889-4bda-be4e-1de777450958",
+      "documentation": "",
+      "method": "delete",
+      "endpoint": "project/:projectID/attachment",
+      "responses": [
+        {
+          "uuid": "415dc46e-0651-4815-8d2c-7e1d7e19cc35",
+          "body": "",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false
+        }
+      ],
+      "enabled": true,
+      "randomResponse": false,
+      "sequentialResponse": false
+    },
+    {
+      "uuid": "fe071816-c4d8-4905-ba54-e0fb2a94ea6d",
+      "documentation": "",
+      "method": "put",
+      "endpoint": "project/:projectID/contact",
+      "responses": [
+        {
+          "uuid": "b3211998-de50-44f4-be72-ddcc3db4850c",
+          "body": "{}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false
+        }
+      ],
+      "enabled": true,
+      "randomResponse": false,
+      "sequentialResponse": false
+    }
+  ],
+  "proxyMode": false,
+  "proxyHost": "",
+  "proxyRemovePrefix": false,
+  "cors": true,
+  "headers": [
+    {
+      "key": "Content-Type",
+      "value": "application/json"
+    }
+  ],
+  "proxyReqHeaders": [
+    {
+      "key": "",
+      "value": ""
+    }
+  ],
+  "proxyResHeaders": [
+    {
+      "key": "",
+      "value": ""
+    }
+  ],
+  "tlsOptions": {
+    "enabled": false,
+    "type": "CERT",
+    "pfxPath": "",
+    "certPath": "",
+    "keyPath": "",
+    "caPath": "",
+    "passphrase": ""
+  }
+}
