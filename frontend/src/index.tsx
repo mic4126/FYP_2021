@@ -3,18 +3,24 @@ import ReactDOM from 'react-dom';
 import './index.css';
 import IndexPageContent from './IndexPageContent';
 import Header from './header';
+import IndexRouter from './IndexRouter';
 import reportWebVitals from './reportWebVitals';
+import { BrowserRouter } from "react-router-dom";
+
+
 
 import 'bootstrap/dist/css/bootstrap.min.css'
 
 
-function IndexPage(props:any) {
+function IndexPage(props: any) {
   const [locale, setLocale] = useState(navigator.language);
   console.log(locale);
   return (
     <React.StrictMode>
       <Header locale={locale} setLocale={setLocale} />
-      <IndexPageContent />
+      <BrowserRouter>
+        <IndexRouter />
+      </BrowserRouter>
     </React.StrictMode>)
 }
 
