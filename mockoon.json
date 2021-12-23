@@ -548,7 +548,7 @@
       "responses": [
         {
           "uuid": "cc176e3d-2742-44e6-a1a9-f8aac47bee33",
-          "body": "[\"car plate\",\"ocr\"]\r\n",
+          "body": "[\"car plate\",\"ocr\",\"Recognition\"]\r\n",
           "latency": 0,
           "statusCode": 200,
           "label": "",

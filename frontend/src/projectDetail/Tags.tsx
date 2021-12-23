@@ -23,9 +23,13 @@ const Tags = (props: any) => {
 
     return (
         <div className="container col">
-            <h5>Tags:</h5>
-            <div className="d-flex flex-wrap col">
-                {listTag(tagData)}
+            <div className="card">
+                <div className="card-body">
+                    <h5 className="card-title">Tags:</h5>
+                    <div className="d-flex flex-wrap col">
+                        {listTag(tagData)}
+                    </div>
+                </div>
             </div>
         </div>
     )

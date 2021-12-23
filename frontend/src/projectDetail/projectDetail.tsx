@@ -12,11 +12,11 @@ const ProjectDetail = (props: any) => {
 
     return (
         <div className="container-fluid">
-            
+
             <div className="row justify-content-center">
                 <div className="col container"></div>
                 <div className="col-xxl-9">
-                    <h1>Car Plate Reconginition</h1>
+                    <h1>Car Plate Recognition</h1>
                     <Carousel variant="dark">
                         <Carousel.Item>
                             <img
@@ -63,19 +63,23 @@ const ProjectDetail = (props: any) => {
                             <h2 className="card-title w-100">
                                 Contact Information
                             </h2>
-                            <div className="container w-100">
-                                <div className="row">
-                                    <div className="card col-6">
-                                        <div className="card-body">
-                                            <h4 className="card-title">Responsible Bureau/Department</h4>
-                                            Transport Department
-                                        </div>
+                            <div className="d-flex flex-wrap">
+                                <div className="card  mx-2 my-2">
+                                    <div className="card-body">
+                                        <h4 className="card-title">Responsible Bureau/Department</h4>
+                                        Transport Department
                                     </div>
-                                    <div className="card col-6">
-                                        <div className="card-body">
-                                            <h4 className="card-title">Email</h4>
-                                            <a href="mailto:">abc@abc.com</a>
-                                        </div>
+                                </div>
+                                <div className="card  mx-2 my-2">
+                                    <div className="card-body">
+                                        <h4 className="card-title">Email</h4>
+                                        <a href="mailto:">abc@abc.com</a>
+                                    </div>
+                                </div>
+                                <div className="card mx-2 my-2">
+                                    <div className="card-body">
+                                        <h4 className="card-title">Telephone</h4>
+                                        <a href="tel:+85212345678">12345678</a>
                                     </div>
                                 </div>
 
