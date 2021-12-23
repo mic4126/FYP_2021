@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import IndexPageContent from './IndexPageContent';
-import Header from './header';
+import Header from './header/header';
 import IndexRouter from './IndexRouter';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from "react-router-dom";
@@ -17,8 +17,8 @@ function IndexPage(props: any) {
   console.log(locale);
   return (
     <React.StrictMode>
-      <Header locale={locale} setLocale={setLocale} />
       <BrowserRouter>
+        <Header locale={locale} setLocale={setLocale} />
         <IndexRouter />
       </BrowserRouter>
     </React.StrictMode>)

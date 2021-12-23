@@ -1,9 +1,13 @@
 import React from "react";
+import { Button, Container, Form, FormControl, Nav, NavDropdown } from "react-bootstrap";
+import Navbar from 'react-bootstrap/Navbar'
+import { Link } from "react-router-dom";
 import './header.css'
 
 function Header(props: any) {
 
     return (
+
         <header className="p-3 mb-3">
             <div className="container">
                 <div className="d-flex flex-wrap align-items-center justify-content-lg-start">
@@ -11,9 +15,10 @@ function Header(props: any) {
                         AI Algorithm Registry
                     </a>
                     <div className="d-flex flex-wrap align-items-center justify-content-lg-start searchbar">
-                        <form className="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3 ">
+                        <form className="col-12 col-lg-auto mb-3 mb-lg-0">
                             <input type="search" className="form-control" placeholder="Search..." aria-label="Search"></input>
                         </form>
+                        <button className="btn btn-secondary mx-2">Search</button>
                     </div>
 
                     <div id="langs" className="d-flex flex-wrap align-items-start justify-content-lg-start">

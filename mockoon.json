@@ -2,10 +2,10 @@
   "uuid": "bb9c6167-0feb-48bf-9f2e-5a851b10157c",
   "lastMigration": 19,
   "name": "New environment",
-  "endpointPrefix": "",
+  "endpointPrefix": "api",
   "latency": 0,
   "port": 3001,
-  "hostname": "0.0.0.0",
+  "hostname": "127.0.0.1",
   "routes": [
     {
       "uuid": "bb15ee83-7d4b-4d7a-ac62-0ea90104e984",
@@ -548,7 +548,7 @@
       "responses": [
         {
           "uuid": "cc176e3d-2742-44e6-a1a9-f8aac47bee33",
-          "body": "{}\r\n",
+          "body": "[\"car plate\",\"ocr\"]\r\n",
           "latency": 0,
           "statusCode": 200,
           "label": "",
@@ -619,11 +619,11 @@
       "uuid": "8d78242c-b473-4651-a3a3-6fb19710e7b3",
       "documentation": "Get detail with all section data",
       "method": "get",
-      "endpoint": "project/<project id>/detail",
+      "endpoint": "project/:projectID/detail",
       "responses": [
         {
           "uuid": "ec041fde-37c2-4f88-b5bb-88e8262b05eb",
-          "body": "{}",
+          "body": "[{\n  \"detailID\":1,\n  \"detailName\":\"Data Used\",\n  \"detailDesc\":\"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.\"\n},{\n  \"detailID\":2,\n  \"detailName\":\"Data Processing & Storage\",\n  \"detailDesc\":\"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.\"\n},{\n  \"detailID\":3,\n  \"detailName\":\"Risk\",\n  \"detailDesc\":\"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.\"\n}]",
           "latency": 0,
           "statusCode": 200,
           "label": "",
@@ -741,13 +741,113 @@
       "sequentialResponse": false
     },
     {
+      "uuid": "a6937559-50c6-46bd-b8ea-af8f1b1c620c",
+      "documentation": "",
+      "method": "post",
+      "endpoint": "project/:detailID/attachment",
+      "responses": [
+        {
+          "uuid": "e12ea195-246a-4985-829c-b14f072d0193",
+          "body": "13",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false
+        }
+      ],
+      "enabled": true,
+      "randomResponse": false,
+      "sequentialResponse": false
+    },
+    {
       "uuid": "a6d4cc1b-9889-4bda-be4e-1de777450958",
       "documentation": "",
       "method": "delete",
-      "endpoint": "project/:projectID/attachment",
+      "endpoint": "project/attachment/:attachmentID",
       "responses": [
         {
           "uuid": "415dc46e-0651-4815-8d2c-7e1d7e19cc35",
+          "body": "",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false
+        }
+      ],
+      "enabled": true,
+      "randomResponse": false,
+      "sequentialResponse": false
+    },
+    {
+      "uuid": "69d58702-93b7-4893-a468-68dd2b080bd1",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "project/attachment/:attachmentID",
+      "responses": [
+        {
+          "uuid": "33821e62-43e9-407d-930a-3366415c34fb",
+          "body": "",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false
+        }
+      ],
+      "enabled": true,
+      "randomResponse": false,
+      "sequentialResponse": false
+    },
+    {
+      "uuid": "90196ba6-f358-42b6-a356-f72336e4a201",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "project/:detailID/attachment",
+      "responses": [
+        {
+          "uuid": "c2f27155-16d0-4967-a624-2dbeae07c5a3",
+          "body": "",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false
+        }
+      ],
+      "enabled": true,
+      "randomResponse": false,
+      "sequentialResponse": false
+    },
+    {
+      "uuid": "242fe00e-be68-4090-842a-2e4d2811cb58",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "project/:projectID/attachment",
+      "responses": [
+        {
+          "uuid": "39748bb6-080d-494e-ad06-63a199a2a61d",
           "body": "",
           "latency": 0,
           "statusCode": 200,
@@ -799,6 +899,18 @@
     {
       "key": "Content-Type",
       "value": "application/json"
+    },
+    {
+      "key": "Access-Control-Allow-Origin",
+      "value": "*"
+    },
+    {
+      "key": "Access-Control-Allow-Methods",
+      "value": "GET,POST,PUT,PATCH,DELETE,HEAD,OPTIONS"
+    },
+    {
+      "key": "Access-Control-Allow-Headers",
+      "value": "Content-Type, Origin, Accept, Authorization, Content-Length, X-Requested-With"
     }
   ],
   "proxyReqHeaders": [
