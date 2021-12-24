@@ -1,0 +1,38 @@
+@import "~bootstrap/scss/bootstrap";
+
+$spacer: 1rem;
+$spacers: (
+  0: 0,
+  1: $spacer * .25,
+  2: $spacer * .5,
+  3: $spacer,
+  4: $spacer * 1.5,
+  5: $spacer * 3,
+);
+
+@media only screen and (max-width: 600px) {
+        .searchbar {
+            order: 3;
+            width: 100%;
+            margin-top: 0.75em;    
+            margin-left: 0px;
+            margin-left: 0px;
+        }
+        .searchbar .form-control {
+            padding: 0px,0px;
+        }
+
+        div#langs{
+            order: 2;
+        }
+
+        #logo{
+            order: 1;
+        }
+}
+
+@media only screen and (min-width: 601px) {
+    .searchbar {
+        margin-right: $spacer * .5;
+    }
+}

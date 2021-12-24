@@ -644,7 +644,7 @@
       "uuid": "8920c1ee-8b40-4249-a9ec-ea4718808f33",
       "documentation": "Get detail with all section data",
       "method": "post",
-      "endpoint": "project/<project id>/detail",
+      "endpoint": "project/:projectID/detail",
       "responses": [
         {
           "uuid": "c942de69-f2b1-427a-a064-4e25eb1ee2da",
@@ -669,7 +669,7 @@
       "uuid": "d4c05515-3db8-4f46-ab2b-8bb35328f5c1",
       "documentation": "Get detail with all section data",
       "method": "put",
-      "endpoint": "project/<project id>/detail",
+      "endpoint": "project/:projectID/detail",
       "responses": [
         {
           "uuid": "905bfa9f-fcee-4f0c-b41d-95dd297a98ed",
@@ -694,7 +694,7 @@
       "uuid": "9ee3d06d-7730-4f5e-a58b-dddf531fe1ef",
       "documentation": "Get detail with all section data",
       "method": "delete",
-      "endpoint": "project/<project id>/detail",
+      "endpoint": "project/:projectID/detail",
       "responses": [
         {
           "uuid": "786f23a3-8a40-4bb7-9c9e-ecf5eb55b0ac",
@@ -874,6 +874,31 @@
         {
           "uuid": "b3211998-de50-44f4-be72-ddcc3db4850c",
           "body": "{}",
+          "latency": 0,
+          "statusCode": 200,
+          "label": "",
+          "headers": [],
+          "filePath": "",
+          "sendFileAsBody": false,
+          "rules": [],
+          "rulesOperator": "OR",
+          "disableTemplating": false,
+          "fallbackTo404": false
+        }
+      ],
+      "enabled": true,
+      "randomResponse": false,
+      "sequentialResponse": false
+    },
+    {
+      "uuid": "e57bf2ad-54c9-435f-b8eb-9edd93350539",
+      "documentation": "",
+      "method": "get",
+      "endpoint": "project/search",
+      "responses": [
+        {
+          "uuid": "cb31bc6c-9f09-4598-86b8-de8ea1cdf1c5",
+          "body": "[\n  {\n    \"projectID\":1,\n    \"projectName\":\"Car Plate Recognition\",\n    \"projectDesc\":\"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.\"\n  },\n  {\n    \"projectID\":2,\n    \"projectName\":\"Test\",\n    \"projectDesc\":\"Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five centuries, but also the leap into electronic typesetting, remaining essentially unchanged. It was popularised in the 1960s with the release of Letraset sheets containing Lorem Ipsum passages, and more recently with desktop publishing software like Aldus PageMaker including versions of Lorem Ipsum.\"\n  }\n]",
           "latency": 0,
           "statusCode": 200,
           "label": "",

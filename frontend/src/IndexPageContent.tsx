@@ -10,7 +10,7 @@ function IndexPageContent(props: any) {
   const navigate = useNavigate();
   return (
     <div className="row d-flex align-items-center align-self-center vertical-center">
-      <div className="card col-6 mx-auto" style={{ width: '18rem' }}>
+      <div className="card col-6 mx-auto my-2" style={{ width: '18rem' }}>
         <img src={logo} className="card-img-top" alt="..."></img>
         <div className="card-body">
           <h5 className="card-title">Car Plate Reconginition</h5>
@@ -25,7 +25,7 @@ function IndexPageContent(props: any) {
           >Read more</button>
         </div>
       </div>
-      <div className="card col-6 mx-auto" style={{ width: '18rem' }}>
+      <div className="card col-6 mx-auto my-2" style={{ width: '18rem' }}>
         <img src={logo} className="card-img-top" alt="..."></img>
         <div className="card-body">
           <h5 className="card-title">Card title</h5>
@@ -33,7 +33,7 @@ function IndexPageContent(props: any) {
           <a href="#" className="btn btn-primary">Go somewhere</a>
         </div>
       </div>
-      <div className="card col-6 mx-auto" style={{ width: '18rem' }}>
+      <div className="card col-6 mx-auto my-2" style={{ width: '18rem' }}>
         <img src={logo} className="card-img-top" alt="..."></img>
         <div className="card-body">
           <h5 className="card-title">Card title</h5>
@@ -41,7 +41,7 @@ function IndexPageContent(props: any) {
           <a href="#" className="btn btn-primary">Go somewhere</a>
         </div>
       </div>
-      <div className="card col-6 mx-auto" style={{ width: '18rem' }}>
+      <div className="card col-6 mx-auto my-2" style={{ width: '18rem' }}>
         <img src={logo} className="card-img-top" alt="..."></img>
         <div className="card-body">
           <h5 className="card-title">Card title</h5>

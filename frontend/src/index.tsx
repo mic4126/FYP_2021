@@ -10,6 +10,7 @@ import { BrowserRouter } from "react-router-dom";
 
 
 import 'bootstrap/dist/css/bootstrap.min.css'
+import axios from 'axios';
 
 
 function IndexPage(props: any) {
@@ -24,7 +25,7 @@ function IndexPage(props: any) {
     </React.StrictMode>)
 }
 
-
+axios.defaults.baseURL = `http://${process.env.REACT_APP_API_SERVER}`
 ReactDOM.render(
   <IndexPage />,
   document.getElementById('root')
