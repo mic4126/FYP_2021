@@ -9,7 +9,7 @@ import IndexPageContent from "./IndexPageContent";
 import SearchResult from "./search/searchresult";
 
 function IndexRouter(props: any) {
-
+    const locale: string = props.locale;
     return (
         <Routes>
             <Route path='/' element={<IndexPageContent />}> </Route>

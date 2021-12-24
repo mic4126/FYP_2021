@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useEffect, useState } from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
 import Header from './header/header';
@@ -8,22 +8,36 @@ import { BrowserRouter } from "react-router-dom";
 import 'bootstrap/dist/css/bootstrap.min.css'
 import axios from 'axios';
 import { IntlProvider } from 'react-intl';
-import lang_en from './lang/lang_en.json';
+import en from './lang/en.json';
+import zhTW from './lang/zh-TW.json'
 
 function IndexPage(props: any) {
   const [locale, setLocale] = useState(navigator.language);
-
+  const [langFile, setLangFile] = useState(en)
   console.log(locale);
 
-  let lang = {
-    'en': lang_en
-  }
+  // let lang: { string: Record<string, string> } = { en: (new Record<string,string>).co) }
+
+  useEffect(() => {
+    switch (locale) {
+      case 'zh-TW':
+        setLangFile(zhTW)
+        break;
+      case 'en':
+        setLangFile(en);
+        break;
+      default:
+        setLangFile(en);
+        break;
+    }
+  }, [locale])
+
   return (
     <React.StrictMode>
-      <IntlProvider locale="en" messages={lang_en}>
+      <IntlProvider locale={locale} messages={langFile}>
         <BrowserRouter>
           <Header locale={locale} setLocale={setLocale} />
-          <IndexRouter />
+          <IndexRouter locale={locale} />
         </BrowserRouter>
 
       </IntlProvider>

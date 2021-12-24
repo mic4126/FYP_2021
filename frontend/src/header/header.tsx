@@ -12,7 +12,7 @@ function Header(props: any) {
             search: `?${createSearchParams({ q: searchQuery })}`
         })
     }
-    // const intl = useIntl();
+    const intl = useIntl();
 
     return (
 
@@ -25,7 +25,10 @@ function Header(props: any) {
                     <div className="d-flex flex-wrap align-items-center justify-content-lg-start searchbar">
                         <form className="w-100">
                             <div className="input-group">
-                                <input id="searchInput" type="search" className="form-control" aria-label="Search" placeholder=""
+                                <input id="searchInput" type="search" className="form-control" aria-label="Search" placeholder={intl.formatMessage({
+                                    id: 'header.searchPlaceHolder',
+                                    description:'placeholder text for search bar input'
+                                })}
                                     value={searchQuery} onInput={e => setSearchQuery(e.currentTarget.value)} />
                                 <button type="button" className="btn btn-outline-primary" onClick={searchHandler}>Search</button>
                             </div>
@@ -33,7 +36,7 @@ function Header(props: any) {
                     </div>
 
                     <div id="langs" className="d-flex flex-wrap align-items-start justify-content-lg-start">
-                        <a href="" onClick={(e) => { e.preventDefault(); props.setLocale('ENG') }} id="eng" className="link-secondary">English </a>/
+                        <a href="" onClick={(e) => { e.preventDefault(); props.setLocale('en') }} id="eng" className="link-secondary">English </a>/
                         <a href="" onClick={(e) => { e.preventDefault(); props.setLocale('zh-TW') }} id="tc" className="link-secondary">繁</a> /
                         <a href="" id="sc" onClick={(e) => { e.preventDefault(); props.setLocale('zh-SC') }} className="link-secondary">簡</a>
                     </div>
