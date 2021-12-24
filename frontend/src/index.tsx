@@ -1,33 +1,39 @@
 import React, { useState } from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import IndexPageContent from './IndexPageContent';
 import Header from './header/header';
 import IndexRouter from './IndexRouter';
 import reportWebVitals from './reportWebVitals';
 import { BrowserRouter } from "react-router-dom";
-
-
-
 import 'bootstrap/dist/css/bootstrap.min.css'
 import axios from 'axios';
-
+import { IntlProvider } from 'react-intl';
+import lang_en from './lang/lang_en.json';
 
 function IndexPage(props: any) {
   const [locale, setLocale] = useState(navigator.language);
+
   console.log(locale);
+
+  let lang = {
+    'en': lang_en
+  }
   return (
     <React.StrictMode>
-      <BrowserRouter>
-        <Header locale={locale} setLocale={setLocale} />
-        <IndexRouter />
-      </BrowserRouter>
-    </React.StrictMode>)
+      <IntlProvider locale="en" messages={lang_en}>
+        <BrowserRouter>
+          <Header locale={locale} setLocale={setLocale} />
+          <IndexRouter />
+        </BrowserRouter>
+
+      </IntlProvider>
+    </React.StrictMode >)
 }
 
 axios.defaults.baseURL = `http://${process.env.REACT_APP_API_SERVER}`
 ReactDOM.render(
-  <IndexPage />,
+  <IndexPage />
+  ,
   document.getElementById('root')
 
 );

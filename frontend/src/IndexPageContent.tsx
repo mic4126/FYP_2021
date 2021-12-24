@@ -3,11 +3,14 @@ import logo from './logo.svg';
 import { useSearchParams, Link, useNavigate, createSearchParams } from 'react-router-dom';
 import ProjectDetail from './projectDetail/projectDetail';
 
+
 import './IndexPageContent.css'
+import { useIntl } from 'react-intl';
 
 function IndexPageContent(props: any) {
   let [searchParams, setSearchParams] = useSearchParams();
   const navigate = useNavigate();
+  // const intl = useIntl();
   return (
     <div className="row d-flex align-items-center align-self-center vertical-center">
       <div className="card col-6 mx-auto my-2" style={{ width: '18rem' }}>

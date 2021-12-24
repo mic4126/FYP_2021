@@ -20,7 +20,7 @@ const SearchResult = (props: any) => {
 
     const listResult = (searchResult: SearchResult[]) => {
         if (queryDone) {
-            if (searchResult.length != 0) {
+            if (searchResult.length !== 0) {
                 return searchResult.map((e, index) => {
                     return (
                         <div className="card my-2" key={e.projectID}>
