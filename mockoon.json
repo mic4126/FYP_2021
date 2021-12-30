@@ -47,7 +47,7 @@
     },
     {
       "uuid": "39564d7e-7429-4afa-886f-8840d6ea119b",
-      "documentation": "",
+      "documentation": "Update Password",
       "method": "put",
       "endpoint": "admin/password/:username",
       "responses": [
@@ -91,7 +91,7 @@
     },
     {
       "uuid": "93f75b9d-fe90-4e48-8888-da7bc918b80e",
-      "documentation": "",
+      "documentation": "For ‘forget password’ feature",
       "method": "post",
       "endpoint": "admin/password/:username",
       "responses": [

@@ -1,0 +1,21 @@
+### create user
+POST http://localhost:8080/admin/user
+Content-Type: application/json
+
+{
+    "username":"admin",
+    "firstName":"admin",
+    "lastName": "nimda",
+    "userType":"admin",
+    "email":"mic4126@gmail.com"
+}
+
+### reset password
+
+POST http://localhost:8080/admin/user/password/admin
+Content-Type: application/json
+
+{
+    "username":"admin",
+    "email":"mic4126@gmail.com"
+}

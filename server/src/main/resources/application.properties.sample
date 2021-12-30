@@ -1,0 +1,12 @@
+# for config sql database
+spring.datasource.url=
+spring.datasource.username=
+spring.datasource.password=
+
+# configurating mail server
+spring.mail.host=
+spring.mail.port=
+spring.mail.username=
+spring.mail.password=
+#sender address of reset/init password email
+airegistry.mail.sender=
