@@ -6,31 +6,42 @@ import hk.edu.cityu.cs.FYP.AIRegistry.model.AttachmentUpload;
 import hk.edu.cityu.cs.FYP.AIRegistry.model.Contact;
 import hk.edu.cityu.cs.FYP.AIRegistry.model.Lang;
 import hk.edu.cityu.cs.FYP.AIRegistry.model.Project;
+import hk.edu.cityu.cs.FYP.AIRegistry.model.UserInfo;
 
 public interface ProjectService {
 
-    public String getDesc(String projectId, Lang lang);
+    public String getDesc(int projectId, Lang lang);
 
-    public void setDesc(String projectId, String desc, Lang lang);
+    public void setDesc(int projectId, String desc, Lang lang);
 
-    public Contact getContact(String projectId);
+    public Contact getContact(int projectId);
 
-    public void updatePhone(String projectId, Contact contact);
+    public void updatePhone(int projectId, Contact contact);
 
-    public void updateEmail(String projectId, Contact contact);
+    public void updateEmail(int projectId, Contact contact);
 
-    public void updateDepartment(String projectId, Contact contact);
+    public void updateDepartment(int projectId, Contact contact);
 
+    /**
+     * 
+     * @param projectName Project Name
+     * @param developers  List of developers username
+     * @return Project Id
+     */
     public int addProject(String projectName, List<String> developers);
 
-    public String getProjectName(String projectId, Lang lang);
+    public String getProjectName(int projectId, Lang lang);
 
-    public void setProjectName(String projectId, String projectName, Lang lang);
+    public void setProjectName(int projectId, String projectName, Lang lang);
 
-    public void addPhoto(String projectId, AttachmentUpload attachment);
+    public void addPhoto(int projectId, AttachmentUpload attachment);
 
-    public void deletePhoto(String projectId, String attachmentID);
+    public void deletePhoto(int projectId, String attachmentID);
 
-    public Project getProject(String projectId);
+    public Project getProject(int projectId, Lang lang);
+
+    public void addDeveloper(int projectId, String username);
+
+    public List<UserInfo> getDevelopers(int projectId);
 
 }

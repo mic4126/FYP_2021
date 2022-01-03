@@ -8,17 +8,19 @@ import hk.edu.cityu.cs.FYP.AIRegistry.model.Lang;
 
 public interface DetailService {
 
-    public void setDetailName(String detailId, String detailName, Lang lang);
+    public void setDetailName(int detailId, String detailName, Lang lang);
 
-    public String getDetailName(String detailId, Lang lang);
+    public void setDetailDesc(int detailId, String detail, Lang lang);
 
-    public void setDetailDesc(String detailId, String detail, Lang lang);
+    public void setDetail(Detail detail, Lang lang);
 
-    public String getDetailDesc(String detailId, Lang lang);
+    public void addAttachment(int detailId, AttachmentUpload attachment);
 
-    public void addAttachment(String detailId, AttachmentUpload attachment);
+    public void deleteAttachment(int detailId, String Attachment);
 
-    public void deleteAttachment(String detailId, String Attachment);
+    public List<Detail> getAllDetailsByProjectId(int projectId, Lang lang);
 
-    public List<Detail> getAllDetailsByProjectId(String projectId);
+    public int addDetail(int projectId, String detailName);
+
+    public void deleteDetail(int detailId);
 }

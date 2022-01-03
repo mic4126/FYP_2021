@@ -1,8 +1,20 @@
 package hk.edu.cityu.cs.FYP.AIRegistry.model;
 
+import java.io.File;
+
 public class AttachmentDownload {
 
-    private String fileName, path;
+    private String fileName, origFileName, origExt;
+
+    private File file;
+
+    public File getFile() {
+        return file;
+    }
+
+    public void setFile(File file) {
+        this.file = file;
+    }
 
     public String getFileName() {
         return fileName;
@@ -12,14 +24,20 @@ public class AttachmentDownload {
         this.fileName = fileName;
     }
 
-    public String getPath() {
-        return path;
+    public String getOrigFileName() {
+        return origFileName;
     }
 
-    public void setPath(String path) {
-        this.path = path;
+    public void setOrigFileName(String origFileName) {
+        this.origFileName = origFileName;
     }
 
-    
-    
+    public String getOrigExt() {
+        return origExt;
+    }
+
+    public void setOrigExt(String origExt) {
+        this.origExt = origExt;
+    }
+
 }

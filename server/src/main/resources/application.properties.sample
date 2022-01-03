@@ -10,3 +10,6 @@ spring.mail.username=
 spring.mail.password=
 #sender address of reset/init password email
 airegistry.mail.sender=
+
+#
+airegistry.storage.directory=

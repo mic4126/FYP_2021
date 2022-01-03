@@ -669,7 +669,7 @@
       "uuid": "d4c05515-3db8-4f46-ab2b-8bb35328f5c1",
       "documentation": "Get detail with all section data",
       "method": "put",
-      "endpoint": "project/:projectID/detail",
+      "endpoint": "project/:projectID/detail/:detailId",
       "responses": [
         {
           "uuid": "905bfa9f-fcee-4f0c-b41d-95dd297a98ed",
@@ -694,7 +694,7 @@
       "uuid": "9ee3d06d-7730-4f5e-a58b-dddf531fe1ef",
       "documentation": "Get detail with all section data",
       "method": "delete",
-      "endpoint": "project/:projectID/detail",
+      "endpoint": "project/:projectID/detail/:detailId",
       "responses": [
         {
           "uuid": "786f23a3-8a40-4bb7-9c9e-ecf5eb55b0ac",
@@ -744,7 +744,7 @@
       "uuid": "a6937559-50c6-46bd-b8ea-af8f1b1c620c",
       "documentation": "",
       "method": "post",
-      "endpoint": "project/:detailID/attachment",
+      "endpoint": "project/:projectID/detail/:detailId/attachment",
       "responses": [
         {
           "uuid": "e12ea195-246a-4985-829c-b14f072d0193",
@@ -819,7 +819,7 @@
       "uuid": "90196ba6-f358-42b6-a356-f72336e4a201",
       "documentation": "",
       "method": "get",
-      "endpoint": "project/:detailID/attachment",
+      "endpoint": "project/detail/:detailId/attachment",
       "responses": [
         {
           "uuid": "c2f27155-16d0-4967-a624-2dbeae07c5a3",

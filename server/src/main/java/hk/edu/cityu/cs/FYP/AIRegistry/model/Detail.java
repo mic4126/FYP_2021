@@ -2,11 +2,35 @@ package hk.edu.cityu.cs.FYP.AIRegistry.model;
 
 import java.util.List;
 
-public class Detail {
+import com.fasterxml.jackson.annotation.JsonProperty;
 
-    private String detailName, detailDesc;
+public class Detail {
     
-    private List<AttachmentDownload> attachments;
+    private String detailName;
+
+    private String detailDesc;
+    
+    private int projectId;
+
+    private int detailId;
+    
+    private List<AttachmentDownload> attachments;    
+
+    public int getProjectId() {
+        return projectId;
+    }
+
+    public void setProjectId(int projectId) {
+        this.projectId = projectId;
+    }
+
+    public int getDetailId() {
+        return detailId;
+    }
+
+    public void setDetailId(int detailId) {
+        this.detailId = detailId;
+    }
 
     public String getDetailName() {
         return detailName;

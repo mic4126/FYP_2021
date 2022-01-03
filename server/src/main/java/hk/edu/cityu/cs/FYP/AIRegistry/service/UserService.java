@@ -17,4 +17,6 @@ public interface UserService {
     public void createUser(UserInfo userInfo) throws MessagingException;
 
     public boolean login(String username, String password);
+
+    public void deleteUser(String username);
 }

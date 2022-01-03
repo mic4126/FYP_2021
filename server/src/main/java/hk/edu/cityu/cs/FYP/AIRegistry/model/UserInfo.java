@@ -1,5 +1,6 @@
 package hk.edu.cityu.cs.FYP.AIRegistry.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class UserInfo {
@@ -21,8 +22,56 @@ public class UserInfo {
 
     @JsonProperty("userType")
     private String userType;
+
+    @JsonProperty("newPassword")
+    private String newPassword;
+    /**
+     * 
+     */
+    @JsonIgnore
+    private String hashedPassword;
     
-    private String hashedPassword, salt;
+    @JsonIgnore
+    private String salt;
+    /**
+     * The new hashed password
+     */
+    @JsonIgnore
+    private String newHashedPassword;
+    /**
+     * The new salt for the new hashed password
+     */
+    @JsonIgnore
+    private String newSalt;
+
+    public String getNewPassword() {
+        return newPassword;
+    }
+
+    public void setNewPassword(String newPassword) {
+        this.newPassword = newPassword;
+    }
+
+    /**
+     * Getter of user's new hashed password
+     * 
+     * @return {@link String} of the user's new hashed password
+     */
+    public String getNewHashedPassword() {
+        return newHashedPassword;
+    }
+
+    public void setNewHashedPassword(String newHashedPassword) {
+        this.newHashedPassword = newHashedPassword;
+    }
+
+    public String getNewSalt() {
+        return newSalt;
+    }
+
+    public void setNewSalt(String newSalt) {
+        this.newSalt = newSalt;
+    }
 
     public UserInfo(String password, String firstName, String lastName, String email, String userType) {
         this.password = password;
@@ -99,5 +148,4 @@ public class UserInfo {
         this.username = username;
     }
 
-    
 }

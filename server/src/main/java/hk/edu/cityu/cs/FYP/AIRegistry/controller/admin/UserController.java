@@ -7,13 +7,14 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import hk.edu.cityu.cs.FYP.AIRegistry.Exception.EmailAndUserNameNotMatchException;
 import hk.edu.cityu.cs.FYP.AIRegistry.model.ResetPasswordInfo;
 import hk.edu.cityu.cs.FYP.AIRegistry.model.UserInfo;
 import hk.edu.cityu.cs.FYP.AIRegistry.service.UserService;
@@ -49,6 +50,31 @@ public class UserController {
             LOGGER.error(e.toString());
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).build();
         }
+
+        return ResponseEntity.ok().build();
+    }
+
+    @PutMapping(path = {"/user/password/{username}", "/user/password" } )
+    public @ResponseBody ResponseEntity<?> changePassword(@PathVariable(required = false)String username,
+    @RequestBody UserInfo userInfo){
+
+        userService.changePassword(userInfo);
+
+        return ResponseEntity.ok().build();
+    }
+
+    @PutMapping(value="/user/{username}")
+    public @ResponseBody ResponseEntity<?> changeUserInfo (@PathVariable String username, @RequestBody UserInfo userInfo) {
+        
+        userService.changeUserInfo(userInfo);
+
+        return ResponseEntity.ok().build();
+    }
+
+    @DeleteMapping(value = "/user/{username}")
+    public @ResponseBody ResponseEntity<?> deleteUser(@PathVariable String username){
+
+        userService.deleteUser(username);
 
         return ResponseEntity.ok().build();
     }

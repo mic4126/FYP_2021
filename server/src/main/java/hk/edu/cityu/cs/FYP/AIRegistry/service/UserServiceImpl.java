@@ -7,6 +7,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import hk.edu.cityu.cs.FYP.AIRegistry.Exception.EmailAndUserNameNotMatchException;
+import hk.edu.cityu.cs.FYP.AIRegistry.Exception.PasswordNotMatchExceeption;
 import hk.edu.cityu.cs.FYP.AIRegistry.dao.UserDao;
 import hk.edu.cityu.cs.FYP.AIRegistry.model.ResetPasswordInfo;
 import hk.edu.cityu.cs.FYP.AIRegistry.model.UserInfo;
@@ -23,21 +24,45 @@ public class UserServiceImpl implements UserService {
     @Autowired
     UserDao userDao;
 
+
+    @Transactional(rollbackFor = Exception.class)
     @Override
     public void changeUserInfo(UserInfo userInfo) {
 
-    }
+        var dbUserInfo = userDao.findUserByUserName(userInfo.getUsername());
+        
+        boolean oldPasswordMatch = passwordService.checkPassword(userInfo.getPassword(), dbUserInfo.getSalt(), dbUserInfo.getHashedPassword());
 
-    @Override
-    public void changePassword(UserInfo userInfo) {
-        // TODO Auto-generated method stub
+        if (!oldPasswordMatch){
+            throw new PasswordNotMatchExceeption("Password not Match");
+        }
+
+        userDao.changeUserInfo(userInfo);
 
     }
 
     @Transactional(rollbackFor = Exception.class)
     @Override
+    public void changePassword(UserInfo userInfo) {
+        var dbUserInfo = userDao.findUserByUserName(userInfo.getUsername());
+        
+        boolean oldPasswordMatch = passwordService.checkPassword(userInfo.getPassword(), dbUserInfo.getSalt(), dbUserInfo.getHashedPassword());
+
+        if (!oldPasswordMatch){
+            throw new PasswordNotMatchExceeption("Password not Match");
+        }
+
+        var salt = passwordService.generateSalt();
+        userInfo.setSalt(salt);
+        var hashedPassword = passwordService.hashPassword(userInfo.getNewPassword(), salt);
+        userInfo.setHashedPassword(hashedPassword);
+        userDao.changePassword(userInfo);
+    }
+
+    @Transactional(rollbackFor = Exception.class)
+    @Override
     public void resetPassword(ResetPasswordInfo resetPassword) throws MessagingException {
-        var userInfo = userDao.findUserEmailByUserName(resetPassword.getUsername());
+        var userInfo = userDao.findUserByUserName(resetPassword.getUsername());
         if (null == userInfo ){
             throw new EmailAndUserNameNotMatchException("No record find for this pair of username and email");
         }
@@ -78,6 +103,11 @@ public class UserServiceImpl implements UserService {
         userDao.createUser(userInfo);
         emailService.sendInitPassword(userInfo);
 
+    }
+
+    @Override
+    public void deleteUser(String username) {
+        userDao.deleteUser(username);
     }
 
 }

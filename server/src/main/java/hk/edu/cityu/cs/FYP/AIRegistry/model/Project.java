@@ -2,12 +2,23 @@ package hk.edu.cityu.cs.FYP.AIRegistry.model;
 
 import java.util.List;
 
+import com.fasterxml.jackson.annotation.JsonProperty;
+
 public class Project {
 
-    private String projectName, projectDesc;
+    @JsonProperty("projectId")
+    private int projectId;
+    
+    @JsonProperty("projectName")
+    private String projectName;
 
+    @JsonProperty("projectDesc")
+    private String projectDesc;
+
+    @JsonProperty("contact")
     private Contact contact;
 
+    @JsonProperty("detail")
     private List<Detail> details;
 
     public String getProjectName() {
@@ -41,5 +52,15 @@ public class Project {
     public void setDetails(List<Detail> details) {
         this.details = details;
     }
+
+    public int getProjectId() {
+        return projectId;
+    }
+
+    public void setProjectId(int projectId) {
+        this.projectId = projectId;
+    }
+
+    
 
 }

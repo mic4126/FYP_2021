@@ -1,12 +1,24 @@
-### create user
+### create admin
 POST http://localhost:8080/admin/user
 Content-Type: application/json
 
 {
-    "username":"admin",
-    "firstName":"admin",
+    "username":"admin3",
+    "firstName":"admin1",
     "lastName": "nimda",
     "userType":"admin",
+    "email":"mic4126@gmail.com"
+}
+
+### create dev
+POST http://localhost:8080/admin/user
+Content-Type: application/json
+
+{
+    "username":"dev1",
+    "firstName":"admin1",
+    "lastName": "nimda",
+    "userType":"dev",
     "email":"mic4126@gmail.com"
 }
 
@@ -19,3 +31,55 @@ Content-Type: application/json
     "username":"admin",
     "email":"mic4126@gmail.com"
 }
+
+### change password
+
+PUT http://localhost:8080/admin/user/password/admin
+Content-Type: application/json
+
+{
+    "username":"admin",
+    "password":"456",
+    "newPassword":"123"
+}
+
+### change user info
+
+PUT http://localhost:8080/admin/user/admin
+Content-Type: application/json
+
+{
+    "username":"admin",
+    "email":"mic4126@gmail.com",
+    "firstName":"nimda",
+    "lastName":"admin",
+    "password":"123"
+    
+}
+
+
+### Delete User
+
+DELETE http://localhost:8080/admin/user/admin
+
+### Add Project
+POST http://localhost:8080/project
+Content-Type: application/x-www-form-urlencoded
+
+projectName=test2
+&developers=dev
+&developers=dev1
+
+
+### Put Desc (ENG)
+PUT http://localhost:8080/project/desc
+Content-Type: application/x-www-form-urlencoded
+
+projectId=15
+&desc=Lorem_ipsum
+&lang=ENG
+
+### Get Desc (ENG)
+GET  http://localhost:8080/project/desc
+?projectId=15
+&lang=ENG
