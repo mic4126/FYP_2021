@@ -1,5 +1,7 @@
 package hk.edu.cityu.cs.FYP.AIRegistry.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -167,6 +169,34 @@ public class ProjectDaoImple implements ProjectDao {
         var session = sqlSessionFactory.openSession();
         var mapper = session.getMapper(ProjectMapper.class);
         return mapper.getProjectSC(projectId);
+    }
+
+    @Override
+    public List<Integer> searchProject(String query) {
+        var session = sqlSessionFactory.openSession();
+        var mapper = session.getMapper(ProjectMapper.class);
+        return mapper.searchProject(query);
+    }
+
+    @Override
+    public List<Project> getProjects(List<Integer> projectIds) {
+        var session = sqlSessionFactory.openSession();
+        var mapper = session.getMapper(ProjectMapper.class);
+        return mapper.getProjectsByProjectIDs(projectIds);
+    }
+
+    @Override
+    public List<Project> getProjectsTC(List<Integer> projectIds) {
+        var session = sqlSessionFactory.openSession();
+        var mapper = session.getMapper(ProjectMapper.class);
+        return mapper.getProjectsByProjectIDsTC(projectIds);
+    }
+
+    @Override
+    public List<Project> getProjectsSC(List<Integer> projectIds) {
+        var session = sqlSessionFactory.openSession();
+        var mapper = session.getMapper(ProjectMapper.class);
+        return mapper.getProjectsByProjectIDsSC(projectIds);
     }
 
 }

@@ -37,5 +37,12 @@ public class TagDaoImpl implements TagDao{
         mapper.deleteTag(tag);
         
     }
+
+    @Override
+    public List<Integer> searchByTag(String tag) {
+        var session = sqlSessionFactory.openSession();
+        var mapper = session.getMapper(TagMapper.class);
+        return mapper.searchByTag(tag);
+    }
     
 }

@@ -1,5 +1,7 @@
 package hk.edu.cityu.cs.FYP.AIRegistry.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.session.SqlSession;
 
 import hk.edu.cityu.cs.FYP.AIRegistry.model.Contact;
@@ -50,7 +52,13 @@ public interface ProjectDao {
 
     public Project getProjectSC(int projectId);
 
+    public List<Integer> searchProject(String query);
 
-    
+    public List<Project> getProjects(List<Integer> projectIds);
+
+    public List<Project> getProjectsTC(List<Integer> projectIds);
+
+    public List<Project> getProjectsSC(List<Integer> projectIds);
+
 
 }

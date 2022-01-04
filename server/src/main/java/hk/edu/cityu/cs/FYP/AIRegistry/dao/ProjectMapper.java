@@ -1,5 +1,7 @@
 package hk.edu.cityu.cs.FYP.AIRegistry.dao;
 
+import java.util.List;
+
 import org.apache.ibatis.annotations.Insert;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Options;
@@ -14,133 +16,197 @@ import hk.edu.cityu.cs.FYP.AIRegistry.model.Project;
 @Mapper
 public interface ProjectMapper {
 
-    @Select("""
-                SELECT `desc` FROM project
-                WHERE projectId = #{projectId}
-            """)
-    public String getDesc(int projectId);
+        @Select("""
+                            SELECT `desc` FROM project
+                            WHERE projectId = #{projectId}
+                        """)
+        public String getDesc(int projectId);
 
-    @Update("""
-        UPDATE project SET
-        `desc` = #{projectDesc}
-        WHERE
-        projectId = #{projectId}
-    """)
-    public void setDesc(int projectId,String projectDesc);
+        @Update("""
+                            UPDATE project SET
+                            `desc` = #{projectDesc}
+                            WHERE
+                            projectId = #{projectId}
+                        """)
+        public void setDesc(int projectId, String projectDesc);
 
-    @Select("""
-                SELECT `desc_TC` FROM project
-                WHERE projectId = #{projectId}
-            """)
-    public String getDescTC(int projectId);
+        @Select("""
+                            SELECT `desc_TC` FROM project
+                            WHERE projectId = #{projectId}
+                        """)
+        public String getDescTC(int projectId);
 
-    @Update("""
-        UPDATE project SET
-        `desc_TC` = #{projectDesc}
-        WHERE
-        projectId = #{projectId}
-    """)
-    public void setDescTC(int projectId,String projectDesc);
+        @Update("""
+                            UPDATE project SET
+                            `desc_TC` = #{projectDesc}
+                            WHERE
+                            projectId = #{projectId}
+                        """)
+        public void setDescTC(int projectId, String projectDesc);
 
+        @Select("""
+                            SELECT `desc_SC` FROM project
+                            WHERE projectId = #{projectId}
+                        """)
+        public String getDescSC(int projectId);
 
-    @Select("""
-                SELECT `desc_SC` FROM project
-                WHERE projectId = #{projectId}
-            """)
-    public String getDescSC(int projectId);
+        @Update("""
+                            UPDATE project SET
+                            `desc_SC` = #{projectDesc}
+                            WHERE
+                            projectId = #{projectId}
+                        """)
+        public void setDescSC(int projectId, String projectDesc);
 
-    @Update("""
-        UPDATE project SET
-        `desc_SC` = #{projectDesc}
-        WHERE
-        projectId = #{projectId}
-    """)
-    public void setDescSC(int projectId,String projectDesc);
+        @Insert("""
+                        INSERT INTO PROJECT (projectName) VALUE (#{projectName})
+                        """)
+        @Options(useGeneratedKeys = true, keyProperty = "projectId")
+        public int addProject(Project project);
 
+        @Update("""
+                        UPDATE project SET
+                        email = #{email},
+                        phoneNumber = #{phoneNumber},
+                        department = #{department}
+                        WHERE
+                        projectId = #{projectId}
+                        """)
+        public void updateContact(Contact contact);
 
-    @Insert("""
-    INSERT INTO PROJECT (projectName) VALUE (#{projectName})
-    """)
-    @Options(useGeneratedKeys = true,keyProperty = "projectId")
-    public int addProject(Project project);
-    
+        @Select("Select projectName from project where projectId = #{projectId}")
+        public String getProjectName(int projectId);
 
-    @Update("""
-    UPDATE project SET
-    email = #{email},
-    phoneNumber = #{phoneNumber},
-    department = #{department}
-    WHERE
-    projectId = #{projectId}
-    """)
-    public void updateContact(Contact contact);
+        @Select("Select projectName_TC from project where projectId = #{projectId}")
+        public String getProjectNameTC(int projectId);
 
-    @Select("Select projectName from project where projectId = #{projectId}")
-    public String getProjectName(int projectId);
+        @Select("Select projectName_SC from project where projectId = #{projectId}")
+        public String getProjectNameSC(int projectId);
 
-    @Select("Select projectName_TC from project where projectId = #{projectId}")
-    public String getProjectNameTC(int projectId);
+        @Update("""
+                        UPDATE `project` SET
+                        `projectName` = #{projectname}
+                        WHERE
+                        `projectId` = #{projectId}
+                        """)
+        public void setProjectName(int projectId, String projectName);
 
-    @Select("Select projectName_SC from project where projectId = #{projectId}")
-    public String getProjectNameSC(int projectId);
+        @Update("""
+                        UPDATE `project` SET
+                        `projectName_TC` = #{projectname}
+                        WHERE
+                        `projectId` = #{projectId}
+                        """)
+        public void setProjectNameTC(int projectId, String projectName);
 
-    @Update("""
-    UPDATE `project` SET
-    `projectName` = #{projectname}
-    WHERE
-    `projectId` = #{projectId}
-    """)
-    public void setProjectName(int projectId,String projectName);
+        @Update("""
+                        UPDATE `project` SET
+                        `projectName_SC` = #{projectname}
+                        WHERE
+                        `projectId` = #{projectId}
+                        """)
+        public void setProjectNameSC(int projectId, String projectName);
 
+        @Results({
+                        @Result(property = "projectName", column = "projectName"),
+                        @Result(property = "projectId", column = "projectId"),
+                        @Result(property = "desc", column = "desc")
+        })
+        @Select("""
+                        SELECT `projectId`, `projectName`, `desc` FROM project
+                        WHERE projectId = #{projectId}
+                        """)
+        public Project getProject(int projectId);
 
-    @Update("""
-    UPDATE `project` SET
-    `projectName_TC` = #{projectname}
-    WHERE
-    `projectId` = #{projectId}
-    """)
-    public void setProjectNameTC(int projectId,String projectName);
+        @Results({
+                        @Result(property = "projectName", column = "projectName_TC"),
+                        @Result(property = "projectId", column = "projectId"),
+                        @Result(property = "desc", column = "desc_TC")
+        })
+        @Select("""
+                        SELECT `projectId`, `projectName_TC`, `desc_TC` FROM project
+                        WHERE projectId = #{projectId}
+                        """)
+        public Project getProjectTC(int projectId);
 
-    @Update("""
-    UPDATE `project` SET
-    `projectName_SC` = #{projectname}
-    WHERE
-    `projectId` = #{projectId}
-    """)
-    public void setProjectNameSC(int projectId,String projectName);
+        @Results({
+                        @Result(property = "projectName", column = "projectName_SC"),
+                        @Result(property = "projectId", column = "projectId"),
+                        @Result(property = "desc", column = "desc_SC")
+        })
+        @Select("""
+                        SELECT `projectId`, `projectName_SC`, `desc_SC` FROM project
+                        WHERE projectId = #{projectId}
+                        """)
+        public Project getProjectSC(int projectId);
 
+        @Select("""
+                           SELECT DISTINCT Project.projectId FROM Project
+                        LEFT JOIN Detail
+                        ON Project.projectId = Detail.projectId
+                        WHERE
+                           AND (projectName LIKE Concat( '%' ,#{query} ,'%') OR
+                           projectName_TC LIKE Concat( '%' ,#{query} ,'%') OR
+                           projectName_SC LIKE Concat( '%' ,#{query} ,'%') OR
+                           Project.desc LIKE Concat( '%' ,#{query} ,'%') OR
+                           Project.desc_TC LIKE Concat( '%' ,#{query} ,'%') OR
+                           Project.desc_SC LIKE Concat( '%' ,#{query} ,'%') OR
+                           Detail.detailDesc LIKE Concat( '%' ,#{query} ,'%') OR
+                           Detail.detailDesc_TC LIKE Concat( '%' ,#{query} ,'%') OR
+                           Detail.detailDesc_SC LIKE Concat( '%' ,#{query} ,'%') OR
+                           Detail.detailName LIKE Concat( '%' ,#{query} ,'%') OR
+                           Detail.detailName_TC LIKE Concat( '%' ,#{query} ,'%') OR
+                           Detail.detailName_SC LIKE Concat( '%' ,#{query} ,'%')
+                           )
+                           """)
+        public List<Integer> searchProject(String query);
 
-    @Results({
-        @Result(property = "projectName",column = "projectName"),
-        @Result(property = "projectId",column = "projectId"), 
-        @Result(property = "desc",column = "desc")
-    })
-    @Select("""
-    SELECT `projectId`, `projectName`, `desc` FROM project
-    WHERE projectId = #{projectId}
-    """)
-    public Project getProject(int projectId);
-    
+        @Results({
+                        @Result(property = "projectName", column = "projectName"),
+                        @Result(property = "projectId", column = "projectId"),
+                        @Result(property = "desc", column = "desc")
+        })
+        @Select("""
+                        SELECT `projectId`, `projectName`, `desc` FROM project
+                        WHERE
+                        projectId in
+                        <foreach item='item' index='index' collection='projectIds'
+                            open='(' separator=',' close=')'>
+                            #{item}
+                        </foreach>
+                            """)
+        public List<Project> getProjectsByProjectIDs(List<Integer> projectIds);
 
-    @Results({
-        @Result(property = "projectName",column = "projectName_TC"),
-        @Result(property = "projectId",column = "projectId"), 
-        @Result(property = "desc",column = "desc_TC")
-    })
-    @Select("""
-    SELECT `projectId`, `projectName_TC`, `desc_TC` FROM project
-    WHERE projectId = #{projectId}
-    """)
-    public Project getProjectTC(int projectId);
+        @Results({
+                        @Result(property = "projectName", column = "projectName_TC"),
+                        @Result(property = "projectId", column = "projectId"),
+                        @Result(property = "desc", column = "desc_TC")
+        })
+        @Select("""
+                        SELECT `projectId`, `projectName_TC`, `desc_TC` FROM project
+                        WHERE
+                        projectId in
+                        <foreach item='item' index='index' collection='projectIds'
+                            open='(' separator=',' close=')'>
+                            #{item}
+                        </foreach>
+                        """)
+        public List<Project> getProjectsByProjectIDsTC(List<Integer> projectIds);
 
-    @Results({
-        @Result(property = "projectName",column = "projectName_SC"),
-        @Result(property = "projectId",column = "projectId"), 
-        @Result(property = "desc",column = "desc_SC")
-    })
-    @Select("""
-    SELECT `projectId`, `projectName_SC`, `desc_SC` FROM project
-    WHERE projectId = #{projectId}
-    """)
-    public Project getProjectSC(int projectId);
+        @Results({
+                        @Result(property = "projectName", column = "projectName_SC"),
+                        @Result(property = "projectId", column = "projectId"),
+                        @Result(property = "desc", column = "desc_SC")
+        })
+        @Select("""
+                        SELECT `projectId`, `projectName_SC`, `desc_SC` FROM project
+                        WHERE
+                        projectId in
+                        <foreach item='item' index='index' collection='projectIds'
+                            open='(' separator=',' close=')'>
+                            #{item}
+                        </foreach>
+                        """)
+        public List<Project> getProjectsByProjectIDsSC(List<Integer> projectIds);
+
 }

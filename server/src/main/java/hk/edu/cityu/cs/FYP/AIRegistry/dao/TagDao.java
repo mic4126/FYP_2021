@@ -12,5 +12,7 @@ public interface TagDao {
 
     public void deleteTag(Tag tag);
 
+    public List<Integer> searchByTag(String tag);
+
     
 }

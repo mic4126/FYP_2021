@@ -37,4 +37,12 @@ public interface TagMapper {
     """)
     public void deleteTag (Tag t);
 
+    @Select("""
+    SELECT `projectId` from Tag
+    WHERE tag = #{query} or 
+    tag_TC = #{query} or
+    tag_SC = #{query}
+    """)
+    public List<Integer> searchByTag(String query);
+
 }
