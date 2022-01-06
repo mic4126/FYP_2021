@@ -11,5 +11,7 @@ spring.mail.password=
 #sender address of reset/init password email
 airegistry.mail.sender=
 
-#
+#Attachment storage directory
 airegistry.storage.directory=
+#Key for signing jwt token (At least 32 char)
+jwt.key=

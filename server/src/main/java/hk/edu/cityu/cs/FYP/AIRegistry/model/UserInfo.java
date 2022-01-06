@@ -1,9 +1,18 @@
 package hk.edu.cityu.cs.FYP.AIRegistry.model;
 
+import java.util.ArrayList;
+import java.util.Collection;
+import java.util.Date;
+import java.util.List;
+
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class UserInfo {
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.authority.SimpleGrantedAuthority;
+import org.springframework.security.core.userdetails.UserDetails;
+
+public class UserInfo implements UserDetails {
 
     @JsonProperty("password")
     private String password;
@@ -30,7 +39,7 @@ public class UserInfo {
      */
     @JsonIgnore
     private String hashedPassword;
-    
+
     @JsonIgnore
     private String salt;
     /**
@@ -43,6 +52,30 @@ public class UserInfo {
      */
     @JsonIgnore
     private String newSalt;
+
+    @JsonIgnore
+    private List<Integer> projectIds;
+
+    private Date deleteDate;
+
+    @JsonIgnore
+    private List<GrantedAuthority> authorities = new ArrayList<>();
+
+    public Date getDeleteDate() {
+        return deleteDate;
+    }
+
+    public void setDeleteDate(Date deleteDate) {
+        this.deleteDate = deleteDate;
+    }
+
+    public List<Integer> getProjectIds() {
+        return projectIds;
+    }
+
+    public void setProjectIds(List<Integer> projectIds) {
+        this.projectIds = projectIds;
+    }
 
     public String getNewPassword() {
         return newPassword;
@@ -146,6 +179,40 @@ public class UserInfo {
 
     public void setUsername(String username) {
         this.username = username;
+    }
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        if (authorities.isEmpty()) {
+            authorities.add(new SimpleGrantedAuthority("ROLE_" + userType));
+            if (projectIds != null) {
+                projectIds.forEach((e) -> {
+                    authorities.add(new SimpleGrantedAuthority("PROJECT_" + e));
+                });
+            }
+        }
+        return authorities;
+    }
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return deleteDate == null;
     }
 
 }

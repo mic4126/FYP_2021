@@ -3,6 +3,9 @@ package hk.edu.cityu.cs.FYP.AIRegistry.service;
 import javax.mail.MessagingException;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -13,7 +16,7 @@ import hk.edu.cityu.cs.FYP.AIRegistry.model.ResetPasswordInfo;
 import hk.edu.cityu.cs.FYP.AIRegistry.model.UserInfo;
 
 @Service
-public class UserServiceImpl implements UserService {
+public class UserServiceImpl implements UserService,UserDetailsService {
 
     @Autowired
     PasswordService passwordService;
@@ -52,8 +55,11 @@ public class UserServiceImpl implements UserService {
             throw new PasswordNotMatchExceeption("Password not Match");
         }
 
-        var salt = passwordService.generateSalt();
-        userInfo.setSalt(salt);
+        // var salt = passwordService.generateSalt();
+        // Bcrypt will generate random salt each time.
+        
+        var salt = "";
+        userInfo.setSalt(salt);        
         var hashedPassword = passwordService.hashPassword(userInfo.getNewPassword(), salt);
         userInfo.setHashedPassword(hashedPassword);
         userDao.changePassword(userInfo);
@@ -69,7 +75,8 @@ public class UserServiceImpl implements UserService {
         String password = passwordService.generatePassword();
         userInfo.setPassword(password);
 
-        String salt = passwordService.generateSalt();
+        // Bcrypt will generate random salt each time.
+        String salt = "";
         userInfo.setSalt(salt);
         resetPassword.setSalt(salt);
 
@@ -108,6 +115,16 @@ public class UserServiceImpl implements UserService {
     @Override
     public void deleteUser(String username) {
         userDao.deleteUser(username);
+    }
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        
+        var user =  userDao.findUserByUserName(username);
+        if (user == null){
+            throw new UsernameNotFoundException("User not found exception");
+        }
+        return user;
     }
 
 }

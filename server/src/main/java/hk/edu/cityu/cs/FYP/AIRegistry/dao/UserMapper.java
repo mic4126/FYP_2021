@@ -3,6 +3,7 @@ package hk.edu.cityu.cs.FYP.AIRegistry.dao;
 import java.util.List;
 
 import org.apache.ibatis.annotations.Insert;
+import org.apache.ibatis.annotations.Many;
 import org.apache.ibatis.annotations.Mapper;
 import org.apache.ibatis.annotations.Result;
 import org.apache.ibatis.annotations.Results;
@@ -41,14 +42,24 @@ public interface UserMapper {
             @Result(property = "hashedPassword", column = "password"),
             @Result(property = "salt", column = "salt"),
             @Result(property = "newPassword", column = "new_password"),
-            @Result(property = "newSalt", column = "new_salt")
+            @Result(property = "newSalt", column = "new_salt"),
+            @Result(property = "projectIds",column = "username",many = @Many(select = "findProjectIdByusername")),
+            @Result(property = "deleteDate",column = "delete_date")
     })
     @Select("""
-            SELECT username, email, firstName, lastName, userType, password, salt, new_password, new_salt
+            SELECT username, email, firstName, lastName, userType, password, salt, new_password, new_salt, delete_date
             FROM user
             WHERE username = #{username}
             """)
     public UserInfo findUserByUsername(String username);
+
+    
+
+    @Select("""
+        Select projectId from Project_user where username = #{username}
+    """)
+    public List<Integer> findProjectIdByusername(String username);
+
 
     @Update("""
             UPDATE user SET

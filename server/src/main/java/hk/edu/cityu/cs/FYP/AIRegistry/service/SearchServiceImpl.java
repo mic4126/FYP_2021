@@ -4,12 +4,14 @@ import java.util.List;
 
 import org.apache.catalina.util.RequestUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import hk.edu.cityu.cs.FYP.AIRegistry.dao.ProjectDao;
 import hk.edu.cityu.cs.FYP.AIRegistry.dao.TagDao;
 import hk.edu.cityu.cs.FYP.AIRegistry.model.Lang;
 import hk.edu.cityu.cs.FYP.AIRegistry.model.Project;
 
+@Service
 public class SearchServiceImpl implements SearchService{
 
     @Autowired
