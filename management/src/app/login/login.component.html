@@ -1,0 +1,18 @@
+<div class="container-xxl h-100 justify-content-center my-auto vertical-center">
+    <div class="d-flex justify-content-conter h-100 align-content-center align-self-center w-100">
+        <div class="row mx-auto">
+            <form class="col-md-auto w-100" id="loginForm" [formGroup]="loginForm" (ngSubmit)="submit()">
+                <div class="mb-3 input-group-lg">
+                    <label for="username" class="form-label">Username</label>
+                    <input type="text" class="form-control" id="username" placeholder="Username" formControlName="username">
+                </div>
+                <div class="mb-3 input-group-lg">
+                    <label for="password" class="form-label">Password</label>
+                    <input type="password" class="form-control" id="password" placeholder="Password" formControlName="password">
+                </div>                
+                <button type="submit" class="btn btn-primary mx-auto">Login</button>
+            </form>
+        </div>
+    </div>
+
+</div>
