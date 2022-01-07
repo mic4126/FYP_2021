@@ -1,14 +1,14 @@
-package hk.edu.cityu.cs.FYP.AIRegistry.dao;
+package hk.edu.cityu.cs.FYP.AIRegistry.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class LoginReq {
 
     @JsonProperty("username")
-    public String username;
+    private String username;
 
     @JsonProperty("password")
-    public String password;
+    private String password;
 
     public String getUsername() {
         return username;

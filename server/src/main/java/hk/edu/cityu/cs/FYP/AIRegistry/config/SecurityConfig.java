@@ -25,8 +25,18 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Autowired
     CustomAuthProvider customAuthProvider;
 
-    @Autowired
     JWTAuthFilter jwtAuthFilter;
+
+    
+
+    public JWTAuthFilter getJwtAuthFilter() {
+        return jwtAuthFilter;
+    }
+
+    @Autowired
+    public void setJwtAuthFilter(JWTAuthFilter jwtAuthFilter) {
+        this.jwtAuthFilter = jwtAuthFilter;
+    }
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {

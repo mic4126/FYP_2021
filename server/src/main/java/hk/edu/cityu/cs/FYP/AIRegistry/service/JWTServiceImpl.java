@@ -15,8 +15,8 @@ import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
-import hk.edu.cityu.cs.FYP.AIRegistry.dao.LoginReq;
 import hk.edu.cityu.cs.FYP.AIRegistry.dao.UserDao;
+import hk.edu.cityu.cs.FYP.AIRegistry.model.LoginReq;
 import hk.edu.cityu.cs.FYP.AIRegistry.model.UserInfo;
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwt;
@@ -26,7 +26,7 @@ import io.jsonwebtoken.security.Keys;
 @Service
 public class JWTServiceImpl {
 
-    @Autowired
+    
     private AuthenticationManager authenticationManager;
 
     @Autowired
@@ -34,6 +34,17 @@ public class JWTServiceImpl {
 
     @Value("${jwt.key}")
     private String KEY;
+
+    
+
+    public AuthenticationManager getAuthenticationManager() {
+        return authenticationManager;
+    }
+
+    @Autowired
+    public void setAuthenticationManager(AuthenticationManager authenticationManager) {
+        this.authenticationManager = authenticationManager;
+    }
 
     public String genToken(LoginReq loginReq) {
         Authentication authentication = new UsernamePasswordAuthenticationToken(loginReq.getUsername(),

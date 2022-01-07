@@ -8,20 +8,26 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.autoconfigure.AutoConfigureOrder;
+import org.springframework.context.annotation.Lazy;
 import org.springframework.http.HttpHeaders;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.security.core.userdetails.UserDetailsService;
+import org.springframework.stereotype.Component;
 import org.springframework.web.filter.OncePerRequestFilter;
 
 import hk.edu.cityu.cs.FYP.AIRegistry.service.JWTServiceImpl;
 
+@Component
 public class JWTAuthFilter extends OncePerRequestFilter {
 
-    @Autowired
     JWTServiceImpl jwtServiceImpl;
+
+  
+    public JWTAuthFilter(@Lazy JWTServiceImpl jwtServiceImpl) {
+        this.jwtServiceImpl = jwtServiceImpl;
+    }
 
     @Autowired
     UserDetailsService userDetailsService;
@@ -42,7 +48,7 @@ public class JWTAuthFilter extends OncePerRequestFilter {
 
             Authentication authentication = new UsernamePasswordAuthenticationToken(userDetails, null,
                     userDetails.getAuthorities());
-            
+
             SecurityContextHolder.getContext().setAuthentication(authentication);
 
         }
