@@ -1,5 +1,7 @@
 package hk.edu.cityu.cs.FYP.AIRegistry.service;
 
+import java.util.List;
+
 import javax.mail.MessagingException;
 
 import org.apache.catalina.User;
@@ -19,4 +21,10 @@ public interface UserService {
     public boolean login(String username, String password);
 
     public void deleteUser(String username);
+
+    public List<UserInfo> getAllUsers();
+
+    public List<UserInfo> getAllDevs();
+
+    public List<UserInfo> getAllAdmins();
 }

@@ -24,7 +24,7 @@ Content-Type: application/json
 
 ### reset password
 
-POST http://localhost:8080/admin/user/password/admin
+POST http://localhost:8080/api/admin/user/password/admin
 Content-Type: application/json
 
 {
@@ -94,9 +94,10 @@ Content-Type: application/json
     "password":"123"
 }
 
-### Login
-# POST  http://localhost:8080/api/login
-# Content-Type: application/x-www-form-urlencoded
+### Get Dev usres
+GET http://localhost:8080/api/admin/user
+?userType=dev
 
-# username=admin
-# &password=123
+### Get Admin usres
+GET http://localhost:8080/api/admin/user
+?userType=admin

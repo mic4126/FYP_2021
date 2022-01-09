@@ -60,6 +60,8 @@ public class JWTServiceImpl {
         claims.put("userType", userInfo.getUserType());
         claims.put("username", userInfo.getUsername());
         claims.put("projectIds", userInfo.getProjectIds());
+        claims.put("firstname", userInfo.getFirstName());
+        claims.put("lastName", userInfo.getLastName());
         claims.setExpiration(expireTime.getTime());
         claims.setNotBefore(Calendar.getInstance().getTime());
         claims.setIssuer("AIRegistry");

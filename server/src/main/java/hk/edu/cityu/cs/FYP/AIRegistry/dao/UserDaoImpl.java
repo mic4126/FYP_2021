@@ -49,7 +49,7 @@ public class UserDaoImpl implements UserDao {
     public void changeUserInfo(UserInfo userInfo) {
         var session = sqlSessionFactory.openSession();
         var mapper = session.getMapper(UserMapper.class);
-        mapper.changeUserInfo(userInfo);        
+        mapper.changeUserInfo(userInfo);
     }
 
     @Override
@@ -64,6 +64,27 @@ public class UserDaoImpl implements UserDao {
         var session = sqlSessionFactory.openSession();
         var mapper = session.getMapper(UserMapper.class);
         return mapper.findUsersByUsername(usernameList);
+    }
+
+    @Override
+    public List<UserInfo> getAllUsers() {
+        var session = sqlSessionFactory.openSession();
+        var mapper = session.getMapper(UserMapper.class);
+        return mapper.getAllUsers();
+    }
+
+    @Override
+    public List<UserInfo> getAllDevs() {
+        var session = sqlSessionFactory.openSession();
+        var mapper = session.getMapper(UserMapper.class);
+        return mapper.getAllDevs();
+    }
+
+    @Override
+    public List<UserInfo> getAllAdmins() {
+        var session = sqlSessionFactory.openSession();
+        var mapper = session.getMapper(UserMapper.class);
+        return mapper.getAllAdmins();
     }
 
 }

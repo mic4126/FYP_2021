@@ -14,6 +14,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 public class UserInfo implements UserDetails {
 
+    @JsonIgnore
     @JsonProperty("password")
     private String password;
 
@@ -32,6 +33,7 @@ public class UserInfo implements UserDetails {
     @JsonProperty("userType")
     private String userType;
 
+    @JsonIgnore
     @JsonProperty("newPassword")
     private String newPassword;
     /**
@@ -77,6 +79,7 @@ public class UserInfo implements UserDetails {
         this.projectIds = projectIds;
     }
 
+    @JsonIgnore
     public String getNewPassword() {
         return newPassword;
     }
@@ -90,6 +93,7 @@ public class UserInfo implements UserDetails {
      * 
      * @return {@link String} of the user's new hashed password
      */
+    @JsonIgnore
     public String getNewHashedPassword() {
         return newHashedPassword;
     }
@@ -117,10 +121,12 @@ public class UserInfo implements UserDetails {
     public UserInfo() {
     };
 
+    @JsonIgnore
     public String getPassword() {
         return password;
     }
 
+    @JsonIgnore
     public String getHashedPassword() {
         return hashedPassword;
     }

@@ -21,4 +21,11 @@ public interface UserDao {
 
     public void deleteUser(String username);
 
+    public List<UserInfo> getAllUsers();
+
+    public List<UserInfo> getAllDevs();
+
+    public List<UserInfo> getAllAdmins();
+
+
 }
