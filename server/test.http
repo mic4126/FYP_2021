@@ -63,16 +63,18 @@ Content-Type: application/json
 DELETE http://localhost:8080/admin/user/admin
 
 ### Add Project
-POST http://localhost:8080/project
-Content-Type: application/x-www-form-urlencoded
+POST http://localhost:8080/api/project
+Content-Type: application/json
 
-projectName=test2
-&developers=dev
-&developers=dev1
+{
+    "projectName":"test5",
+    "developers":["dev","dev1"]
+}
+
 
 
 ### Put Desc (ENG)
-PUT http://localhost:8080/project/desc
+PUT http://localhost:8080/api/project/desc
 Content-Type: application/x-www-form-urlencoded
 
 projectId=15
@@ -80,7 +82,7 @@ projectId=15
 &lang=ENG
 
 ### Get Desc (ENG)
-GET  http://localhost:8080/project/desc
+GET  http://localhost:8080/api/project/desc
 ?projectId=15
 &lang=ENG
 
@@ -101,3 +103,17 @@ GET http://localhost:8080/api/admin/user
 ### Get Admin usres
 GET http://localhost:8080/api/admin/user
 ?userType=admin
+
+### add dev to project 
+POST http://localhost:8080/api/project/15/user
+Content-Type: application/x-www-form-urlencoded
+
+username=dev6
+
+### delete dev from project
+
+DELETE  http://localhost:8080/api/project/15/user/dev6
+
+
+### Get All Project
+GET http://localhost:8080/api/project

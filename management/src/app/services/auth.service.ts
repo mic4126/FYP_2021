@@ -4,7 +4,7 @@ import * as Globals from 'src/app/globals'
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { tap } from 'rxjs';
 import { shareReplay } from 'rxjs/operators';
-import { UserInfo } from 'src/app/model/UserInfo.model';
+import { JWTUserInfo } from 'src/app/model/UserInfo.model';
 import { Router } from '@angular/router';
 
 @Injectable({
@@ -22,11 +22,11 @@ export class AuthService {
       tap((resp) => { localStorage.setItem("jwt", resp) }),
       tap((resp) => { this.setUserInfo(resp) }),
       shareReplay()
-    ).subscribe(() => { this.router.navigateByUrl("/") })
+    ).subscribe(() => { this.router.navigateByUrl("/home/index") })
   }
 
   private setUserInfo(jwt: string) {
-    const userInfo: UserInfo = <UserInfo>this.jwtHelper.decodeToken(jwt)
+    const userInfo: JWTUserInfo = <JWTUserInfo>this.jwtHelper.decodeToken(jwt)
     console.log("set user info called");
     console.log(userInfo);
     localStorage.setItem("userInfo", JSON.stringify(userInfo));
@@ -40,5 +40,19 @@ export class AuthService {
       }
     }
     return false;
+  }
+
+  getUserInfo(): JWTUserInfo {
+    const userInfo = <JWTUserInfo>JSON.parse(localStorage.getItem("userInfo") || "");
+    return userInfo;
+  }
+
+  isAdmin(): boolean {
+    return this.getUserInfo().userType.toLowerCase() === 'admin'
+  }
+
+
+  isDev(): boolean {
+    return this.getUserInfo().userType.toLowerCase() === 'dev'
   }
 }

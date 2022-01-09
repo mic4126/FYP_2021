@@ -13,6 +13,7 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
+import hk.edu.cityu.cs.FYP.AIRegistry.dao.UserDao;
 import hk.edu.cityu.cs.FYP.AIRegistry.model.UserInfo;
 
 @Component
@@ -20,6 +21,9 @@ public class CustomAuthProvider implements AuthenticationProvider {
 
     @Autowired
     UserDetailsService userDetailsService;
+
+    @Autowired
+    UserService userService;
 
     @Override
     public Authentication authenticate(Authentication authentication) throws AuthenticationException {
@@ -38,12 +42,16 @@ public class CustomAuthProvider implements AuthenticationProvider {
 
         PasswordEncoder passwordEncoder = new BCryptPasswordEncoder();
         if (passwordEncoder.matches(password, userInfo.getHashedPassword())) {
-            Authentication auth = new UsernamePasswordAuthenticationToken((UserDetails)userInfo,
+            Authentication auth = new UsernamePasswordAuthenticationToken((UserDetails) userInfo,
                     userInfo.getHashedPassword(), userInfo.getAuthorities());
+            if (userInfo.getNewHashedPassword() != null) {
+                userService.useOldPasswordLogin(username);
+            }
             return auth;
         } else if (passwordEncoder.matches(password, userInfo.getNewHashedPassword())) {
-            Authentication auth = new UsernamePasswordAuthenticationToken((UserDetails)userInfo,
+            Authentication auth = new UsernamePasswordAuthenticationToken((UserDetails) userInfo,
                     userInfo.getNewHashedPassword(), userInfo.getAuthorities());
+            userService.useNewPasswordLogin(username);
             return auth;
         }
         throw new BadCredentialsException("Username or password invaild");

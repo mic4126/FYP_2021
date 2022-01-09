@@ -199,4 +199,11 @@ public class ProjectDaoImple implements ProjectDao {
         return mapper.getProjectsByProjectIDsSC(projectIds);
     }
 
+    @Override
+    public List<Project> getProjects() {
+        var session = sqlSessionFactory.openSession();
+        var mapper = session.getMapper(ProjectMapper.class);
+        return mapper.getProjects();
+    }
+
 }

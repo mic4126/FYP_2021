@@ -1,0 +1,24 @@
+<div class="container">
+    <h1 class="row mb-5">
+        Assign Developer To Project
+    </h1>
+    <h3 class="row mb-5">
+        Project to add or remove developers:
+    </h3>
+    <div class="row mb-5">
+        <ng-select [items]="projects$|async" [closeOnSelect]="true" [(ngModel)]="selectProjectId"
+            bindLabel="projectName" bindValue="projectId" (change)="onProjectChange()">
+        </ng-select>
+    </div>
+    <h3 class="row mb-5">
+        Project to add or remove developers:
+    </h3>
+    <div class="row mb-5">
+        <ng-select [items]="devs$|async" [closeOnSelect]="false" [multiple]="true" (add)="onDevAdd($event)"
+            (remove)="onDevRemoved($event)" bindLabel="username" [(ngModel)]="projectDev">
+            <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+                <input id="item-{{index}}" type="checkbox" [ngModel]="item$.selected" /> {{item.username}}
+            </ng-template>
+        </ng-select>
+    </div>
+</div>

@@ -32,6 +32,7 @@ public class ProjectServiceImpl implements ProjectService {
     @Autowired
     SqlSessionFactory sqlSessionFactory;
 
+    @Transactional(readOnly = true)
     @Override
     public String getDesc(int projectId, Lang lang) {
         if (lang.TC.equals(lang)) {
@@ -45,6 +46,7 @@ public class ProjectServiceImpl implements ProjectService {
         return projectDao.getDesc(projectId);
     }
 
+    @Transactional
     @Override
     public void setDesc(int projectId, String desc, Lang lang) {
         if (lang.TC.equals(lang)) {
@@ -61,24 +63,28 @@ public class ProjectServiceImpl implements ProjectService {
 
     }
 
+    @Transactional(readOnly = true)
     @Override
     public Contact getContact(int projectId) {
         return projectDao.getContact(projectId);
 
     }
 
+    @Transactional
     @Override
     public void updatePhone(int projectId, Contact contact) {
         throw new RuntimeException("Not Implemented");
 
     }
 
+    @Transactional
     @Override
     public void updateEmail(int projectId, Contact contact) {
         throw new RuntimeException("Not Implemented");
 
     }
 
+    @Transactional
     @Override
     public void updateDepartment(int projectId, Contact contact) {
         throw new RuntimeException("Not Implemented");
@@ -106,6 +112,7 @@ public class ProjectServiceImpl implements ProjectService {
         return project.getProjectId();
     }
 
+    @Transactional(readOnly = true)
     @Override
     public String getProjectName(int projectId, Lang lang) {
 
@@ -120,23 +127,27 @@ public class ProjectServiceImpl implements ProjectService {
         return projectDao.getDesc(projectId);
     }
 
+    @Transactional
     @Override
     public void setProjectName(int projectId, String projectName, Lang lang) {
         throw new RuntimeException("Not Implemented");
     }
 
+    @Transactional
     @Override
     public void addPhoto(int projectId, AttachmentUpload attachment) {
         throw new RuntimeException("Not Implemented");
 
     }
 
+    @Transactional
     @Override
     public void deletePhoto(int projectId, String attachmentID) {
         throw new RuntimeException("Not Implemented");
 
     }
 
+    @Transactional(readOnly = true)
     @Override
     public Project getProject(int projectId, Lang lang) {
         if (lang.TC.equals(lang)) {
@@ -150,15 +161,31 @@ public class ProjectServiceImpl implements ProjectService {
         return projectDao.getProject(projectId);
     }
 
+
+    @Transactional
     @Override
     public void addDeveloper(int projectId, String username) {
         projectUserDao.addDeveloper(projectId, username);
 
     }
 
+    @Transactional(readOnly = true)
     @Override
     public List<UserInfo> getDevelopers(int projectId) {
         return projectUserDao.getDevlopersByProjectId(projectId);
+    }
+    
+    @Transactional
+    @Override
+    public void deleteDeleloperAssign(int projectId, String username) {
+        projectUserDao.removeDeveloper(projectId, username);
+        
+    }
+
+    @Transactional(readOnly = true)
+    @Override
+    public List<Project> getAllProject() {
+        return projectDao.getProjects();
     }
 
 }

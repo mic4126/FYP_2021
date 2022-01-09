@@ -1,0 +1,20 @@
+<div class="container-fluid h-100 mt-5">
+    <div class="row w-100">
+        <div class="col-10 h-100">
+            <router-outlet>                
+            </router-outlet>
+        </div>
+        <div class="col-2">
+            <nav class="nav flex-column navbar-end">
+                <h3>Welcome, {{username}}</h3>
+                <a routerLink="/home/index" class="nav-link" [hidden]="">Index</a>
+                <a routerLink="/home/create-user" class="nav-link" [hidden]="!isAdmin">Create User</a>
+                <a routerLink="/home/delete-user" [hidden]="!isAdmin" class="nav-link">Delete Users</a>
+                <a routerLink="/home/create-project" class="nav-link" [hidden]="!isAdmin">Create Project</a>
+                <a routerLink="/home/assign-dev" [hidden]="!isAdmin" class="nav-link">Assign developers to project</a>
+            </nav>
+
+
+        </div>
+    </div>
+</div>

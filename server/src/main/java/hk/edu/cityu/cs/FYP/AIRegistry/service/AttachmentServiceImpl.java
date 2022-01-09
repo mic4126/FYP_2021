@@ -10,6 +10,7 @@ import javax.annotation.PostConstruct;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import hk.edu.cityu.cs.FYP.AIRegistry.Exception.StorageFolderCannotAccessException;
@@ -44,11 +45,13 @@ public class AttachmentServiceImpl implements AttachmentService {
 
     }
 
+    @Transactional(readOnly = true)
     @Override
     public List<Integer> getProjectAttachment(int projectId) {
         return attachmentDao.getProjectAttachments(projectId);
     }
 
+    @Transactional(readOnly = true)
     @Override
     public List<Integer> getDetailAttachment(int detailId) {
 
@@ -70,6 +73,7 @@ public class AttachmentServiceImpl implements AttachmentService {
 
     }
 
+    @Transactional
     @Override
     public int addProjectAttachment(AttachmentUpload attachmentUpload) throws IOException {
 
@@ -79,6 +83,7 @@ public class AttachmentServiceImpl implements AttachmentService {
         return attachmentUpload.getAttachmentId();
     }
 
+    @Transactional
     @Override
     public int addDetailAttachment(AttachmentUpload attachmentUpload) throws IOException {
         var filename = saveFileToFolder(attachmentUpload.getMultipartFile());
@@ -87,6 +92,7 @@ public class AttachmentServiceImpl implements AttachmentService {
         return attachmentUpload.getAttachmentId();
     }
 
+    @Transactional(readOnly = true)
     @Override
     public AttachmentDownload getAttachment(int attachmentId) {
         var attachmentDownload = attachmentDao.getAttachment(attachmentId);
@@ -97,6 +103,7 @@ public class AttachmentServiceImpl implements AttachmentService {
 
     }
 
+    @Transactional
     public void deleteAttachment(int attachmentId){
         attachmentDao.deleteAttachment(attachmentId);
     }

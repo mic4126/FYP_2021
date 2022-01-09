@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import hk.edu.cityu.cs.FYP.AIRegistry.dao.DetailDao;
 import hk.edu.cityu.cs.FYP.AIRegistry.model.AttachmentUpload;
@@ -16,6 +17,7 @@ public class DetailServiceImpl implements DetailService {
     @Autowired
     DetailDao detailDao;
 
+    @Transactional
     @Override
     public void setDetailName(int detailId, String detailName, Lang lang) {
         if (Lang.TC.equals(lang)) {
@@ -30,6 +32,7 @@ public class DetailServiceImpl implements DetailService {
         detailDao.setDetailName(detailId, detailName);
     }
 
+    @Transactional
     @Override
     public void setDetailDesc(int detailId, String desc, Lang lang) {
         if (Lang.TC.equals(lang)) {
@@ -44,6 +47,7 @@ public class DetailServiceImpl implements DetailService {
         detailDao.setDetailDesc(detailId, desc);
     }
 
+    @Transactional
     @Override
     public void addAttachment(int detailId, AttachmentUpload attachment) {
         // TODO Auto-generated method stub
@@ -56,6 +60,7 @@ public class DetailServiceImpl implements DetailService {
 
     }
 
+    @Transactional(readOnly = true)
     @Override
     public List<Detail> getAllDetailsByProjectId(int projectId, Lang lang) {
         if (Lang.TC.equals(lang)) {
@@ -70,6 +75,7 @@ public class DetailServiceImpl implements DetailService {
         return detailDao.getAllDetailsByProjectId(projectId);
     }
 
+    @Transactional
     @Override
     public int addDetail(int projectId, String detailName) {
         var detail = new Detail();
@@ -82,11 +88,13 @@ public class DetailServiceImpl implements DetailService {
 
     }
 
+    @Transactional
     @Override
     public void deleteDetail(int detailId) {
         detailDao.deleteDetail(detailId);
     }
 
+    @Transactional
     @Override
     public void setDetail(Detail detail, Lang lang) {
         if (Lang.TC.equals(lang)) {

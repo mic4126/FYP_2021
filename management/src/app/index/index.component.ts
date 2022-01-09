@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { JWTUserInfo } from '../model/UserInfo.model';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-index',
@@ -7,7 +9,18 @@ import { Component, OnInit } from '@angular/core';
 })
 export class IndexComponent implements OnInit {
 
-  constructor() { }
+  userInfo: JWTUserInfo;
+  username: string;
+
+  isDev:boolean;
+  isAdmin:boolean;
+
+  constructor(private authService:AuthService) {
+    this.userInfo = this.authService.getUserInfo();
+    this.username = this.userInfo.username;
+    this.isDev = authService.isDev();
+    this.isAdmin = authService.isAdmin();
+   }
 
   ngOnInit(): void {
   }

@@ -1,0 +1,30 @@
+<div class="container">
+    <h1 class="row mb-5">
+        Create Project
+    </h1>
+    <form class="d-flex flex-column" [formGroup]="createProjectForm" (ngSubmit)="onCreateProjectFormSubmit()">
+        <div class="row mx-2">
+            <label for="projectname" class="col-3 form-label fs-3">Project Name:</label>
+            <div class="col-9">
+                <input type="text" name="projectName" id="projectName" class="form-control"
+                    formControlName="projectName">
+            </div>
+        </div>
+    </form>
+    <div class="row mx-2">
+        <label for="" class="col-3 form-label fs-3">Developers:</label>
+        <div class="col-9">
+            <ng-select class="form-control" [multiple]="true" [items]="devs$ |async" bindLabel="username"
+                bindValue="username" [closeOnSelect]="false" [(ngModel)]="selectedDevs">
+                <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
+                    <input id="item-{{index}}" type="checkbox" [ngModel]="item$.selected" /> {{item.username}}
+                </ng-template>
+            </ng-select>
+        </div>
+    </div>
+    <div class="row mx-2">
+        <div class="col">
+            <button type="submit" class="btn btn-primary" (click)="onCreateProjectFormSubmit()">Submit</button>
+        </div>
+    </div>
+</div>

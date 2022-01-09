@@ -1,12 +1,15 @@
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
+import { ForgetPasswordComponent } from './forget-password/forget-password.component';
 import { LoginGuard } from './guard/login-guard.guard';
+import { HomeComponent } from './home/home.component';
 import { IndexComponent } from './index/index.component';
 import { LoginComponent } from './login/login.component';
 
 const routes: Routes = [
-  { path: "", component: IndexComponent,canActivate:[LoginGuard]  },
-  { path: "login", component: LoginComponent }
+  { path: "login", component: LoginComponent },
+  { path: "", component: LoginComponent },
+  { path: "forgetpassword", component: ForgetPasswordComponent }
 ];
 
 @NgModule({

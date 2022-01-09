@@ -87,4 +87,19 @@ public class UserDaoImpl implements UserDao {
         return mapper.getAllAdmins();
     }
 
+    @Override
+    public void setNewPasswordAsNull(String username) {
+        var session = sqlSessionFactory.openSession();
+        var mapper = session.getMapper(UserMapper.class);
+        mapper.setNewPasswordAsNull(username);
+    }
+
+    @Override
+    public void setPasswordAsNewPassword(String username) {
+        var session = sqlSessionFactory.openSession();
+        var mapper = session.getMapper(UserMapper.class);
+        mapper.setPasswordAsNewPassword(username);
+
+    }
+
 }

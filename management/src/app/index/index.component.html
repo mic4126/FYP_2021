@@ -1,1 +1,11 @@
-<p>Logined works!</p>
+<div class="container mt-5">
+    <h1 class="row">
+        Welcome, {{username}}
+    </h1>
+    <div class="d-flex flex-column">
+        <a routerLink="/home/create-user" [hidden]="!isAdmin" class="link-primary">Create User</a>
+        <a routerLink="/home/delete-user" [hidden]="!isAdmin" class="link-primary">Delete Users</a>
+        <a routerLink="/home/create-project" [hidden]="!isAdmin" class="link-primary">Create Project</a>
+        <a routerLink="/home/assign-dev" [hidden]="!isAdmin" class="link-primary">Assign developers to project</a>
+    </div>
+</div>

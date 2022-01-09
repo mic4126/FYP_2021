@@ -27,4 +27,8 @@ public interface UserService {
     public List<UserInfo> getAllDevs();
 
     public List<UserInfo> getAllAdmins();
+
+    public void useNewPasswordLogin(String username);
+
+    public void useOldPasswordLogin(String username);
 }

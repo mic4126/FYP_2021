@@ -124,7 +124,7 @@ public interface UserMapper {
                         @Result(property = "newSalt", column = "new_salt")
         })
         @Select("""
-                        SELECT * from user
+                        SELECT * from user where delete_date is null
                         """)
         public List<UserInfo> getAllUsers();
 
@@ -140,7 +140,7 @@ public interface UserMapper {
                         @Result(property = "newSalt", column = "new_salt")
         })
         @Select("""
-                        SELECT * from user WHERE userType = 'admin'
+                        SELECT * from user WHERE userType = 'admin' and delete_date is null
                         """)
         public List<UserInfo> getAllAdmins();
 
@@ -156,8 +156,24 @@ public interface UserMapper {
                         @Result(property = "newSalt", column = "new_salt")
         })
         @Select("""
-                        SELECT * from user WHERE userType = 'dev'
+                        SELECT * from user WHERE userType = 'dev' and delete_date is null
                         """)
         public List<UserInfo> getAllDevs();
+
+        @Update("""
+                        UPDATE USER SET
+                        `new_password` = null,
+                        `new_salt` = null
+                        WHERE `username` = #{username}
+                        """)
+        public void setNewPasswordAsNull(String username);
+
+        @Update("""
+                        UPDATE USER SET
+                        `password` = `new_password`
+                        `salt` = `new_salt`
+                        WHERE `username` = #{username}
+                        """)
+        public void setPasswordAsNewPassword(String username);
 
 }

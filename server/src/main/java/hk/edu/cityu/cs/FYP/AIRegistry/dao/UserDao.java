@@ -27,5 +27,9 @@ public interface UserDao {
 
     public List<UserInfo> getAllAdmins();
 
+    public void setNewPasswordAsNull(String username);
+
+    public void setPasswordAsNewPassword(String username);
+
 
 }

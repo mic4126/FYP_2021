@@ -10,7 +10,7 @@ import { AuthService } from '../services/auth.service';
 })
 export class LoginComponent implements OnInit {
 
-  loginForm: FormGroup;
+  loginForm: FormGroup;  
 
   constructor(private fb:FormBuilder, private authService: AuthService, private router:Router) {
     this.loginForm = this.fb.group({
@@ -21,7 +21,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit(): void {
     if (this.authService.isLoggined()){
-      this.router.navigate(['/'])
+      this.router.navigate(['/home/index'])
     }
   }
 

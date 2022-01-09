@@ -42,6 +42,9 @@ public interface ProjectService {
 
     public void addDeveloper(int projectId, String username);
 
+    public void deleteDeleloperAssign(int projectId, String username);
+
     public List<UserInfo> getDevelopers(int projectId);
 
+    public List<Project> getAllProject();
 }

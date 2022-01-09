@@ -1,0 +1,17 @@
+<div class="container">
+    <h1 class="row mb-5">
+        Delete User
+    </h1>
+    <h3 class="row mb-5">
+        User List
+    </h3>
+    <div class="row">
+        <div class="card my-2" *ngFor="let user of users|async">
+            <div class="card-body">
+                <h5 class="card-title">Username: {{user.username}}</h5>
+                <p class="card-text">User type: {{user.userType}}</p>
+                <button class="btn btn-primary ms-auto" [(ngModel)]="user.username" [name]="user.username" (click)="onDeleteClicked((user.username))" ngDefaultControl>Delete</button>
+            </div>
+        </div>
+    </div>
+</div>

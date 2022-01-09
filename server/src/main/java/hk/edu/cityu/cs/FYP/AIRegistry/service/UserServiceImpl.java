@@ -121,11 +121,13 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
     }
 
+    @Transactional
     @Override
     public void deleteUser(String username) {
         userDao.deleteUser(username);
     }
 
+    @Transactional(readOnly = true)
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
@@ -136,19 +138,37 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         return user;
     }
 
+    @Transactional(readOnly = true)
     @Override
     public List<UserInfo> getAllUsers() {
         return userDao.getAllUsers();
     }
 
+    @Transactional(readOnly = true)
     @Override
     public List<UserInfo> getAllDevs() {
         return userDao.getAllDevs();
     }
 
+    @Transactional(readOnly = true)
     @Override
     public List<UserInfo> getAllAdmins() {
         return userDao.getAllAdmins();
+    }
+
+    @Transactional
+    @Override
+    public void useNewPasswordLogin(String username) {
+        userDao.setNewPasswordAsNull(username);
+        
+    }
+
+    @Transactional
+    @Override
+    public void useOldPasswordLogin(String username) {
+        userDao.setPasswordAsNewPassword(username);
+        userDao.setNewPasswordAsNull(username);
+        
     }
 
 }
