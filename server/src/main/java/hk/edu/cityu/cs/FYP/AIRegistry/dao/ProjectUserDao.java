@@ -5,6 +5,7 @@ import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
 
+import hk.edu.cityu.cs.FYP.AIRegistry.model.Project;
 import hk.edu.cityu.cs.FYP.AIRegistry.model.UserInfo;
 
 public interface ProjectUserDao {
@@ -19,4 +20,6 @@ public interface ProjectUserDao {
     public List<UserInfo> getDevlopersByProjectId(int projectId);
 
     public void removeDeveloper(int projectId, String developer);
+
+    public List<Project> getProjectsByUsername(String username);
 }

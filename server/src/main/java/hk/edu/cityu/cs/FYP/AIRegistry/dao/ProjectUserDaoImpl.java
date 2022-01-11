@@ -7,6 +7,7 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import hk.edu.cityu.cs.FYP.AIRegistry.model.Project;
 import hk.edu.cityu.cs.FYP.AIRegistry.model.UserInfo;
 
 @Repository
@@ -54,5 +55,15 @@ public class ProjectUserDaoImpl implements ProjectUserDao {
         var mapper = session.getMapper(ProjectUserMapper.class);
         mapper.deleteDeveloper(projectId, developer);
     }
+
+    @Override
+    public List<Project> getProjectsByUsername(String username) {
+        var session = sqlSessionFactory.openSession();
+        var mapper = session.getMapper(ProjectUserMapper.class);
+        return mapper.getProjectsByUsername(username);
+        
+    }
+
+    
 
 }

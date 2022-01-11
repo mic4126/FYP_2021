@@ -1,0 +1,61 @@
+<p>edit-tag works!</p>
+
+
+<ng-template #addTagModel let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Add Tag</h4>
+        <button type="button" class="btn close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <form [formGroup]="addTagForm">
+            <div class="form-group">
+                <label for="tag" class="form-label">English</label>
+                <div class="input-group">
+                    <input id="tag" class="form-control" type="text" formControlName="tag">
+                </div>
+                <label for="tag" class="form-label">Trad.Chinese</label>
+                <div class="input-group">
+                    <input id="tag" class="form-control" type="text" formControlName="tagTC">
+                </div>
+                <label for="tag" class="form-label">Simp.Chinese</label>
+                <div class="input-group">
+                    <input id="tag" class="form-control" type="text" formControlName="tagSC">
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline-dark" (click)="addTag()">Add</button>
+    </div>
+</ng-template>
+
+
+<div class="card my-2">
+    <h3 class="card-title ms-2 mt-2">
+        Tag
+    </h3>
+    <div class="card-body">
+        <button (click)="openAddTagModal(addTagModel)" class="btn btn-primary my-2">Add Tag</button>
+
+        <table class="table mx-2 table-striped text-center">
+            <thead>
+                <tr>
+                    <th>English</th>
+                    <th>Trad. Chinese</th>
+                    <th>Simp. Chinese</th>
+                    <th>Delete</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr *ngFor="let tag of tags" class="align-middle">
+                    <td>{{tag.tag}}</td>
+                    <td>{{tag.tagTC}}</td>
+                    <td>{{tag.tagSC}}</td>
+                    <td><button (click)="deleteTag(tag)" class="btn btn-primary">Delete</button> </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

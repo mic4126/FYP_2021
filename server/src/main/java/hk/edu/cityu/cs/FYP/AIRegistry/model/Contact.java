@@ -6,7 +6,7 @@ import com.fasterxml.jackson.annotation.JsonValue;
 public class Contact {
 
     @JsonProperty("projectId")
-    private String projectId;
+    private int projectId;
 
     @JsonProperty("email")
     private String email;
@@ -17,11 +17,11 @@ public class Contact {
     @JsonProperty("department")
     private String department;
 
-    public String getProjectId() {
+    public int getProjectId() {
         return projectId;
     }
 
-    public void setProjectId(String projectId) {
+    public void setProjectId(int projectId) {
         this.projectId = projectId;
     }
 
@@ -52,7 +52,7 @@ public class Contact {
     public Contact() {
     }
 
-    public Contact(String projectId, String email, String phoneNumber, String department) {
+    public Contact(int projectId, String email, String phoneNumber, String department) {
         this.projectId = projectId;
         this.email = email;
         this.phoneNumber = phoneNumber;

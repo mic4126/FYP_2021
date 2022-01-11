@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 import { JWTUserInfo } from '../model/UserInfo.model';
 import { AuthService } from '../services/auth.service';
 
@@ -14,7 +15,7 @@ export class HomeComponent implements OnInit {
   isAdmin:boolean;
   isDev:boolean;
 
-  constructor(private authService: AuthService) {
+  constructor(private authService: AuthService,private router:Router) {
     this.userInfo = this.authService.getUserInfo();
     this.username = this.userInfo.username;
     this.isAdmin = authService.isAdmin();
@@ -22,5 +23,10 @@ export class HomeComponent implements OnInit {
   }
 
   ngOnInit(): void {
+  }
+
+  onLogoutClick(){
+    localStorage.removeItem('jwt');
+    this.router.navigate(['/login']);
   }
 }

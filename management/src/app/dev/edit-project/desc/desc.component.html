@@ -1,0 +1,37 @@
+<div class="card my-2">
+    <h3 class="card-title ms-2 mt-2">
+        Description
+    </h3>
+    <div class="card-body">
+
+        <nav ngbNav #nav="ngbNav" class="nav-tabs" [destroyOnHide]="false">
+            <ng-container ngbNavItem>
+                <a ngbNavLink class="nav-item">English</a>
+                <ng-template ngbNavContent>
+                    <div class="">
+                        <app-edit-desc [projectId]="projectId" [lang]="LANG.ENG"></app-edit-desc>
+                    </div>
+                </ng-template>
+            </ng-container>
+            <ng-container ngbNavItem>
+                <a ngbNavLink="nav-item">Trad. Chinese</a>
+                <ng-template ngbNavContent>
+                    <div class="">
+                        <app-edit-desc [projectId]="projectId" [lang]="LANG.TC"></app-edit-desc>
+                    </div>
+                </ng-template>
+            </ng-container>
+            <ng-container ngbNavItem>
+                <a ngbNavLink="nav-item">Simplified Chinese</a>
+                <ng-template ngbNavContent>
+                    <div class="">
+                        <app-edit-desc [projectId]="projectId" [lang]="LANG.SC"></app-edit-desc>
+                    </div>
+                </ng-template>
+            </ng-container>
+        </nav>
+        <div [ngbNavOutlet]="nav" class="mt-2"></div>
+
+
+    </div>
+</div>

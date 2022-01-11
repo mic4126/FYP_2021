@@ -17,6 +17,13 @@ import { CreateProjectComponent } from './admin/create-project/create-project.co
 import { NgSelectModule } from '@ng-select/ng-select';
 import { DeleteUserComponent } from './admin/delete-user/delete-user.component';
 import { AssignDevComponent } from './admin/assign-dev/assign-dev.component';
+import { EditProjectComponent } from './dev/edit-project/edit-project.component';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
+import { DescComponent } from './dev/edit-project/desc/desc.component';
+import { EditDescComponent } from './dev/edit-project/desc/edit-desc/edit-desc.component';
+import { EditProjectNameComponent } from './dev/edit-project/edit-project-name/edit-project-name.component';
+import { EditContactComponent } from './dev/edit-project/edit-contact/edit-contact.component';
+import { EditTagComponent } from './dev/edit-project/edit-tag/edit-tag.component';
 
 export function jwtGetter() {
   return localStorage.getItem("jwt");
@@ -33,6 +40,12 @@ export function jwtGetter() {
     CreateProjectComponent,
     DeleteUserComponent,
     AssignDevComponent,
+    EditProjectComponent,
+    DescComponent,
+    EditDescComponent,
+    EditProjectNameComponent,
+    EditContactComponent,
+    EditTagComponent
   ],
   imports: [
     BrowserModule,
@@ -52,6 +65,7 @@ export function jwtGetter() {
       }
     }),
     AppRoutingModule,
+    NgbModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -19,13 +19,13 @@ import hk.edu.cityu.cs.FYP.AIRegistry.model.Lang;
 import hk.edu.cityu.cs.FYP.AIRegistry.model.Tag;
 import hk.edu.cityu.cs.FYP.AIRegistry.service.TagService;
 
-@RestController("/project/{projectId}/tag")
+@RestController()
 public class TagController {
 
     @Autowired
     TagService tagService;
 
-    @PostMapping(value = "")
+    @PostMapping(value = "/project/{projectId}/tag")
     public ResponseEntity<?> addTag(@PathVariable int projectId, @RequestBody Tag tag){
         
         if (projectId != tag.getProjectId()){
@@ -36,7 +36,7 @@ public class TagController {
         return ResponseEntity.ok().build();
     }
 
-    @GetMapping(value = "")
+    @GetMapping(value = "/project/{projectId}/tag")
     public ResponseEntity<?> getTag(@PathVariable int projectId){
         var tagList = tagService.findAllTagsByprojectId(projectId);
 
@@ -44,7 +44,7 @@ public class TagController {
         
     }
 
-    @DeleteMapping(value = "")
+    @DeleteMapping(value = "/project/{projectId}/tag")
     public ResponseEntity<?> deleteTag(@PathVariable int projectId, @RequestBody Tag tag){
         tagService.deleteTag(tag);
         return ResponseEntity.ok().build();

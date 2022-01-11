@@ -86,6 +86,19 @@ GET  http://localhost:8080/api/project/desc
 ?projectId=15
 &lang=ENG
 
+### Get Project Name
+GET http://localhost:8080/api/project/name
+?projectId=15
+&lang=ENG
+
+### Get Contact
+
+GET http://localhost:8080/api/project/contact
+?projectId=15
+
+### Get Tag
+GET http://localhost:8080/api/project/15/tag
+
 
 ### Login
 POST  http://localhost:8080/api/login
@@ -117,3 +130,8 @@ DELETE  http://localhost:8080/api/project/15/user/dev6
 
 ### Get All Project
 GET http://localhost:8080/api/project
+
+
+### Get Dev's project
+
+GET http://localhost:8080/api/admin/user/dev/project

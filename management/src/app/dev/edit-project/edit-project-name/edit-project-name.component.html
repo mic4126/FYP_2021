@@ -1,0 +1,22 @@
+<div class="card my-2">
+    <h3 class="card-title ms-2 mt-2">
+        Project Name
+    </h3>
+    <div class="card-body">
+        <form [formGroup]="projectNameForm" (ngSubmit)="onSubmit()">
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="">Eng</span>
+                <input type="text" class="form-control" formControlName="engName">
+            </div>
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="inputGroup-sizing-default">繁</span>
+                <input type="text" class="form-control" formControlName="TCName">
+            </div>
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="inputGroup-sizing-default">簡</span>
+                <input type="text" class="form-control" formControlName="SCName">
+            </div>
+            <button type="submit" class="btn btn-primary">Update</button>
+        </form>
+    </div>
+</div>

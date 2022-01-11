@@ -6,6 +6,7 @@ import javax.mail.MessagingException;
 
 import org.apache.catalina.User;
 
+import hk.edu.cityu.cs.FYP.AIRegistry.model.Project;
 import hk.edu.cityu.cs.FYP.AIRegistry.model.ResetPasswordInfo;
 import hk.edu.cityu.cs.FYP.AIRegistry.model.UserInfo;
 
@@ -31,4 +32,6 @@ public interface UserService {
     public void useNewPasswordLogin(String username);
 
     public void useOldPasswordLogin(String username);
+
+    public List<Project> getUsersProjects(String username);
 }

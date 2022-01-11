@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import hk.edu.cityu.cs.FYP.AIRegistry.model.Contact;
 import hk.edu.cityu.cs.FYP.AIRegistry.model.Lang;
 import hk.edu.cityu.cs.FYP.AIRegistry.model.request.CreateProjectReq;
 import hk.edu.cityu.cs.FYP.AIRegistry.service.ProjectService;
@@ -45,6 +46,19 @@ public class ProjectController {
         return new ResponseEntity<String>(desc, HttpStatus.OK);
     }
 
+    @GetMapping(path = {"/name","/{projectId}/name"})
+    public ResponseEntity<String> getProjectName(@RequestParam(name = "projectId",required = false) @PathVariable(name = "projectId",required = false) String projectId, @RequestParam("lang") Lang lang) {
+
+        if (projectId == null || projectId.equals("")){
+            return ResponseEntity.badRequest().body("Missing project ID");
+        }
+        
+        String projectName = projectService.getProjectName(Integer.parseInt(projectId), lang);
+
+        return new ResponseEntity<String>(projectName, HttpStatus.OK);
+    }
+
+
     @PutMapping(path = "/desc")
     public ResponseEntity<?> setDesc(@RequestBody MultiValueMap<String,String> mvm){
 
@@ -58,6 +72,22 @@ public class ProjectController {
 
         return ResponseEntity.ok().build();
     }
+
+    
+    @PutMapping(path = {"/name","/{projectId}/name"})
+    public ResponseEntity<?> setProjectName(@RequestBody MultiValueMap<String,String> mvm , @PathVariable(name = "projectId",required = false) Integer projId){
+
+
+        Lang langT = Lang.valueOf(mvm.getFirst("lang"));
+        var projectId = mvm.getFirst("projectId");
+        var projectName = mvm.getFirst("projectName");
+        
+        projectService.setProjectName(Integer.parseInt(projectId), projectName, langT);
+
+
+        return ResponseEntity.ok().build();
+    }
+
 
     @PostMapping(path="/{projectId}/user")
     public ResponseEntity<?> addDevToProject(@PathVariable("projectId")int projectId,@RequestParam("username") String username){
@@ -82,6 +112,24 @@ public class ProjectController {
         var projects = projectService.getAllProject();
         return ResponseEntity.ok(projects);
     }
+
+    @GetMapping(path={"/{projectId}/contact","/contact"})
+    public ResponseEntity<?> getContact(@RequestParam(name = "projectId",required = false) @PathVariable(name = "projectId",required = false) Integer projectId){
+        if (projectId == null){
+            return ResponseEntity.badRequest().body("Missing Project Id");
+        }
+        var contact =  projectService.getContact(projectId);
+        return ResponseEntity.ok(contact);
+    }
+
+    @PutMapping(path={"/{projectId}/contact","/contact"})
+    public ResponseEntity<?> setContact(@PathVariable(name = "projectId",required = false) Integer projectId , @RequestBody Contact contact){
+        if (projectId != null && projectId.intValue() == contact.getProjectId()){
+            return ResponseEntity.badRequest().body("Project ID not match");
+        }
+        projectService.setContact(contact);
+        return ResponseEntity.ok().build();
+    }   
 
 
 }

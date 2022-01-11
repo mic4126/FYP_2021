@@ -4,7 +4,11 @@ import { Observable } from 'rxjs';
 import { tap } from 'rxjs/operators';
 
 import * as Globals from 'src/app/globals'
+import { LabeledStatement } from 'typescript';
+import { Contact } from '../model/Contact.model';
+import { LANG } from '../model/Lang';
 import { Project } from '../model/Project.model';
+import { Tag } from '../model/Tag.model';
 import { UserInfo } from '../model/UserInfo.model';
 
 @Injectable({
@@ -32,6 +36,71 @@ export class ProjectService {
 
   deleteDevFromProject(projectId: number, username: string) {
     return this.http.delete(`${Globals.API_ROOT}/project/${projectId}/user/${username}`)
+  }
+
+  getDevProjects(username: string): Observable<Project[]> {
+    return this.http.get<Project[]>(`${Globals.API_ROOT}/admin/user/${username}/project`)
+  }
+
+  getProjectDesc(projectId: number, lang: LANG): Observable<string> {
+    return this.http.get(`${Globals.API_ROOT}/project/desc`, {
+      responseType: 'text',
+      params: {
+        projectId: projectId,
+        lang: lang
+      }
+    })
+  }
+
+  setProjectDesc(projectId: number, lang: LANG, desc: string) {
+    const param = new HttpParams()
+      .append('projectId', projectId)
+      .append('desc', desc)
+      .append('lang', lang);
+    return this.http.put(`${Globals.API_ROOT}/project/desc`, param)
+  }
+
+  getProjectName(projectId: number, lang: LANG): Observable<string> {
+    return this.http.get(`${Globals.API_ROOT}/project/name`, {
+      responseType: 'text',
+      params: {
+        projectId: projectId,
+        lang: lang
+      }
+    }
+    )
+  }
+
+  setProjectName(projectId: number, lang: LANG, name: string) {
+    const param = new HttpParams()
+      .append('projectId', projectId)
+      .append('lang', lang)
+      .append('projectName', name)
+    return this.http.put(`${Globals.API_ROOT}/project/name`, param)
+  }
+
+  getContact(projectId: number): Observable<Contact> {
+    return this.http.get<Contact>(`${Globals.API_ROOT}/project/contact`, {
+      params: {
+        'projectId': projectId
+      }
+    })
+  }
+
+  setContact(contact: Contact) {
+    return this.http.put(`${Globals.API_ROOT}/project/contact`, contact)
+  }
+
+  addTag(tag: Tag) {
+    return this.http.post(`${Globals.API_ROOT}/project/${tag.projectId}/tag`, tag)
+  }
+
+  getTags(projectId: number): Observable<Tag[]> {
+    return this.http.get<Tag[]>(`${Globals.API_ROOT}/project/${projectId}/tag`)
+  }
+
+  deleteTag(tag: Tag) {
+    return this.http.request('delete', `${Globals.API_ROOT}/project/${tag.projectId}/tag`, { body: tag })
   }
 
 }

@@ -72,6 +72,12 @@ public class ProjectServiceImpl implements ProjectService {
 
     @Transactional
     @Override
+    public void setContact(Contact contact){
+        projectDao.setContact(contact);
+    }
+
+    @Transactional
+    @Override
     public void updatePhone(int projectId, Contact contact) {
         throw new RuntimeException("Not Implemented");
 
@@ -117,20 +123,29 @@ public class ProjectServiceImpl implements ProjectService {
     public String getProjectName(int projectId, Lang lang) {
 
         if (lang.TC.equals(lang)) {
-            return projectDao.getDesc(projectId);
+            return projectDao.getProjectNameTC(projectId);
         }
 
         if (lang.SC.equals(lang)) {
-            return projectDao.getDescSC(projectId);
+            return projectDao.getProjectnameSC(projectId);
         }
 
-        return projectDao.getDesc(projectId);
+        return projectDao.getProjectName(projectId);
     }
 
     @Transactional
     @Override
     public void setProjectName(int projectId, String projectName, Lang lang) {
-        throw new RuntimeException("Not Implemented");
+
+        if (lang.TC.equals(lang)) {
+            projectDao.setProjectnameTC(projectId, projectName);
+        }
+
+        if (lang.SC.equals(lang)) {
+            projectDao.setProjectnameSC(projectId, projectName);
+        }
+
+        projectDao.setProjectname(projectId, projectName);
     }
 
     @Transactional
@@ -161,7 +176,6 @@ public class ProjectServiceImpl implements ProjectService {
         return projectDao.getProject(projectId);
     }
 
-
     @Transactional
     @Override
     public void addDeveloper(int projectId, String username) {
@@ -174,12 +188,12 @@ public class ProjectServiceImpl implements ProjectService {
     public List<UserInfo> getDevelopers(int projectId) {
         return projectUserDao.getDevlopersByProjectId(projectId);
     }
-    
+
     @Transactional
     @Override
     public void deleteDeleloperAssign(int projectId, String username) {
         projectUserDao.removeDeveloper(projectId, username);
-        
+
     }
 
     @Transactional(readOnly = true)

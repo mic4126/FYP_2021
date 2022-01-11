@@ -62,5 +62,4 @@ public interface ProjectDao {
 
     public List<Project> getProjects();
 
-
 }

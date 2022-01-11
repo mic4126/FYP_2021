@@ -22,6 +22,8 @@ public interface ProjectService {
 
     public void updateDepartment(int projectId, Contact contact);
 
+    public void setContact(Contact contact);
+
     /**
      * 
      * @param projectName Project Name

@@ -4,7 +4,9 @@ import { AssignDevComponent } from '../admin/assign-dev/assign-dev.component';
 import { CreateProjectComponent } from '../admin/create-project/create-project.component';
 import { CreateUserComponent } from '../admin/create-user/create-user.component';
 import { DeleteUserComponent } from '../admin/delete-user/delete-user.component';
+import { EditProjectComponent } from '../dev/edit-project/edit-project.component';
 import { AdminGuard } from '../guard/admin.guard';
+import { DevGuard } from '../guard/dev.guard';
 import { LoginGuard } from '../guard/login-guard.guard';
 import { IndexComponent } from '../index/index.component';
 import { HomeComponent } from './home.component';
@@ -19,6 +21,7 @@ const routes: Routes = [{
     { path: 'create-project', component: CreateProjectComponent, canActivate: [AdminGuard] },
     { path: 'delete-user', component: DeleteUserComponent, canActivate: [AdminGuard] },
     { path: 'assign-dev', component: AssignDevComponent, canActivate: [AdminGuard] },
+    { path: 'edit-project', component: EditProjectComponent, canActivate: [DevGuard] },
   ]
 }];
 
@@ -27,3 +30,4 @@ const routes: Routes = [{
   exports: [RouterModule]
 })
 export class HomeRoutingModule { }
+

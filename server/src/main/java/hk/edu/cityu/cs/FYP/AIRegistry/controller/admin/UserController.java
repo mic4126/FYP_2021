@@ -103,4 +103,10 @@ public class UserController {
         return ResponseEntity.ok(userInfoList);
 
     }
+
+    @GetMapping(value="/user/{username}/project")
+    public @ResponseBody ResponseEntity<?> getUsersProjects(@PathVariable("username") String username){
+        var projectList = userService.getUsersProjects(username);
+        return ResponseEntity.ok(projectList);
+    }
 }

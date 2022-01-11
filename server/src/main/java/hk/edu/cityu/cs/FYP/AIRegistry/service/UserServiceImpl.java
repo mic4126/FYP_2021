@@ -14,7 +14,9 @@ import org.springframework.transaction.annotation.Transactional;
 import hk.edu.cityu.cs.FYP.AIRegistry.Exception.EmailAndUserNameNotMatchException;
 import hk.edu.cityu.cs.FYP.AIRegistry.Exception.PasswordNotMatchExceeption;
 import hk.edu.cityu.cs.FYP.AIRegistry.Exception.UserAlreadyExistException;
+import hk.edu.cityu.cs.FYP.AIRegistry.dao.ProjectUserDao;
 import hk.edu.cityu.cs.FYP.AIRegistry.dao.UserDao;
+import hk.edu.cityu.cs.FYP.AIRegistry.model.Project;
 import hk.edu.cityu.cs.FYP.AIRegistry.model.ResetPasswordInfo;
 import hk.edu.cityu.cs.FYP.AIRegistry.model.UserInfo;
 
@@ -29,6 +31,9 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
     @Autowired
     UserDao userDao;
+
+    @Autowired
+    ProjectUserDao projectUserDao;
 
     @Transactional(rollbackFor = Exception.class)
     @Override
@@ -169,6 +174,12 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         userDao.setPasswordAsNewPassword(username);
         userDao.setNewPasswordAsNull(username);
         
+    }
+
+    @Transactional(readOnly = true)
+    @Override
+    public List<Project> getUsersProjects(String username) {
+       return projectUserDao.getProjectsByUsername(username);
     }
 
 }
