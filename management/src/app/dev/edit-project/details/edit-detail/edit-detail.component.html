@@ -1,0 +1,37 @@
+<form [formGroup]="editDetailForm" (ngSubmit)="onUpdateClick()">
+    <div class="mb-3">
+        <label for="detailName" class="form-label">Detail Name</label>
+        <input type="text" name="detailName" id="detailName" class="form-control" formControlName='detailName'>
+    </div>
+    <div class="mb-3">
+        <label for="detailName_TC" class="form-label">Detail Name (Trad. Chinese)</label>
+        <input type="text" name="detailName_TC" id="detailName_TC" class="form-control" formControlName='detailName_TC'>
+    </div>
+    <div class="mb-3">
+        <label for="detailName_SC" class="form-label">Detail Name (Simp. Chinese)</label>
+        <input type="text" name="detailName_SC" id="detailName_SC" class="form-control" formControlName='detailName_SC'>
+    </div>
+    <div class="mb-3">
+        <label for="detailDesc" class="form-label">Detail Description</label>
+        <textarea name="detailDesc" id="detailDesc" cols="30" rows="10" class="form-control"
+            formControlName="detailDesc"></textarea>
+    </div>
+    <div class="mb-3">
+        <label for="detailDesc_TC" class="form-label">Detail Description (Trad. Chinese)</label>
+        <textarea name="detailDesc_TC" id="detailDesc_TC" cols="30" rows="10" class="form-control"
+            formControlName="detailDesc_TC"></textarea>
+    </div>
+    <div class="mb-3">
+        <label for="detailDesc_SC" class="form-label">Detail Description (Simp. Chinese)</label>
+        <textarea name="detailDesc_SC" id="detailDesc_SC" cols="30" rows="10" class="form-control"
+            formControlName="detailDesc_SC"></textarea>
+    </div>
+    <div class="row">
+        <div class="col">
+            <button type="submit" class="btn btn-primary">Update</button>
+        </div>
+        <div class="col ms-auto">
+            <button type="" class="btn btn-danger float-end" (click)="onDeleteClick()">Delete</button>
+        </div>
+    </div>
+</form>

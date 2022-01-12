@@ -24,6 +24,8 @@ import { EditDescComponent } from './dev/edit-project/desc/edit-desc/edit-desc.c
 import { EditProjectNameComponent } from './dev/edit-project/edit-project-name/edit-project-name.component';
 import { EditContactComponent } from './dev/edit-project/edit-contact/edit-contact.component';
 import { EditTagComponent } from './dev/edit-project/edit-tag/edit-tag.component';
+import { DetailsComponent } from './dev/edit-project/details/details.component';
+import { EditDetailComponent } from './dev/edit-project/details/edit-detail/edit-detail.component';
 
 export function jwtGetter() {
   return localStorage.getItem("jwt");
@@ -45,7 +47,9 @@ export function jwtGetter() {
     EditDescComponent,
     EditProjectNameComponent,
     EditContactComponent,
-    EditTagComponent
+    EditTagComponent,
+    DetailsComponent,
+    EditDetailComponent
   ],
   imports: [
     BrowserModule,

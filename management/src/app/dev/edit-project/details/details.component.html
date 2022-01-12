@@ -1,0 +1,59 @@
+<p>details works!</p>
+<p>
+    ProjectId: {{projectId}}
+    Detail: {{parseDetails()}}
+</p>
+
+
+
+
+
+<div class="card my-2">
+    <div class="card-body">
+        <h3 class="card-title my-2">
+            Detail
+        </h3>
+
+        <button class="btn btn-primary" (click)="openAddDetailModal(addDetailModal)">Add Detail</button>
+
+        <ngb-accordion [closeOthers]="true">
+            <ng-container *ngIf="details$|async">
+                <ng-container *ngFor="let d of details$|async">
+                    <ngb-panel [id]="'detail-'+d.detailId" [title]="d.detailName">
+                        <ng-template ngbPanelContent>
+                            <app-edit-detail [projectId]="projectId" [detail]="d" [getNewDetails]="getNewDetails"
+                                (detailUpdate)="getNewDetails()" (detailDelete)="getNewDetails()"></app-edit-detail>
+                        </ng-template>
+                    </ngb-panel>
+                </ng-container>
+            </ng-container>
+        </ngb-accordion>
+
+    </div>
+
+</div>
+
+
+
+
+<ng-template #addDetailModal let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Add Tag</h4>
+        <button type="button" class="btn close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <form [formGroup]="addDetailForm">
+            <div class="form-group">
+                <label for="tag" class="form-label">Detail Name(English)</label>
+                <div class="input-group">
+                    <input id="tag" class="form-control" type="text" formControlName="detailName">
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline-dark" (click)="addDetailClicked()">Add</button>
+    </div>
+</ng-template>

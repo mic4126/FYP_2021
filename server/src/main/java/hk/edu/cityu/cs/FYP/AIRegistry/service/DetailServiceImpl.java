@@ -62,15 +62,8 @@ public class DetailServiceImpl implements DetailService {
 
     @Transactional(readOnly = true)
     @Override
-    public List<Detail> getAllDetailsByProjectId(int projectId, Lang lang) {
-        if (Lang.TC.equals(lang)) {
-            return detailDao.getAllDetailsByProjectIdTC(projectId);
+    public List<Detail> getAllDetailsByProjectId(int projectId) {
 
-        }
-        if (Lang.SC.equals(lang)) {
-            return detailDao.getAllDetailsByProjectIdSC(projectId);
-
-        }
 
         return detailDao.getAllDetailsByProjectId(projectId);
     }
@@ -96,15 +89,7 @@ public class DetailServiceImpl implements DetailService {
 
     @Transactional
     @Override
-    public void setDetail(Detail detail, Lang lang) {
-        if (Lang.TC.equals(lang)) {
-            detailDao.setDetailTC(detail);
-            return;
-        }
-        if (Lang.SC.equals(lang)) {
-            detailDao.setDetailSC(detail);
-            return;
-        }
+    public void setDetail(Detail detail) {
 
         detailDao.setDetail(detail);
     }

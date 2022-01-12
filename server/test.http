@@ -135,3 +135,7 @@ GET http://localhost:8080/api/project
 ### Get Dev's project
 
 GET http://localhost:8080/api/admin/user/dev/project
+
+### Get Details
+
+GET  http://localhost:8080/api/project/15/detail
