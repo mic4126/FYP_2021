@@ -2,6 +2,7 @@ package hk.edu.cityu.cs.FYP.AIRegistry.service;
 
 import java.io.File;
 import java.io.IOException;
+import java.nio.file.Path;
 import java.util.List;
 import java.util.UUID;
 
@@ -29,7 +30,7 @@ public class AttachmentServiceImpl implements AttachmentService {
 
     @PostConstruct
     private void checkFolder() {
-        var baseDirectory = new File(storageBaseDirectory);
+        var baseDirectory = Path.of(storageBaseDirectory).toFile();
 
         if (!baseDirectory.exists()) {
             if (!baseDirectory.mkdirs()) {
@@ -47,13 +48,13 @@ public class AttachmentServiceImpl implements AttachmentService {
 
     @Transactional(readOnly = true)
     @Override
-    public List<Integer> getProjectAttachment(int projectId) {
+    public List<AttachmentDownload> getProjectAttachment(int projectId) {
         return attachmentDao.getProjectAttachments(projectId);
     }
 
     @Transactional(readOnly = true)
     @Override
-    public List<Integer> getDetailAttachment(int detailId) {
+    public List<AttachmentDownload> getDetailAttachment(int detailId) {
 
         return attachmentDao.getDetailAttachments(detailId);
     }
@@ -61,7 +62,7 @@ public class AttachmentServiceImpl implements AttachmentService {
     private String saveFileToFolder(MultipartFile multipartFile) throws IOException {
         var filename = UUID.randomUUID();
         var file = new File(storageBaseDirectory + File.separator + filename.toString());
-
+        
         while (file.exists()) {
             filename = UUID.randomUUID();
             file = new File(storageBaseDirectory + File.separator + filename.toString());
@@ -78,7 +79,7 @@ public class AttachmentServiceImpl implements AttachmentService {
     public int addProjectAttachment(AttachmentUpload attachmentUpload) throws IOException {
 
         var filename = saveFileToFolder(attachmentUpload.getMultipartFile());
-        attachmentUpload.setFilename(filename);
+        attachmentUpload.setFileName(filename);
         attachmentDao.addProjectAttachment(attachmentUpload);
         return attachmentUpload.getAttachmentId();
     }
@@ -87,7 +88,7 @@ public class AttachmentServiceImpl implements AttachmentService {
     @Override
     public int addDetailAttachment(AttachmentUpload attachmentUpload) throws IOException {
         var filename = saveFileToFolder(attachmentUpload.getMultipartFile());
-        attachmentUpload.setFilename(filename);
+        attachmentUpload.setFileName(filename);
         attachmentDao.addDetailAttachment(attachmentUpload);
         return attachmentUpload.getAttachmentId();
     }
@@ -107,5 +108,6 @@ public class AttachmentServiceImpl implements AttachmentService {
     public void deleteAttachment(int attachmentId){
         attachmentDao.deleteAttachment(attachmentId);
     }
+
 
 }

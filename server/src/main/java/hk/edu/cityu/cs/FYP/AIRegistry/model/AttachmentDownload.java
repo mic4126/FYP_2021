@@ -2,12 +2,25 @@ package hk.edu.cityu.cs.FYP.AIRegistry.model;
 
 import java.io.File;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 public class AttachmentDownload {
 
     private String fileName, origFileName, origExt;
 
+    private int attachmentId;
+
     private File file;
 
+    public int getAttachmentId() {
+        return attachmentId;
+    }
+
+    public void setAttachmentId(int attachmentId) {
+        this.attachmentId = attachmentId;
+    }
+
+    @JsonIgnore
     public File getFile() {
         return file;
     }

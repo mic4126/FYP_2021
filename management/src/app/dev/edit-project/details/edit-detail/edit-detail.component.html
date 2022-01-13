@@ -35,3 +35,51 @@
         </div>
     </div>
 </form>
+
+<div class="my-xxl-5 ms-2">
+    <div class="row">
+        <h3 class="col">Attachment</h3>
+
+        <button class="btn btn-primary float-end col-auto" (click)="openAddAttachmentModal(addAttachmentModal)">Add
+            Attachment</button>
+    </div>
+    <div class="row">
+        <table class="table">
+            <thead>
+                <th>Name</th>
+                <th>Delete</th>
+            </thead>
+            <tbody>
+                <tr *ngFor="let atch of attachments$|async">
+                    <td><a [href]="'/api/project/attachment/'+atch.attachmentId" target="_blank">
+                            {{atch.origFileName}}.{{atch.origExt}}</a></td>
+                    <td><button class="btn btn-danger" (click)="onDeleteAttachmen(atch.attachmentId)">Delete</button>
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+</div>
+
+<ng-template #addAttachmentModal let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Add Attachment</h4>
+        <button type="button" class="btn close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <form [formGroup]="addAttachmentForm">
+            <div class="form-group">
+                <label for="tag" class="form-label">Attachment</label>
+                <div class="input-group">
+                    <input #file id="tag" class="form-control" type="file" formControlName="file"
+                        (change)="onFileChange(file.files)">
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline-dark" (click)="onAddAttachmentClick()">Add</button>
+    </div>
+</ng-template>

@@ -1,0 +1,50 @@
+<div class="card">
+    <div class="card-body">
+        <div class="row">
+            <h3 class="col-auto card-title">
+                Photo
+            </h3>
+            <button class="btn btn-primary col-auto ms-auto" (click)="openAddPhotoModal(addPhotoModal)">Add
+                Photo</button>
+        </div>
+        <div class="my-2" style="max-height: 50vh;overflow-y: auto;">
+            <ng-container *ngFor="let img of photos$|async">
+                <div class="w-auto">
+                    <form>
+                        <div class="row mx-0 my-2 flex-column" style="left: 0;right: 0;">
+                            <img [src]="'/api/project/attachment/'+img.attachmentId" alt="" srcset="" class="col-12"
+                                style="max-width: 10vw;">
+                        </div>
+                        <div class="row mx-0 mt-2 mb-4">
+                            <div class="col-auto">
+                                <button class="btn btn-primary" (click)="deletePhoto(img.attachmentId)">Delete Photo Above</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </ng-container>
+        </div>
+    </div>
+</div>
+
+<ng-template #addPhotoModal let-modal>
+    <div class="modal-header">
+        <h4 class="modal-title" id="modal-basic-title">Add Attachment</h4>
+        <button type="button" class="btn close" aria-label="Close" (click)="modal.dismiss('Cross click')">
+            <span aria-hidden="true">&times;</span>
+        </button>
+    </div>
+    <div class="modal-body">
+        <form>
+            <div class="form-group">
+                <label for="tag" class="form-label">Photo</label>
+                <div class="input-group">
+                    <input #file id="tag" class="form-control" type="file" (change)="onFileChange(file.files)">
+                </div>
+            </div>
+        </form>
+    </div>
+    <div class="modal-footer">
+        <button type="button" class="btn btn-outline-dark" (click)="onAddPhotoClick()">Add</button>
+    </div>
+</ng-template>

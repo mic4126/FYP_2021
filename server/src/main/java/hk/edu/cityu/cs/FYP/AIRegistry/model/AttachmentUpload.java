@@ -1,13 +1,11 @@
 package hk.edu.cityu.cs.FYP.AIRegistry.model;
 
-import java.nio.file.Paths;
-
 import org.apache.commons.io.FilenameUtils;
 import org.springframework.web.multipart.MultipartFile;
 
 public class AttachmentUpload {
 
-    private String filename;
+    private String fileName;
 
     private int fileSize;
 
@@ -18,6 +16,14 @@ public class AttachmentUpload {
     private String origFileName, origExt;
 
     private MultipartFile multipartFile;    
+
+    public String getFileName() {
+        return fileName;
+    }
+
+    public void setFileName(String fileName) {
+        this.fileName = fileName;
+    }
 
     public MultipartFile getMultipartFile() {
         return multipartFile;
@@ -63,11 +69,6 @@ public class AttachmentUpload {
         this.attachmentId = attachmentId;
     }
 
-    public String getFilename() {
-        return filename;
-    }
-
-    
 
     public AttachmentUpload(MultipartFile multipartFile) {        
         setMultipartFile(multipartFile);
@@ -77,10 +78,6 @@ public class AttachmentUpload {
 
     public AttachmentUpload(){};
 
-
-    public void setFilename(String filename) {
-        this.filename = filename;
-    }
 
     public int getFileSize() {
         return fileSize;
@@ -95,7 +92,6 @@ public class AttachmentUpload {
     }
 
     public void setProjectId(int projectId) {
-        this.detailId = null;
         this.projectId = projectId;
     }
 
@@ -104,7 +100,6 @@ public class AttachmentUpload {
     }
 
     public void setDetailId(int detailId) {
-        this.projectId = null;
         this.detailId = detailId;
     }
 

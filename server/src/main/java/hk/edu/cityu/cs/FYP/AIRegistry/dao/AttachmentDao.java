@@ -7,9 +7,9 @@ import hk.edu.cityu.cs.FYP.AIRegistry.model.AttachmentUpload;
 
 public interface AttachmentDao {
 
-    public List<Integer> getProjectAttachments(int projectId);
+    public List<AttachmentDownload> getProjectAttachments(int projectId);
 
-    public List<Integer> getDetailAttachments(int detailId);
+    public List<AttachmentDownload> getDetailAttachments(int detailId);
 
     public AttachmentDownload getAttachment(int attachmentId);
 
@@ -18,5 +18,8 @@ public interface AttachmentDao {
     public void addDetailAttachment(AttachmentUpload attachmentUpload);
 
     public void deleteAttachment(int attachmentId);
+    
+
+
     
 }

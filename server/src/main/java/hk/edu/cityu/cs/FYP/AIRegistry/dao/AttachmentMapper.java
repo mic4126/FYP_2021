@@ -16,52 +16,65 @@ import hk.edu.cityu.cs.FYP.AIRegistry.model.AttachmentUpload;
 @Mapper
 public interface AttachmentMapper {
 
-    @Select("""
-            SELECT attachmentID from attachment
-            WHERE projectId = `#{projectId}`
-            AND detailId IS NULL
-            """)
-    public List<Integer> getProjectAttachments(int projectId);
+        @Results({
+                        @Result(property = "fileName", column = "fileName"),
+                        @Result(property = "origFileName", column = "orig_filename"),
+                        @Result(property = "origExt", column = "orig_ext"),
+                        @Result(property = "attachmentId", column = "attachmentID")
+        })
+        @Select("""
+                        SELECT filename, orig_filename, orig_ext, attachmentID FROM attachment
+                                        WHERE projectId = #{projectId}
+                                        AND detailId IS NULL
+                                        AND deleted IS NULL
+                                        """)
+        public List<AttachmentDownload> getProjectAttachments(int projectId);
 
-    @Select("""
-            SELECT attachmentID from attachment
-            WHERE detailId = #{detailId}
-            """)
-    public List<Integer> getDetailAttachments(int detailId);
+        @Results({
+                        @Result(property = "fileName", column = "fileName"),
+                        @Result(property = "origFileName", column = "orig_filename"),
+                        @Result(property = "origExt", column = "orig_ext")
+        })
+        @Select("""
+                        SELECT filename, orig_filename, orig_ext, attachmentID FROM attachment
+                        WHERE detailId = #{detailId}
+                        AND deleted IS NULL
+                                        """)
+        public List<AttachmentDownload> getDetailAttachments(int detailId);
 
-    @Results({
-            @Result(property = "filenName", column = "fileName"),
-            @Result(property = "origFileName", column = "orig_filename"),
-            @Result(property = "origExt", column = "orig_ext")
-    })
-    @Select("""
-            SELECT filename, orig_filename, orig_ext FROM attachment
-            WHERE attachmentID = #{attachmentId}
-            """)
-    public AttachmentDownload getAttachment(int attachmentId);
+        @Results({
+                        @Result(property = "fileName", column = "fileName"),
+                        @Result(property = "origFileName", column = "orig_filename"),
+                        @Result(property = "origExt", column = "orig_ext")
+        })
+        @Select("""
+                        SELECT filename, orig_filename, orig_ext FROM attachment
+                        WHERE attachmentID = #{attachmentId}
+                        """)
+        public AttachmentDownload getAttachment(int attachmentId);
 
-    @Update("""
-            UPDATE ATTACHMENT SET
-            deleted = NOW()
-            WHERE attachmentID = #{attachmentId}
-            """)
-    public void deleteAttachment(int attachmentId);
+        @Update("""
+                        UPDATE ATTACHMENT SET
+                        deleted = NOW()
+                        WHERE attachmentID = #{attachmentId}
+                        """)
+        public void deleteAttachment(int attachmentId);
 
-    @Insert("""
-            INSERT INTO `attachment`
-            (`filename`,`orig_filename`,`orig_ext`,`projectId`)
-            VALUES
-            (#{fileName},#{origFileName},#{origExt},#{projectId})
-                """)
-    @Options(useGeneratedKeys = true, keyProperty = "attachmentId", keyColumn = "attachmentID")
-    public void addProjectAttachment(AttachmentUpload attachmentUpload);
+        @Insert("""
+                        INSERT INTO `attachment`
+                        (`filename`,`orig_filename`,`orig_ext`,`projectId`)
+                        VALUES
+                        (#{fileName},#{origFileName},#{origExt},#{projectId})
+                            """)
+        @Options(useGeneratedKeys = true, keyProperty = "attachmentId", keyColumn = "attachmentID")
+        public void addProjectAttachment(AttachmentUpload attachmentUpload);
 
-    @Insert("""
-            INSERT INTO `attachment`
-            (`filename`,`orig_filename`,`orig_ext`,`projectId`)
-            VALUES
-            (#{fileName},#{origFileName},#{origExt},#{detailId})
-                """)
-    @Options(useGeneratedKeys = true, keyProperty = "attachmentId", keyColumn = "attachmentID")
-    public void addDetailAttachment(AttachmentUpload attachmentUpload);
+        @Insert("""
+                        INSERT INTO `attachment`
+                        (`filename`,`orig_filename`,`orig_ext`,`detailId`, `projectId`)
+                        VALUES
+                        (#{fileName},#{origFileName},#{origExt},#{detailId},#{projectId})
+                            """)
+        @Options(useGeneratedKeys = true, keyProperty = "attachmentId", keyColumn = "attachmentID")
+        public void addDetailAttachment(AttachmentUpload attachmentUpload);
 }

@@ -6,8 +6,10 @@ import java.nio.file.Files;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ByteArrayResource;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -66,19 +68,41 @@ public class AttachmentContoller {
         return new ResponseEntity<Integer>(attachmentId, HttpStatus.OK);
     }
 
-    @GetMapping("/project/attachment/{attachmentId}")
+    @GetMapping("/project/{projectId}/attachment")
+    public ResponseEntity<?> getProjectAttachments(@PathVariable int projectId) {
+        var attachments = attachmentService.getProjectAttachment(projectId);
+        return ResponseEntity.ok(attachments);
+    }
+
+    @GetMapping("/project/detail/{detailId}/attachment")
+    public ResponseEntity<?> getDetailAttachments(@PathVariable int detailId) {
+        var attachments = attachmentService.getDetailAttachment(detailId);
+        return ResponseEntity.ok(attachments);
+    }
+
+    @GetMapping(path = "/project/attachment/{attachmentId}", produces = MediaType.APPLICATION_OCTET_STREAM_VALUE)
     public ResponseEntity<?> getAttachment(@PathVariable int attachmentId) {
 
         AttachmentDownload attachmentDownload = attachmentService.getAttachment(attachmentId);
         var file = attachmentDownload.getFile();
         var headers = new HttpHeaders();
         var ext = attachmentDownload.getOrigExt();
+        var fileName = attachmentDownload.getOrigFileName() + "." + ext;
 
-        StreamingResponseBody stream = out -> {
-            out.write(Files.readAllBytes(file.toPath()));
-        };
+        headers.add(HttpHeaders.CONTENT_DISPOSITION,
+                "inline; filename=" + fileName);
 
-        return new ResponseEntity<>(stream, HttpStatus.OK);
+        ByteArrayResource resource;
+        try {
+            resource = new ByteArrayResource(Files.readAllBytes(file.toPath()));
+        } catch (IOException e) {
+            LOGGER.error("ERROR", e.getCause());
+            return ResponseEntity.internalServerError().build();
+        }
+
+        return ResponseEntity.ok().headers(headers)
+                .contentType(MediaType.APPLICATION_OCTET_STREAM)
+                .body(resource);
 
     }
 

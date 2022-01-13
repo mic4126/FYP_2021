@@ -26,6 +26,7 @@ import { EditContactComponent } from './dev/edit-project/edit-contact/edit-conta
 import { EditTagComponent } from './dev/edit-project/edit-tag/edit-tag.component';
 import { DetailsComponent } from './dev/edit-project/details/details.component';
 import { EditDetailComponent } from './dev/edit-project/details/edit-detail/edit-detail.component';
+import { PhotoComponent } from './dev/edit-project/photo/photo.component';
 
 export function jwtGetter() {
   return localStorage.getItem("jwt");
@@ -49,7 +50,8 @@ export function jwtGetter() {
     EditContactComponent,
     EditTagComponent,
     DetailsComponent,
-    EditDetailComponent
+    EditDetailComponent,
+    PhotoComponent
   ],
   imports: [
     BrowserModule,

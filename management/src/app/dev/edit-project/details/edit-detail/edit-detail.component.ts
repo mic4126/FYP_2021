@@ -1,7 +1,10 @@
 import { Component, EventEmitter, Input, OnChanges, OnInit, Output, SimpleChanges } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { NgbAccordion } from '@ng-bootstrap/ng-bootstrap';
+import { NgbAccordion, NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
+import { Observable } from 'rxjs';
+import { Attachment } from 'src/app/model/Attachment.model';
 import { Detail } from 'src/app/model/Detail.model';
+import { AttachmentService } from 'src/app/services/attachment.service';
 import { DetailService } from 'src/app/services/detail.service';
 
 @Component({
@@ -13,14 +16,22 @@ export class EditDetailComponent implements OnInit, OnChanges {
 
   @Input() detail: Detail | null = null;
   @Input() projectId: number = -1;
-  @Input() getNewDetails: Function = () => { console.log('place holder'); }
   @Output() detailUpdate = new EventEmitter<string>();
   @Output() detailDelete = new EventEmitter<string>();
 
   editDetailForm: FormGroup = new FormGroup({});
 
+  addAttachmentForm: FormGroup;
+  addAttachmentModalRef: NgbModalRef | null = null;
+  uploadFile: any;
 
-  constructor(private detailService: DetailService, private fb: FormBuilder, private accrodionService: NgbAccordion) { }
+  attachments$: Observable<Attachment[]> = new Observable<Attachment[]>();
+
+  constructor(private detailService: DetailService, private fb: FormBuilder,
+    private accrodionService: NgbAccordion, private modalService: NgbModal,
+    private attachmentService: AttachmentService) {
+    this.addAttachmentForm = fb.group({ file: ['', [Validators.required]] })
+  }
 
   ngOnChanges(changes: SimpleChanges): void {
     console.log(changes);
@@ -31,6 +42,7 @@ export class EditDetailComponent implements OnInit, OnChanges {
 
   ngOnInit(): void {
     this.setFormValue();
+    this.getDetailAttachments();
   }
 
   private setFormValue() {
@@ -47,6 +59,12 @@ export class EditDetailComponent implements OnInit, OnChanges {
 
   parseDetail() {
     return JSON.stringify(this.detail)
+  }
+
+  getDetailAttachments() {
+    if (this.detail) {
+      this.attachments$ = this.attachmentService.getDetailAttachmentList(this.detail?.detailId);
+    }
   }
 
   onUpdateClick() {
@@ -67,6 +85,33 @@ export class EditDetailComponent implements OnInit, OnChanges {
       })
     }
     return null;
+  }
+
+  onFileChange(file: FileList | null) {
+    if (file) {
+      this.uploadFile = file.item(0)
+    }
+  }
+
+  onAddAttachmentClick() {
+    console.log(this.addAttachmentForm.value);
+    if (this.detail) {
+      this.attachmentService.addDetailAttachment(this.detail.projectId, this.detail.detailId, this.uploadFile).subscribe(() => {
+        this.addAttachmentModalRef?.close();
+        this.getDetailAttachments()
+      })
+
+    }
+  }
+
+  openAddAttachmentModal(content: any) {
+    this.addAttachmentModalRef = this.modalService.open(content)
+  }
+
+  onDeleteAttachmen(attachmentId:number){
+    this.attachmentService.deleteAttachment(attachmentId).subscribe(()=>{
+      this.getDetailAttachments()
+    })
   }
 
 

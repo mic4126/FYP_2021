@@ -14,7 +14,6 @@ import org.springframework.security.web.authentication.UsernamePasswordAuthentic
 
 import hk.edu.cityu.cs.FYP.AIRegistry.filter.JWTAuthFilter;
 import hk.edu.cityu.cs.FYP.AIRegistry.service.CustomAuthProvider;
-import hk.edu.cityu.cs.FYP.AIRegistry.service.UserServiceImpl;
 
 @EnableWebSecurity
 public class SecurityConfig extends WebSecurityConfigurerAdapter {

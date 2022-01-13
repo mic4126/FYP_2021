@@ -1,33 +1,23 @@
-<p>details works!</p>
-<p>
-    ProjectId: {{projectId}}
-    Detail: {{parseDetails()}}
-</p>
-
-
-
-
-
 <div class="card my-2">
     <div class="card-body">
         <h3 class="card-title my-2">
             Detail
         </h3>
 
-        <button class="btn btn-primary" (click)="openAddDetailModal(addDetailModal)">Add Detail</button>
+        <button class="btn btn-primary my-2" (click)="openAddDetailModal(addDetailModal)">Add Detail</button>
 
         <ngb-accordion [closeOthers]="true">
             <ng-container *ngIf="details$|async">
                 <ng-container *ngFor="let d of details$|async">
-                    <ngb-panel [id]="'detail-'+d.detailId" [title]="d.detailName">
+                    <ngb-panel [id]="'detail-'+d.detailId" [title]="d.detailName" class="my-2">
                         <ng-template ngbPanelContent>
-                            <app-edit-detail [projectId]="projectId" [detail]="d" [getNewDetails]="getNewDetails"
-                                (detailUpdate)="getNewDetails()" (detailDelete)="getNewDetails()"></app-edit-detail>
+                            <app-edit-detail [projectId]="projectId" [detail]="d" (detailUpdate)="getNewDetails()"
+                                (detailDelete)="getNewDetails()"></app-edit-detail>
                         </ng-template>
                     </ngb-panel>
                 </ng-container>
             </ng-container>
-        </ngb-accordion>
+        </ngb-accordion>        
 
     </div>
 

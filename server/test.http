@@ -139,3 +139,10 @@ GET http://localhost:8080/api/admin/user/dev/project
 ### Get Details
 
 GET  http://localhost:8080/api/project/15/detail
+
+### Get Attachment List
+GET  http://localhost:8080/api/project/15/attachment
+
+
+### Get Detail Attachment list
+GET  http://localhost:8080/api/project/detail/1/attachment

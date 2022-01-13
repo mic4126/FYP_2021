@@ -9,9 +9,9 @@ import hk.edu.cityu.cs.FYP.AIRegistry.model.AttachmentUpload;
 
 public interface AttachmentService {
 
-    public List<Integer> getProjectAttachment(int projectId);
+    public List<AttachmentDownload> getProjectAttachment(int projectId);
 
-    public List<Integer> getDetailAttachment(int detailId);
+    public List<AttachmentDownload> getDetailAttachment(int detailId);
 
     public int addProjectAttachment(AttachmentUpload attachmentUpload) throws IOException;
 
@@ -20,4 +20,5 @@ public interface AttachmentService {
     public AttachmentDownload getAttachment(int attachmentId);
 
     public void deleteAttachment(int attachmentId);
+    
 }

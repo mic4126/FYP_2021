@@ -16,14 +16,14 @@ public class AttachmentDaoImpl implements AttachmentDao{
     SqlSessionFactory sqlSessionFactory;
 
     @Override
-    public List<Integer> getProjectAttachments(int projectId) {
+    public List<AttachmentDownload> getProjectAttachments(int projectId) {
         var session = sqlSessionFactory.openSession();
         var mapper = session.getMapper(AttachmentMapper.class);
         return mapper.getProjectAttachments(projectId);
     }
 
     @Override
-    public List<Integer> getDetailAttachments(int detailId) {
+    public List<AttachmentDownload> getDetailAttachments(int detailId) {
         var session = sqlSessionFactory.openSession();
         var mapper = session.getMapper(AttachmentMapper.class);
         return mapper.getDetailAttachments(detailId);
