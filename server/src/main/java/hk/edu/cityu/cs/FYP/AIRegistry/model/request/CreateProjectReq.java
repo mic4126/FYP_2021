@@ -2,7 +2,6 @@ package hk.edu.cityu.cs.FYP.AIRegistry.model.request;
 
 import java.util.List;
 
-import com.fasterxml.jackson.annotation.JsonAlias;
 import com.fasterxml.jackson.annotation.JsonProperty;
 
 public class CreateProjectReq {

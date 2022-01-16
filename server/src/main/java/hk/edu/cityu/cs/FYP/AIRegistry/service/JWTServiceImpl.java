@@ -1,6 +1,5 @@
 package hk.edu.cityu.cs.FYP.AIRegistry.service;
 
-import java.nio.charset.Charset;
 import java.nio.charset.StandardCharsets;
 import java.security.Key;
 import java.util.Calendar;
@@ -13,13 +12,11 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
-import org.springframework.validation.annotation.Validated;
 
 import hk.edu.cityu.cs.FYP.AIRegistry.dao.UserDao;
 import hk.edu.cityu.cs.FYP.AIRegistry.model.LoginReq;
 import hk.edu.cityu.cs.FYP.AIRegistry.model.UserInfo;
 import io.jsonwebtoken.Claims;
-import io.jsonwebtoken.Jwt;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.security.Keys;
 

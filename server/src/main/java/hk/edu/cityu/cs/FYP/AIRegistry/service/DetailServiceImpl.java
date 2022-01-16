@@ -50,20 +50,18 @@ public class DetailServiceImpl implements DetailService {
     @Transactional
     @Override
     public void addAttachment(int detailId, AttachmentUpload attachment) {
-        // TODO Auto-generated method stub
-
+        throw new RuntimeException("Not implemented");
     }
 
     @Override
     public void deleteAttachment(int detailId, String Attachment) {
-        // TODO Auto-generated method stub
+        throw new RuntimeException("Not implemented");
 
     }
 
     @Transactional(readOnly = true)
     @Override
     public List<Detail> getAllDetailsByProjectId(int projectId) {
-
 
         return detailDao.getAllDetailsByProjectId(projectId);
     }

@@ -1,4 +1,17 @@
 {
     "header.searchPlaceHolder":"Search",
-    "test":"Test"
+    "header.search":"Search",
+    "test":"Test",
+    "index.readMore":"Read more",
+    "detail.desc":"Description",
+    "detail.attachment":"Attachment",
+    "project.desc": "Description",
+    "detail.detail":"Details",
+    "project.contact":"Contact",
+    "project.contact.department":"Responsible Bureau/Department",
+    "project.contact.email":"Email",
+    "project.contact.tel":"Telephone",
+    "searchResult.All":"All"
+
+
 }

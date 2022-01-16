@@ -1,6 +1,7 @@
-import React, { useState } from "react";
-import { useIntl } from "react-intl";
+import React, { useContext, useState } from "react";
+import { FormattedMessage, useIntl } from "react-intl";
 import { createSearchParams, useNavigate } from "react-router-dom";
+import { LangContext } from "../context/lang-context";
 import './header.scss'
 
 function Header(props: any) {
@@ -13,6 +14,9 @@ function Header(props: any) {
         })
     }
     const intl = useIntl();
+    const {lang,updateLang} = useContext(LangContext);
+
+
 
     return (
 
@@ -30,7 +34,7 @@ function Header(props: any) {
                                     description:'placeholder text for search bar input'
                                 })}
                                     value={searchQuery} onInput={e => setSearchQuery(e.currentTarget.value)} />
-                                <button type="button" className="btn btn-outline-primary" onClick={searchHandler}>Search</button>
+                                <button type="button" className="btn btn-outline-primary" onClick={searchHandler}><FormattedMessage id="header.search" defaultMessage={"Search"}/></button>
                             </div>
                         </form>
                     </div>

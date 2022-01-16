@@ -1,7 +1,6 @@
 package hk.edu.cityu.cs.FYP.AIRegistry.model;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
-import com.fasterxml.jackson.annotation.JsonValue;
 
 public class Contact {
 
@@ -16,6 +15,39 @@ public class Contact {
 
     @JsonProperty("department")
     private String department;
+
+    @JsonProperty("department_TC")
+    private String department_TC;
+
+    @JsonProperty("department_SC")
+    private String department_SC;
+
+    @JsonProperty("url")
+    private String url;    
+
+    public String getUrl() {
+        return url;
+    }
+
+    public void setUrl(String url) {
+        this.url = url;
+    }
+
+    public String getDepartment_TC() {
+        return department_TC;
+    }
+
+    public void setDepartment_TC(String department_TC) {
+        this.department_TC = department_TC;
+    }
+
+    public String getDepartment_SC() {
+        return department_SC;
+    }
+
+    public void setDepartment_SC(String department_SC) {
+        this.department_SC = department_SC;
+    }
 
     public int getProjectId() {
         return projectId;

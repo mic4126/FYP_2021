@@ -10,6 +10,9 @@ import axios from 'axios';
 import { IntlProvider } from 'react-intl';
 import en from './lang/en.json';
 import zhTW from './lang/zh-TW.json'
+import { Context } from 'react-intl/src/components/injectIntl';
+import { LangContext } from './context/lang-context';
+
 
 function IndexPage(props: any) {
   const [locale, setLocale] = useState(navigator.language);
@@ -32,15 +35,20 @@ function IndexPage(props: any) {
     }
   }, [locale])
 
+
+
+
+
   return (
     <React.StrictMode>
-      <IntlProvider locale={locale} messages={langFile}>
-        <BrowserRouter>
-          <Header locale={locale} setLocale={setLocale} />
-          <IndexRouter locale={locale} />
-        </BrowserRouter>
-
-      </IntlProvider>
+      <LangContext.Provider value={{ lang: locale, updateLang: setLocale }}>
+        <IntlProvider locale={locale} messages={langFile}>
+          <BrowserRouter>
+            <Header locale={locale} setLocale={setLocale} />
+            <IndexRouter locale={locale} />
+          </BrowserRouter>
+        </IntlProvider>
+      </LangContext.Provider>
     </React.StrictMode >)
 }
 

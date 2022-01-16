@@ -1,5 +1,5 @@
 interface SearchResult {
-    projectID:number,
+    projectId:number,
     projectName:string,
     projectDesc:string,
 }

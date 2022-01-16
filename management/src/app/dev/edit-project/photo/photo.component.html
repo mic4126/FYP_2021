@@ -9,18 +9,22 @@
         </div>
         <div class="my-2" style="max-height: 50vh;overflow-y: auto;">
             <ng-container *ngFor="let img of photos$|async">
-                <div class="w-auto">
-                    <form>
-                        <div class="row mx-0 my-2 flex-column" style="left: 0;right: 0;">
-                            <img [src]="'/api/project/attachment/'+img.attachmentId" alt="" srcset="" class="col-12"
-                                style="max-width: 10vw;">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="w-auto">
+                            <form>
+                                <div class="row mx-0 my-2 flex-column" style="left: 0;right: 0;">
+                                    <img [src]="'/api/project/attachment/'+img.attachmentId" alt="" srcset="" class="col-12"
+                                        style="max-width: 10vw;">
+                                </div>
+                                <div class="row mx-0 mt-2 mb-4">
+                                    <div class="col-auto">
+                                        <button class="btn btn-primary" (click)="deletePhoto(img.attachmentId)">Delete Photo Above</button>
+                                    </div>
+                                </div>
+                            </form>
                         </div>
-                        <div class="row mx-0 mt-2 mb-4">
-                            <div class="col-auto">
-                                <button class="btn btn-primary" (click)="deletePhoto(img.attachmentId)">Delete Photo Above</button>
-                            </div>
-                        </div>
-                    </form>
+                    </div>
                 </div>
             </ng-container>
         </div>

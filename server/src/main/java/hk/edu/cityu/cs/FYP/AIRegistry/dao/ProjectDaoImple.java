@@ -70,19 +70,16 @@ public class ProjectDaoImple implements ProjectDao {
 
     @Override
     public void setPhone(Contact contact) {
-        // TODO Auto-generated method stub
         throw new RuntimeException("Not Implemented");
     }
 
     @Override
     public void setDepartment(Contact contact) {
-        // TODO Auto-generated method stub
         throw new RuntimeException("Not Implemented");
     }
 
     @Override
     public void setEmail(Contact contact) {
-        // TODO Auto-generated method stub
         throw new RuntimeException("Not Implemented");
     }
 
@@ -206,6 +203,20 @@ public class ProjectDaoImple implements ProjectDao {
         var session = sqlSessionFactory.openSession();
         var mapper = session.getMapper(ProjectMapper.class);
         return mapper.getProjects();
+    }
+
+    @Override
+    public List<Project> getProjectsSC() {
+        var session = sqlSessionFactory.openSession();
+        var mapper = session.getMapper(ProjectMapper.class);
+        return mapper.getProjectsSC();
+    }
+
+    @Override
+    public List<Project> getProjectsTC() {
+        var session = sqlSessionFactory.openSession();
+        var mapper = session.getMapper(ProjectMapper.class);
+        return mapper.getProjectsTC();
     }
 
 }

@@ -1,5 +1,17 @@
-{"properties": [{
-  "name": "airegistry.mail.sender",
-  "type": "java.lang.String",
-  "description": "A description for 'airegistry.mail.sender'"
-}]}
+{"properties": [
+  {
+    "name": "airegistry.mail.sender",
+    "type": "java.lang.String",
+    "description": "Sender Email address of the system"
+  },
+  {
+    "name": "jwt.key",
+    "type": "java.lang.String",
+    "description": "JSON Web Token Encrpyption key"
+  },
+  {
+    "name":"airegistry.storage.directory",
+    "type":"java.lang.String",
+    "description" : "Storage location for attachments"
+  }
+]}

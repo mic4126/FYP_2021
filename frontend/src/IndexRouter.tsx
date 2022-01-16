@@ -5,7 +5,7 @@ import {
 import ProjectDetail from "./projectDetail/projectDetail";
 
 
-import IndexPageContent from "./IndexPageContent";
+import IndexPageContent from "./indexPage/IndexPageContent";
 import SearchResult from "./search/searchresult";
 
 function IndexRouter(props: any) {

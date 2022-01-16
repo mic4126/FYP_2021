@@ -1,4 +1,19 @@
 {
-    "header.searchPlaceHolder":"搜尋",
-    "test":"Test"
+    "header.searchPlaceHolder": "搜尋",
+    "header.search": "搜尋",
+    "test": "Test",
+    "index.readMore": "繼續閲讀",
+    "detail.desc": "內容",
+    "detail.attachment": "附件",
+    "project.desc": "內容",
+    "detail.detail":"詳細內容",
+    "project.contact":"聯絡資料",
+    "project.contact.department":"負責部門",
+    "project.contact.email":"電郵",
+    "project.contact.tel":"電話",
+    "searchResult.All":"全部"
+
+
+
+
 }

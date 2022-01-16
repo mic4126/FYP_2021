@@ -1,12 +1,19 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
 import Accordion from 'react-bootstrap/Accordion'
+import useDetailName from "../util/useDetailLang";
+import { FormattedMessage, useIntl } from "react-intl";
+import { formatMessage } from "@formatjs/intl";
+import { Attachment } from "../modal/Attachment.model";
+import DetailChild from "./DetailChild";
 
 
 const Detail = (props: any) => {
     const projectID = props.projectID
     const [data, setData] = useState<Detail[]>([])
     console.log("projectID:" + projectID);
+    const detailLang = useDetailName();
+    const intl = useIntl();
 
     useEffect(() => {
         const data = axios.request<Detail[]>({
@@ -19,17 +26,19 @@ const Detail = (props: any) => {
 
     }, [])
 
+    const [attachments, setAttachments] = useState([] as Attachment[])
+    useEffect(() => {
+        axios.get<Attachment[]>(`project/${projectID}/attachment`, {
+        }).then(resp => {
+            console.log(resp.data);
+            setAttachments(resp.data)
+        })
+    }, [])
+
     const listdetailChild = (data: Detail[]) => {
         return data.map((d, index) => {
             return (
-                <Accordion.Item eventKey={index + ''} key={d.detailID}>
-                    <Accordion.Header>
-                        {d.detailName}
-                    </Accordion.Header>
-                    <Accordion.Body>
-                        {d.detailDesc}
-                    </Accordion.Body>
-                </Accordion.Item>
+                <DetailChild detail={d} key={'detailId-'+d.detailId} />
             )
         })
 
@@ -38,7 +47,7 @@ const Detail = (props: any) => {
     return (
         <div className="card my-2">
             <div className="card-body">
-                <h2 className="card-title">Details</h2>
+                <h2 className="card-title"><FormattedMessage id="detail.detail" defaultMessage={"Details"} /></h2>
                 <Accordion>
                     {listdetailChild(data)}
                 </Accordion>

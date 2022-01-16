@@ -13,7 +13,6 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Component;
 
-import hk.edu.cityu.cs.FYP.AIRegistry.dao.UserDao;
 import hk.edu.cityu.cs.FYP.AIRegistry.model.UserInfo;
 
 @Component

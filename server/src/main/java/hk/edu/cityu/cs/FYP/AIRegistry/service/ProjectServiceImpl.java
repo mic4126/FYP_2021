@@ -35,11 +35,11 @@ public class ProjectServiceImpl implements ProjectService {
     @Transactional(readOnly = true)
     @Override
     public String getDesc(int projectId, Lang lang) {
-        if (lang.TC.equals(lang)) {
+        if (Lang.TC.equals(lang)) {
             return projectDao.getDescTC(projectId);
         }
 
-        if (lang.SC.equals(lang)) {
+        if (Lang.SC.equals(lang)) {
             return projectDao.getDescSC(projectId);
         }
 
@@ -49,12 +49,12 @@ public class ProjectServiceImpl implements ProjectService {
     @Transactional
     @Override
     public void setDesc(int projectId, String desc, Lang lang) {
-        if (lang.TC.equals(lang)) {
+        if (Lang.TC.equals(lang)) {
             projectDao.setDescTC(projectId, desc);
             return;
         }
 
-        if (lang.SC.equals(lang)) {
+        if (Lang.SC.equals(lang)) {
             projectDao.setDescSC(projectId, desc);
             return;
         }
@@ -72,7 +72,7 @@ public class ProjectServiceImpl implements ProjectService {
 
     @Transactional
     @Override
-    public void setContact(Contact contact){
+    public void setContact(Contact contact) {
         projectDao.setContact(contact);
     }
 
@@ -122,11 +122,11 @@ public class ProjectServiceImpl implements ProjectService {
     @Override
     public String getProjectName(int projectId, Lang lang) {
 
-        if (lang.TC.equals(lang)) {
+        if (Lang.TC.equals(lang)) {
             return projectDao.getProjectNameTC(projectId);
         }
 
-        if (lang.SC.equals(lang)) {
+        if (Lang.SC.equals(lang)) {
             return projectDao.getProjectnameSC(projectId);
         }
 
@@ -137,11 +137,11 @@ public class ProjectServiceImpl implements ProjectService {
     @Override
     public void setProjectName(int projectId, String projectName, Lang lang) {
 
-        if (lang.TC.equals(lang)) {
+        if (Lang.TC.equals(lang)) {
             projectDao.setProjectnameTC(projectId, projectName);
         }
 
-        if (lang.SC.equals(lang)) {
+        if (Lang.SC.equals(lang)) {
             projectDao.setProjectnameSC(projectId, projectName);
         }
 
@@ -165,11 +165,11 @@ public class ProjectServiceImpl implements ProjectService {
     @Transactional(readOnly = true)
     @Override
     public Project getProject(int projectId, Lang lang) {
-        if (lang.TC.equals(lang)) {
+        if (Lang.TC.equals(lang)) {
             return projectDao.getProject(projectId);
         }
 
-        if (lang.SC.equals(lang)) {
+        if (Lang.SC.equals(lang)) {
             return projectDao.getProject(projectId);
         }
 
@@ -199,6 +199,19 @@ public class ProjectServiceImpl implements ProjectService {
     @Transactional(readOnly = true)
     @Override
     public List<Project> getAllProject() {
+        return projectDao.getProjects();
+    }
+
+    @Override
+    public List<Project> getAllProject(Lang lang) {
+        if (Lang.TC.equals(lang)) {
+            return projectDao.getProjectsTC();
+        }
+
+        if (Lang.SC.equals(lang)) {
+            return projectDao.getProjectsSC();
+        }
+
         return projectDao.getProjects();
     }
 

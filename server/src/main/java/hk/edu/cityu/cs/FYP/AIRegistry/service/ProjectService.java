@@ -49,4 +49,6 @@ public interface ProjectService {
     public List<UserInfo> getDevelopers(int projectId);
 
     public List<Project> getAllProject();
+
+    public List<Project> getAllProject(Lang lang);
 }

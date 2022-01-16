@@ -11,34 +11,37 @@ import { ProjectService } from 'src/app/services/project.service';
 export class EditContactComponent implements OnInit {
 
   @Input() projectId: number = -1;
-  contactForm:FormGroup;
+  contactForm: FormGroup;
 
-  constructor(private fb:FormBuilder,private projectService:ProjectService) {
+  constructor(private fb: FormBuilder, private projectService: ProjectService) {
     this.contactForm = fb.group({
-      'email':['',[Validators.email]],
-      'department':['',[]],
-      'phoneNumber':['',[]],
-      'projectId':['',[]]
+      'email': ['', [Validators.email]],
+      'department': ['', []],
+      'department_TC': ['', []],
+      'department_SC': ['', []],
+      'url': ['', []],
+      'phoneNumber': ['', []],
+      'projectId': ['', []]
     })
-   }
+  }
 
   ngOnInit(): void {
     this.initForm();
   }
 
-  initForm(){
-    this.projectService.getContact(this.projectId).subscribe( (contact) => {
+  initForm() {
+    this.projectService.getContact(this.projectId).subscribe((contact) => {
       this.contactForm.patchValue(contact);
     })
   }
 
-  onSubmit(){
-    if (this.contactForm.invalid){
+  onSubmit() {
+    if (this.contactForm.invalid) {
       return;
     }
-    const contact:Contact = this.contactForm.value
+    const contact: Contact = this.contactForm.value
     this.projectService.setContact(contact).subscribe(() => {
-      console.log("Contact updated");    
+      console.log("Contact updated");
     })
 
   }

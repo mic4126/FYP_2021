@@ -18,8 +18,6 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
-import org.springframework.web.servlet.mvc.method.annotation.StreamingResponseBody;
-
 import hk.edu.cityu.cs.FYP.AIRegistry.model.AttachmentDownload;
 import hk.edu.cityu.cs.FYP.AIRegistry.model.AttachmentUpload;
 import hk.edu.cityu.cs.FYP.AIRegistry.service.AttachmentService;
