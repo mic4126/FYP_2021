@@ -77,8 +77,8 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     @Transactional(rollbackFor = Exception.class)
     @Override
     public void resetPassword(ResetPasswordInfo resetPassword) throws MessagingException {
-        var userInfo = userDao.findUserByUserName(resetPassword.getUsername());
-        if (null == userInfo) {
+        var userInfo = userDao.findUserByUserName(resetPassword.getUsername());        
+        if (null == userInfo || !userInfo.getEmail().equals(resetPassword.getEmail())) {
             throw new EmailAndUserNameNotMatchException("No record find for this pair of username and email");
         }
         String password = passwordService.generatePassword();
