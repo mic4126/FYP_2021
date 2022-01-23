@@ -2,7 +2,6 @@ package hk.edu.cityu.cs.FYP.AIRegistry.service;
 
 import java.util.List;
 
-import org.apache.catalina.util.RequestUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -20,10 +19,7 @@ public class SearchServiceImpl implements SearchService{
 
     @Autowired
     TagDao tagDao;
-
-    @Autowired
-    DetailService detailService;
-
+        
     @Transactional(readOnly = true)
     @Override
     public List<Project> search(String query, Lang lang) {
