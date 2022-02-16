@@ -102,4 +102,13 @@ public class UserDaoImpl implements UserDao {
 
     }
 
+    @Override
+    public UserInfo getUserInfo(String username) {
+        var session = sqlSessionFactory.openSession();
+        var mapper = session.getMapper(UserMapper.class);
+        return mapper.getUserInfo(username);
+    }
+
+    
+
 }

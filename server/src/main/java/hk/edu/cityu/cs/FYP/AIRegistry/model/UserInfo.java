@@ -136,6 +136,9 @@ public class UserInfo implements UserDetails {
     }
 
     public String getSalt() {
+        if (null == salt){
+            return "";
+        }
         return salt;
     }
 

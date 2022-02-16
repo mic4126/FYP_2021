@@ -31,5 +31,7 @@ public interface UserDao {
 
     public void setPasswordAsNewPassword(String username);
 
+    public UserInfo getUserInfo(String username);
+
 
 }

@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import hk.edu.cityu.cs.FYP.AIRegistry.annotation.IsProjectDeveloperOrAdmin;
 import hk.edu.cityu.cs.FYP.AIRegistry.model.Tag;
 import hk.edu.cityu.cs.FYP.AIRegistry.service.TagService;
 
@@ -21,6 +22,7 @@ public class TagController {
     @Autowired
     TagService tagService;
 
+    @IsProjectDeveloperOrAdmin
     @PostMapping(value = "/project/{projectId}/tag")
     public ResponseEntity<?> addTag(@PathVariable int projectId, @RequestBody Tag tag){
         
@@ -40,6 +42,7 @@ public class TagController {
         
     }
 
+    @IsProjectDeveloperOrAdmin
     @DeleteMapping(value = "/project/{projectId}/tag")
     public ResponseEntity<?> deleteTag(@PathVariable int projectId, @RequestBody Tag tag){
         tagService.deleteTag(tag);

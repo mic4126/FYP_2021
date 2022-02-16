@@ -19,6 +19,7 @@ import hk.edu.cityu.cs.FYP.AIRegistry.dao.UserDao;
 import hk.edu.cityu.cs.FYP.AIRegistry.model.Project;
 import hk.edu.cityu.cs.FYP.AIRegistry.model.ResetPasswordInfo;
 import hk.edu.cityu.cs.FYP.AIRegistry.model.UserInfo;
+import hk.edu.cityu.cs.FYP.AIRegistry.model.UserType;
 
 @Service
 public class UserServiceImpl implements UserService, UserDetailsService {
@@ -40,9 +41,10 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     public void changeUserInfo(UserInfo userInfo) {
 
         var dbUserInfo = userDao.findUserByUserName(userInfo.getUsername());
-
-        boolean oldPasswordMatch = passwordService.checkPassword(userInfo.getPassword(), dbUserInfo.getSalt(),
-                dbUserInfo.getHashedPassword());
+        var salt = dbUserInfo.getSalt();
+        var hashedPassword = dbUserInfo.getHashedPassword();
+        boolean oldPasswordMatch = passwordService.checkPassword(userInfo.getPassword(), salt,
+                hashedPassword);
 
         if (!oldPasswordMatch) {
             throw new PasswordNotMatchExceeption("Password not Match");
@@ -77,7 +79,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     @Transactional(rollbackFor = Exception.class)
     @Override
     public void resetPassword(ResetPasswordInfo resetPassword) throws MessagingException {
-        var userInfo = userDao.findUserByUserName(resetPassword.getUsername());        
+        var userInfo = userDao.findUserByUserName(resetPassword.getUsername());
         if (null == userInfo || !userInfo.getEmail().equals(resetPassword.getEmail())) {
             throw new EmailAndUserNameNotMatchException("No record find for this pair of username and email");
         }
@@ -165,7 +167,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     @Override
     public void useNewPasswordLogin(String username) {
         userDao.setNewPasswordAsNull(username);
-        
+
     }
 
     @Transactional
@@ -173,13 +175,24 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     public void useOldPasswordLogin(String username) {
         userDao.setPasswordAsNewPassword(username);
         userDao.setNewPasswordAsNull(username);
-        
+
     }
 
     @Transactional(readOnly = true)
     @Override
     public List<Project> getUsersProjects(String username) {
-       return projectUserDao.getProjectsByUsername(username);
+        return projectUserDao.getProjectsByUsername(username);
+    }
+
+    @Override
+    public UserInfo getUserInfo(String username) {
+        var userInfo = userDao.getUserInfo(username);
+        if ("dev".equals(userInfo.getUserType())) {
+            userInfo.setProjectIds(
+                    projectUserDao.getProjectsByUsername(username).stream()
+                            .map(Project::getProjectId).toList());
+        }
+        return userInfo;
     }
 
 }

@@ -10,15 +10,20 @@ import javax.annotation.PostConstruct;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
+import hk.edu.cityu.cs.FYP.AIRegistry.Exception.InsufficientPermissionException;
 import hk.edu.cityu.cs.FYP.AIRegistry.Exception.StorageFolderCannotAccessException;
 import hk.edu.cityu.cs.FYP.AIRegistry.dao.AttachmentDao;
+import hk.edu.cityu.cs.FYP.AIRegistry.dao.ProjectUserDao;
 import hk.edu.cityu.cs.FYP.AIRegistry.model.AttachmentDownload;
 import hk.edu.cityu.cs.FYP.AIRegistry.model.AttachmentUpload;
+import hk.edu.cityu.cs.FYP.AIRegistry.model.UserInfo;
 
+@Component()
 @Service
 public class AttachmentServiceImpl implements AttachmentService {
 
@@ -27,6 +32,9 @@ public class AttachmentServiceImpl implements AttachmentService {
 
     @Value("${airegistry.storage.directory}")
     String storageBaseDirectory;
+
+    @Autowired
+    ProjectUserDao projectUserDao;
 
     @PostConstruct
     private void checkFolder() {
@@ -62,7 +70,7 @@ public class AttachmentServiceImpl implements AttachmentService {
     private String saveFileToFolder(MultipartFile multipartFile) throws IOException {
         var filename = UUID.randomUUID();
         var file = new File(storageBaseDirectory + File.separator + filename.toString());
-        
+
         while (file.exists()) {
             filename = UUID.randomUUID();
             file = new File(storageBaseDirectory + File.separator + filename.toString());
@@ -104,10 +112,30 @@ public class AttachmentServiceImpl implements AttachmentService {
 
     }
 
+    @Override
     @Transactional
-    public void deleteAttachment(int attachmentId){
+    public void deleteAttachment(int attachmentId) {
         attachmentDao.deleteAttachment(attachmentId);
+
     }
 
+    @Override
+    public boolean CanDeveloperDeleteAttachment(UserInfo user, int attachmentId) {
+        var projectList = user.getProjectIds();
+        int atchProjectId = attachmentDao.getAttachmentProjectId(attachmentId);
+
+        var it = projectList.iterator();
+        while (it.hasNext()) {
+            if (atchProjectId == it.next().intValue()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    @Override
+    public int getAttachmentProjectId(int attachmentId) {
+        return attachmentDao.getAttachmentProjectId(attachmentId);
+    }
 
 }

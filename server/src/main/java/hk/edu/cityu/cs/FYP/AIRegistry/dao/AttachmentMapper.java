@@ -77,4 +77,10 @@ public interface AttachmentMapper {
                             """)
         @Options(useGeneratedKeys = true, keyProperty = "attachmentId", keyColumn = "attachmentID")
         public void addDetailAttachment(AttachmentUpload attachmentUpload);
+
+
+        @Select("""
+        SELECT projectId FROM attachment WHERE attachmentId = #{attachmentId};
+        """)
+        public int getAttachmentProjectId(int attachmentId);
 }

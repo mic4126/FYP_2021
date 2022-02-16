@@ -19,7 +19,7 @@ public interface AttachmentDao {
 
     public void deleteAttachment(int attachmentId);
     
-
+    public int getAttachmentProjectId(int attachmentId);
 
     
 }

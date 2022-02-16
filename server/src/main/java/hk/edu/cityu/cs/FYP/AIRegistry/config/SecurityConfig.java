@@ -2,8 +2,11 @@ package hk.edu.cityu.cs.FYP.AIRegistry.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
+import org.springframework.security.config.annotation.method.configuration.EnableGlobalMethodSecurity;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
@@ -11,11 +14,16 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.web.multipart.commons.CommonsMultipartResolver;
+import org.springframework.web.servlet.config.annotation.EnableWebMvc;
+import org.springframework.web.servlet.config.annotation.PathMatchConfigurer;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import hk.edu.cityu.cs.FYP.AIRegistry.filter.JWTAuthFilter;
 import hk.edu.cityu.cs.FYP.AIRegistry.service.CustomAuthProvider;
 
-@EnableWebSecurity
+@EnableWebSecurity()
+@EnableGlobalMethodSecurity(prePostEnabled = true)
 public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Autowired
@@ -25,8 +33,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     CustomAuthProvider customAuthProvider;
 
     JWTAuthFilter jwtAuthFilter;
-
-    
 
     public JWTAuthFilter getJwtAuthFilter() {
         return jwtAuthFilter;
@@ -39,13 +45,58 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.authorizeRequests()
+        http
+                .csrf().disable()
+                .authorizeRequests()
 
-                // dev work around
-                .antMatchers("/**").permitAll().and().csrf().disable()
+                .mvcMatchers("/login").permitAll()
+                // .antMatchers("/admin/user/**").authenticated()
+                .mvcMatchers("/admin/user/**").authenticated()
+                // exclude reset password
+                .mvcMatchers(HttpMethod.POST, "/user/password",
+                        "/user/password/{username}")
+                .permitAll()
+
+                // guard all user api
+                // Attachment Controller related
+                .mvcMatchers(HttpMethod.GET, "/project/{projectId}/attachment",
+                        "/project/detail/{detailId}/attachment",
+                        "/project/attachment/{attachmentId}")
+                .permitAll()
+
+                .mvcMatchers("/project/{projectId}/attachment",
+                "/project/{projectId}/detail/{detailId}/attachment",
+                "/project/attachment/{attachmentId}")
+                .hasAnyRole("admin", "dev")
+
+                // Detail Contoller
+                .mvcMatchers(HttpMethod.GET, "/project/{projectId}/detail").permitAll()
+                .mvcMatchers("/project/{projectId}/detail/**").hasAnyRole("admin",
+                "dev")                
+                // Project Controller
+                .mvcMatchers("/project/{projectId}/user").authenticated()
+                .mvcMatchers(HttpMethod.GET, "/project/{projectId}/tag").permitAll()
+                .mvcMatchers(HttpMethod.GET, "/project/desc", "/project/name", "/project/{projectId}/name",
+                        "/project/{projectId}/contact", "/project/contact")
+                .permitAll()
+                .mvcMatchers(HttpMethod.GET, "/project").permitAll()
+                .mvcMatchers("/project/**").authenticated()
+                // Search Controller
+                .mvcMatchers("/search").permitAll()
+                .mvcMatchers("/search/tag").permitAll()
+                // Tag Controller
+                .mvcMatchers(HttpMethod.GET,"/project/{projectId}/tag").permitAll()
+                .mvcMatchers("/project/{projectId}/tag").authenticated()
+                .anyRequest().denyAll()
+                .and()
                 .addFilterBefore(jwtAuthFilter, UsernamePasswordAuthenticationFilter.class)
-                .sessionManagement()
-                .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+                .sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);
+
+        // dev work around
+        // .antMatchers("/**").permitAll().and().csrf().disable()
+
+        // .sessionManagement()
+        // .sessionCreationPolicy(SessionCreationPolicy.STATELESS);
     }
 
     @Override
@@ -61,4 +112,5 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .userDetailsService(userDetailsService)
                 .passwordEncoder(new BCryptPasswordEncoder());
     }
+
 }

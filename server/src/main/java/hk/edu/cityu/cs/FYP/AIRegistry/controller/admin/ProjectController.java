@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.util.MultiValueMap;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -16,10 +17,12 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import hk.edu.cityu.cs.FYP.AIRegistry.annotation.IsProjectDeveloperOrAdmin;
 import hk.edu.cityu.cs.FYP.AIRegistry.model.Contact;
 import hk.edu.cityu.cs.FYP.AIRegistry.model.Lang;
 import hk.edu.cityu.cs.FYP.AIRegistry.model.Project;
 import hk.edu.cityu.cs.FYP.AIRegistry.model.request.CreateProjectReq;
+import hk.edu.cityu.cs.FYP.AIRegistry.model.request.SetDescReq;
 import hk.edu.cityu.cs.FYP.AIRegistry.service.ProjectService;
 
 @RestController
@@ -29,6 +32,7 @@ public class ProjectController {
     @Autowired
     ProjectService projectService;
 
+    @PreAuthorize("hasRole('admin')")
     @PostMapping(path = "")
     public ResponseEntity<?> addProject(@RequestBody CreateProjectReq createProjectReq) {
 
@@ -60,31 +64,33 @@ public class ProjectController {
         return new ResponseEntity<String>(projectName, HttpStatus.OK);
     }
 
+    @PreAuthorize("hasAuthority('PROJECT_'.concat(#seq.getProjectId()))")
     @PutMapping(path = "/desc")
-    public ResponseEntity<?> setDesc(@RequestBody MultiValueMap<String, String> mvm) {
+    public ResponseEntity<?> setDesc(@RequestBody SetDescReq seq) {
 
-        Lang langT = Lang.valueOf(mvm.getFirst("lang"));
-        var projectId = mvm.getFirst("projectId");
-        var desc = mvm.getFirst("desc");
-
-        projectService.setDesc(Integer.parseInt(projectId), desc, langT);
+        projectService.setDesc(seq.getProjectId(), seq.getDesc(), seq.getLang());
 
         return ResponseEntity.ok().build();
     }
 
-    @PutMapping(path = { "/name", "/{projectId}/name" })
+    @IsProjectDeveloperOrAdmin
+    @PutMapping(path = { "/{projectId}/name" })
     public ResponseEntity<?> setProjectName(@RequestBody MultiValueMap<String, String> mvm,
-            @PathVariable(name = "projectId", required = false) Integer projId) {
+            @PathVariable(name = "projectId") Integer projectId) {
 
+        if (projectId != null && projectId.intValue() == Integer.parseInt(mvm.getFirst("projectId"))) {
+            return ResponseEntity.badRequest().body("Project ID not match");
+        }
         Lang langT = Lang.valueOf(mvm.getFirst("lang"));
-        var projectId = mvm.getFirst("projectId");
+
         var projectName = mvm.getFirst("projectName");
 
-        projectService.setProjectName(Integer.parseInt(projectId), projectName, langT);
+        projectService.setProjectName(projectId, projectName, langT);
 
         return ResponseEntity.ok().build();
     }
 
+    @IsProjectDeveloperOrAdmin
     @PostMapping(path = "/{projectId}/user")
     public ResponseEntity<?> addDevToProject(@PathVariable("projectId") int projectId,
             @RequestParam("username") String username) {
@@ -92,6 +98,7 @@ public class ProjectController {
         return ResponseEntity.ok().build();
     }
 
+    @IsProjectDeveloperOrAdmin
     @DeleteMapping(path = "/{projectId}/user/{username}")
     public ResponseEntity<?> deleteDevFromProject(@PathVariable("projectId") int projectId,
             @PathVariable("username") String username) {
@@ -121,8 +128,9 @@ public class ProjectController {
         return ResponseEntity.ok(contact);
     }
 
-    @PutMapping(path = { "/{projectId}/contact", "/contact" })
-    public ResponseEntity<?> setContact(@PathVariable(name = "projectId", required = false) Integer projectId,
+    @IsProjectDeveloperOrAdmin
+    @PutMapping(path = { "/{projectId}/contact" })
+    public ResponseEntity<?> setContact(@PathVariable(name = "projectId") Integer projectId,
             @RequestBody Contact contact) {
         if (projectId != null && projectId.intValue() == contact.getProjectId()) {
             return ResponseEntity.badRequest().body("Project ID not match");
@@ -133,7 +141,7 @@ public class ProjectController {
 
     @GetMapping(path = "")
     public ResponseEntity<?> getAllProjects(@RequestParam(required = false) Lang lang) {
-        if (lang == null){
+        if (lang == null) {
             lang = Lang.ENG;
         }
         List<Project> projects = projectService.getAllProject(lang);

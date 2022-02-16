@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import hk.edu.cityu.cs.FYP.AIRegistry.annotation.IsProjectDeveloperOrAdmin;
 import hk.edu.cityu.cs.FYP.AIRegistry.model.Detail;
 import hk.edu.cityu.cs.FYP.AIRegistry.service.DetailService;
 
@@ -34,6 +35,7 @@ public class DetailController {
         return response;
     }
 
+    @IsProjectDeveloperOrAdmin
     @PutMapping(path = "/project/{projectId}/detail/{detailId}", consumes = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<?> updateDetail(@PathVariable int projectId, @PathVariable int detailId,
             @RequestBody Detail detail) {
@@ -47,6 +49,7 @@ public class DetailController {
         return ResponseEntity.ok().build();
     }
 
+    @IsProjectDeveloperOrAdmin
     @PostMapping(path = "/project/{projectId}/detail", consumes = MediaType.APPLICATION_FORM_URLENCODED_VALUE)
     public ResponseEntity<?> addDetail(@PathVariable int projectId, @RequestParam String detailName) {
         var detailId = detailService.addDetail(projectId, detailName);
@@ -54,6 +57,7 @@ public class DetailController {
 
     }
 
+    @IsProjectDeveloperOrAdmin
     @DeleteMapping("/project/{projectId}/detail/{detailId}")
     public ResponseEntity<?> deleteDetail(@PathVariable int projectId, @PathVariable int detailId) {
 

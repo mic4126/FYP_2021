@@ -11,6 +11,8 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -18,8 +20,11 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
+
+import hk.edu.cityu.cs.FYP.AIRegistry.annotation.IsProjectDeveloperOrAdmin;
 import hk.edu.cityu.cs.FYP.AIRegistry.model.AttachmentDownload;
 import hk.edu.cityu.cs.FYP.AIRegistry.model.AttachmentUpload;
+import hk.edu.cityu.cs.FYP.AIRegistry.model.UserInfo;
 import hk.edu.cityu.cs.FYP.AIRegistry.service.AttachmentService;
 
 @RestController
@@ -30,6 +35,7 @@ public class AttachmentContoller {
     @Autowired
     AttachmentService attachmentService;
 
+    @IsProjectDeveloperOrAdmin
     @PostMapping("/project/{projectId}/attachment")
     public ResponseEntity<?> addPhoto(@RequestParam("file") MultipartFile multipartFile,
             @PathVariable("projectId") int projectId) {
@@ -48,6 +54,7 @@ public class AttachmentContoller {
 
     }
 
+    @IsProjectDeveloperOrAdmin
     @PostMapping("/project/{projectId}/detail/{detailId}/attachment")
     public ResponseEntity<?> addDetailAttachment(@RequestParam("file") MultipartFile multipartFile,
             @PathVariable("projectId") int projectId, @PathVariable("detailId") int detailId) {
@@ -104,8 +111,9 @@ public class AttachmentContoller {
 
     }
 
+    @PreAuthorize("hasAuthority(@AuthorityUtils.getAttachmentAuthority(#attachmentId))")
     @DeleteMapping("/project/attachment/{attachmentId}")
-    public ResponseEntity<?> deleteAttachment(@PathVariable int attachmentId) {
+    public ResponseEntity<?> deleteAttachment(@PathVariable int attachmentId, @AuthenticationPrincipal UserInfo user) {
         attachmentService.deleteAttachment(attachmentId);
         return ResponseEntity.ok().build();
     }

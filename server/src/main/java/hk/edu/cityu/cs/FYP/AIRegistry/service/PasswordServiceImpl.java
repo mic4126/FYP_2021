@@ -67,6 +67,9 @@ public class PasswordServiceImpl implements PasswordService {
 
     @Override
     public boolean checkPassword(String userTypePassword, String salt, String hashedpassword) {
+        if (null == salt){
+            salt = "";
+        }
         return encoder.matches(userTypePassword + salt, hashedpassword);
     }
 

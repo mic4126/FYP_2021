@@ -1,9 +1,35 @@
-### create admin
-POST http://localhost:8080/admin/user
+@baseApi = http://localhost:8080/api
+
+### admin Login
+# @name adminLogin
+POST {{baseApi}}/login
 Content-Type: application/json
 
 {
-    "username":"admin3",
+    "username": "admin",
+    "password": "123"
+}
+
+### dev login
+# @name devLogin
+POST {{baseApi}}/login
+Content-Type: application/json
+
+{
+    "username": "dev",
+    "password": "123"
+}
+
+
+### create admin
+# @name create-admin
+@token = {{adminLogin.response.body.*}}
+POST http://localhost:8080/api/admin/user
+Authorization: Bearer {{token}}
+Content-Type: application/json
+
+{
+    "username":"admin99",
     "firstName":"admin1",
     "lastName": "nimda",
     "userType":"admin",
@@ -146,3 +172,24 @@ GET  http://localhost:8080/api/project/15/attachment
 
 ### Get Detail Attachment list
 GET  http://localhost:8080/api/project/detail/1/attachment
+
+### Put Detail
+PUT {{baseApi}}/project/15/detail/1
+Content-Type: application/json
+
+{
+  "detailId": 1,
+  "projectId": 15,
+  "detailName": "Test Detail",
+  "detailName_TC": "測試",
+  "detailName_SC": "測試",
+  "detailDesc": "Test",
+  "detailDesc_TC": "測試測試測試測試",
+  "detailDesc_SC": "測試"
+}
+
+### get dev's project list
+@token = {{devLogin.response.body.*}}
+
+GET http://localhost:4200/api/admin/user/dev/project
+Authorization: Bearer {{token}}

@@ -34,4 +34,6 @@ public interface UserService {
     public void useOldPasswordLogin(String username);
 
     public List<Project> getUsersProjects(String username);
+
+    public UserInfo getUserInfo(String username);
 }

@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -34,6 +35,7 @@ public class UserController {
 
     private static Logger LOGGER = LoggerFactory.getLogger(UserController.class);
 
+    @PreAuthorize("hasRole('admin')")
     @PostMapping(path = "/user", consumes = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody ResponseEntity<?> createUser(@RequestBody UserInfo userInfo) {
 
@@ -50,6 +52,7 @@ public class UserController {
 
     }
 
+
     @PostMapping(path = { "/user/password/{username}", "/user/password" }, consumes = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody ResponseEntity<?> resetPassword(@PathVariable(required = false) String username,
             @RequestBody ResetPasswordInfo resetPasswordInfo) {
@@ -63,6 +66,7 @@ public class UserController {
         return ResponseEntity.ok().build();
     }
 
+    @PreAuthorize("authentication.getPrincipal().getUsername() == #userInfo.getUsername()")
     @PutMapping(path = { "/user/password/{username}", "/user/password" })
     public @ResponseBody ResponseEntity<?> changePassword(@PathVariable(required = false) String username,
             @RequestBody UserInfo userInfo) {
@@ -72,6 +76,7 @@ public class UserController {
         return ResponseEntity.ok().build();
     }
 
+    @PreAuthorize("authentication.getPrincipal().getUsername() == #username")
     @PutMapping(value = "/user/{username}")
     public @ResponseBody ResponseEntity<?> changeUserInfo(@PathVariable String username,
             @RequestBody UserInfo userInfo) {
@@ -108,5 +113,11 @@ public class UserController {
     public @ResponseBody ResponseEntity<?> getUsersProjects(@PathVariable("username") String username){
         var projectList = userService.getUsersProjects(username);
         return ResponseEntity.ok(projectList);
+    }
+
+    @GetMapping(value = "/user/{username}")
+    public @ResponseBody ResponseEntity<?> getUserInfo(@PathVariable("username")String username){
+        var user = userService.getUserInfo(username);
+        return ResponseEntity.ok(user);
     }
 }

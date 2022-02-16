@@ -196,7 +196,7 @@ public interface ProjectMapper {
                 projectId in
                 <foreach item='pId' index='index' collection='projectIds'
                     open='(' separator=',' close=')'>
-                    #{pID}
+                    #{pId}
             </foreach>
             </script>
                 """)

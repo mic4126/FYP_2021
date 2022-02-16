@@ -59,5 +59,13 @@ public class AttachmentDaoImpl implements AttachmentDao{
         mapper.deleteAttachment(attachmentId);
         
     }
+
+    @Override
+    public int getAttachmentProjectId(int attachmentId) {
+        var session = sqlSessionFactory.openSession();
+        var mapper = session.getMapper(AttachmentMapper.class);
+        return mapper.getAttachmentProjectId(attachmentId);
+        
+    }
     
 }
