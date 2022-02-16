@@ -134,7 +134,7 @@ const ProjectDetail = (props: any) => {
                                 <div className="card mx-2 my-2">
                                     <div className="card-body">
                                         <h4 className="card-title"><FormattedMessage id="project.contact.tel" defaultMessage="Telephone" /> </h4>
-                                        <a href={"tel:+852" + contact.phonenumber}>{contact.phonenumber}</a>
+                                        <a href={"tel:+852" + contact.phoneNumber}>{contact.phoneNumber}</a>
                                     </div>
                                 </div>
 

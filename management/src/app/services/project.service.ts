@@ -53,11 +53,11 @@ export class ProjectService {
   }
 
   setProjectDesc(projectId: number, lang: LANG, desc: string) {
-    const param = new HttpParams()
-      .append('projectId', projectId)
-      .append('desc', desc)
-      .append('lang', lang);
-    return this.http.put(`${Globals.API_ROOT}/project/desc`, param)
+    return this.http.put(`${Globals.API_ROOT}/project/desc`, {
+      projectId: projectId,
+      desc: desc,
+      lang: lang
+    })
   }
 
   getProjectName(projectId: number, lang: LANG): Observable<string> {
@@ -76,7 +76,7 @@ export class ProjectService {
       .append('projectId', projectId)
       .append('lang', lang)
       .append('projectName', name)
-    return this.http.put(`${Globals.API_ROOT}/project/name`, param)
+    return this.http.put(`${Globals.API_ROOT}/project/${projectId}/name`, param)
   }
 
   getContact(projectId: number): Observable<Contact> {
@@ -88,7 +88,7 @@ export class ProjectService {
   }
 
   setContact(contact: Contact) {
-    return this.http.put(`${Globals.API_ROOT}/project/contact`, contact)
+    return this.http.put(`${Globals.API_ROOT}/project/${contact.projectId}/contact`, contact)
   }
 
   addTag(tag: Tag) {

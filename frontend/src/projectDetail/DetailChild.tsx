@@ -6,8 +6,8 @@ import { Attachment } from "../modal/Attachment.model";
 import useDetailName from "../util/useDetailLang";
 
 const listAttachment = (attachments: Attachment[]) => {
-    attachments.map((atch) => {
-        return <a href={"/api/project/attachment/" + atch.attachmentId}>{atch.origFileName + "." + atch.origExt}</a>
+    return attachments.map((atch) => {
+        return <a href={"/api/project/attachment/" + atch.attachmentId} key={'atch-'+atch.attachmentId}>{atch.origFileName + "." + atch.origExt}</a>
     })
 }
 

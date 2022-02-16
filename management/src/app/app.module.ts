@@ -27,6 +27,8 @@ import { EditTagComponent } from './dev/edit-project/edit-tag/edit-tag.component
 import { DetailsComponent } from './dev/edit-project/details/details.component';
 import { EditDetailComponent } from './dev/edit-project/details/edit-detail/edit-detail.component';
 import { PhotoComponent } from './dev/edit-project/photo/photo.component';
+import { ChangeUserInfoComponent } from './common/change-user-info/change-user-info.component';
+import { ChangePasswordComponent } from './common/change-password/change-password.component';
 
 export function jwtGetter() {
   return localStorage.getItem("jwt");
@@ -51,7 +53,9 @@ export function jwtGetter() {
     EditTagComponent,
     DetailsComponent,
     EditDetailComponent,
-    PhotoComponent
+    PhotoComponent,
+    ChangeUserInfoComponent,
+    ChangePasswordComponent
   ],
   imports: [
     BrowserModule,

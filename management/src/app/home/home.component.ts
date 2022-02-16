@@ -26,7 +26,6 @@ export class HomeComponent implements OnInit {
   }
 
   onLogoutClick(){
-    localStorage.removeItem('jwt');
-    this.router.navigate(['/login']);
+    this.authService.logout()
   }
 }

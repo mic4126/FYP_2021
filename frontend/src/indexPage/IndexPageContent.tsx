@@ -30,7 +30,7 @@ function IndexPageContent(props: any) {
       setProjects(resp.data);
     })
 
-  }, [langContext.lang])
+  }, [requsetLang])
 
 
 

@@ -4,6 +4,8 @@ import { AssignDevComponent } from '../admin/assign-dev/assign-dev.component';
 import { CreateProjectComponent } from '../admin/create-project/create-project.component';
 import { CreateUserComponent } from '../admin/create-user/create-user.component';
 import { DeleteUserComponent } from '../admin/delete-user/delete-user.component';
+import { ChangePasswordComponent } from '../common/change-password/change-password.component';
+import { ChangeUserInfoComponent } from '../common/change-user-info/change-user-info.component';
 import { EditProjectComponent } from '../dev/edit-project/edit-project.component';
 import { AdminGuard } from '../guard/admin.guard';
 import { DevGuard } from '../guard/dev.guard';
@@ -22,6 +24,8 @@ const routes: Routes = [{
     { path: 'delete-user', component: DeleteUserComponent, canActivate: [AdminGuard] },
     { path: 'assign-dev', component: AssignDevComponent, canActivate: [AdminGuard] },
     { path: 'edit-project', component: EditProjectComponent, canActivate: [DevGuard] },
+    { path: 'change-info', component: ChangeUserInfoComponent, canActivate: [LoginGuard] },
+    { path: 'change-password', component: ChangePasswordComponent, canActivate: [LoginGuard] }
   ]
 }];
 

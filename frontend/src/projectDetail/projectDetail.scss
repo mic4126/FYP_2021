@@ -1,8 +1,13 @@
-$carousel-height : 50vh;
+$carousel-height: 50vh;
 .carousel-inner {
     width: 100%;
     height: $carousel-height !important;
     img {
         height: $carousel-height;
     }
+}
+
+.carousel,
+.carousel-item img {
+    max-width: 100vw;
 }

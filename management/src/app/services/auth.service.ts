@@ -25,6 +25,11 @@ export class AuthService {
     ).subscribe(() => { this.router.navigateByUrl("/home/index") })
   }
 
+  logout(){
+    localStorage.removeItem('jwt');
+    this.router.navigate(['/login']);
+  }
+
   private setUserInfo(jwt: string) {
     const userInfo: JWTUserInfo = <JWTUserInfo>this.jwtHelper.decodeToken(jwt)
     console.log("set user info called");

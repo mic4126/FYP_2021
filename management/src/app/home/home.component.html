@@ -12,6 +12,8 @@
                 <a routerLink="/home/delete-user" [hidden]="!isAdmin" class="nav-link">Delete Users</a>
                 <a routerLink="/home/create-project" class="nav-link" [hidden]="!isAdmin">Create Project</a>
                 <a routerLink="/home/assign-dev" [hidden]="!isAdmin" class="nav-link">Assign developers to project</a>
+                <a routerLink="/home/change-info" class="nav-link">Change User Info</a>
+                <a routerLink="/home/change-password" class="nav-link">Change Password</a>
                 <a [hidden]="" class="nav-link" (click)="onLogoutClick()">Logout</a>
             </nav>
 

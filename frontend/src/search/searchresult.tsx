@@ -32,7 +32,7 @@ const SearchResult = (props: any) => {
             }
             )
         }
-    }, [])
+    }, [requestLang])
 
     
     useEffect(() => {
@@ -50,7 +50,7 @@ const SearchResult = (props: any) => {
             }
             )
         }
-    }, [])
+    }, [requestLang])
 
     const listResult = (searchResult: SearchResult[]) => {
         if (queryDone) {
