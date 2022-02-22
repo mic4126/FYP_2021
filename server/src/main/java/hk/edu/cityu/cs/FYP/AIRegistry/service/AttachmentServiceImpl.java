@@ -15,7 +15,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
-import hk.edu.cityu.cs.FYP.AIRegistry.Exception.InsufficientPermissionException;
 import hk.edu.cityu.cs.FYP.AIRegistry.Exception.StorageFolderCannotAccessException;
 import hk.edu.cityu.cs.FYP.AIRegistry.dao.AttachmentDao;
 import hk.edu.cityu.cs.FYP.AIRegistry.dao.ProjectUserDao;

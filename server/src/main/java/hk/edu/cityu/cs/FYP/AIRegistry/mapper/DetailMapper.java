@@ -1,4 +1,4 @@
-package hk.edu.cityu.cs.FYP.AIRegistry.dao;
+package hk.edu.cityu.cs.FYP.AIRegistry.mapper;
 
 import java.util.List;
 
@@ -29,34 +29,6 @@ public interface DetailMapper {
                         AND `deleted` IS null
                         """)
         public List<Detail> getDetailsByProjectId(int projectId);
-
-        @Results({
-                        @Result(property = "detailName", column = "detailName_TC"),
-                        @Result(property = "detailDesc", column = "detailDesc_TC"),
-                        @Result(property = "projectId", column = "projectId"),
-                        @Result(property = "detailId", column = "detailId")
-        })
-        @Select("""
-                        SELECT `projectId`, `detailId`, `detailName_TC`, `detailDesc_TC`
-                        FROM Detail
-                        WHERE `projectId` = #{projectId}
-                        AND `deleted` IS null
-                        """)
-        public List<Detail> getDetailsByProjectIdTC(int projectId);
-
-        @Results({
-                        @Result(property = "detailName", column = "detailName_SC"),
-                        @Result(property = "detailDesc", column = "detailDesc_SC"),
-                        @Result(property = "projectId", column = "projectId"),
-                        @Result(property = "detailId", column = "detailId")
-        })
-        @Select("""
-                        SELECT `projectId`, `detailId`, `detailName_SC`, `detailDesc_SC`
-                        FROM Detail
-                        WHERE `projectId` = #{projectId}
-                        AND `deleted` IS null
-                        """)
-        public List<Detail> getDetailsByProjectIdSC(int projectId);
 
         @Insert("""
                         INSERT INTO `Detail` (`projectId`,`detailName`)

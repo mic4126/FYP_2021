@@ -27,10 +27,7 @@ public class ProjectServiceImpl implements ProjectService {
     ProjectDao projectDao;
 
     @Autowired
-    ProjectUserDao projectUserDao;
-
-    @Autowired
-    SqlSessionFactory sqlSessionFactory;
+    ProjectUserDao projectUserDao; 
 
     @Transactional(readOnly = true)
     @Override
@@ -127,7 +124,7 @@ public class ProjectServiceImpl implements ProjectService {
         }
 
         if (Lang.SC.equals(lang)) {
-            return projectDao.getProjectnameSC(projectId);
+            return projectDao.getProjectNameSC(projectId);
         }
 
         return projectDao.getProjectName(projectId);
@@ -138,14 +135,14 @@ public class ProjectServiceImpl implements ProjectService {
     public void setProjectName(int projectId, String projectName, Lang lang) {
 
         if (Lang.TC.equals(lang)) {
-            projectDao.setProjectnameTC(projectId, projectName);
+            projectDao.setProjectNameTC(projectId, projectName);
         }
 
         if (Lang.SC.equals(lang)) {
-            projectDao.setProjectnameSC(projectId, projectName);
+            projectDao.setProjectNameSC(projectId, projectName);
         }
 
-        projectDao.setProjectname(projectId, projectName);
+        projectDao.setProjectName(projectId, projectName);
     }
 
     @Transactional

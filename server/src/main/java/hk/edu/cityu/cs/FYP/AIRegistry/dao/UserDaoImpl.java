@@ -6,6 +6,7 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import hk.edu.cityu.cs.FYP.AIRegistry.mapper.UserMapper;
 import hk.edu.cityu.cs.FYP.AIRegistry.model.ResetPasswordInfo;
 import hk.edu.cityu.cs.FYP.AIRegistry.model.UserInfo;
 

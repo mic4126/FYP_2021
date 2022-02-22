@@ -6,6 +6,7 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import hk.edu.cityu.cs.FYP.AIRegistry.mapper.TagMapper;
 import hk.edu.cityu.cs.FYP.AIRegistry.model.Tag;
 
 @Repository
@@ -13,6 +14,9 @@ public class TagDaoImpl implements TagDao{
 
     @Autowired
     SqlSessionFactory sqlSessionFactory;
+
+    @Autowired
+    TagMapper tagMapper;
 
     @Override
     public List<Tag> getTags(int projectId) {

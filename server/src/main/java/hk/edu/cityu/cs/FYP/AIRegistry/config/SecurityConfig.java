@@ -2,7 +2,6 @@ package hk.edu.cityu.cs.FYP.AIRegistry.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
-import org.springframework.context.annotation.Configuration;
 import org.springframework.http.HttpMethod;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
@@ -14,10 +13,6 @@ import org.springframework.security.config.http.SessionCreationPolicy;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
-import org.springframework.web.multipart.commons.CommonsMultipartResolver;
-import org.springframework.web.servlet.config.annotation.EnableWebMvc;
-import org.springframework.web.servlet.config.annotation.PathMatchConfigurer;
-import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 
 import hk.edu.cityu.cs.FYP.AIRegistry.filter.JWTAuthFilter;
 import hk.edu.cityu.cs.FYP.AIRegistry.service.CustomAuthProvider;
@@ -33,10 +28,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     CustomAuthProvider customAuthProvider;
 
     JWTAuthFilter jwtAuthFilter;
-
-    public JWTAuthFilter getJwtAuthFilter() {
-        return jwtAuthFilter;
-    }
 
     @Autowired
     public void setJwtAuthFilter(JWTAuthFilter jwtAuthFilter) {

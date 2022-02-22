@@ -23,7 +23,7 @@ public class Contact {
     private String department_SC;
 
     @JsonProperty("url")
-    private String url;    
+    private String url;
 
     public String getUrl() {
         return url;
@@ -89,6 +89,64 @@ public class Contact {
         this.email = email;
         this.phoneNumber = phoneNumber;
         this.department = department;
+    }
+
+    @Override
+    public int hashCode() {
+        final int prime = 31;
+        int result = 1;
+        result = prime * result + ((department == null) ? 0 : department.hashCode());
+        result = prime * result + ((department_SC == null) ? 0 : department_SC.hashCode());
+        result = prime * result + ((department_TC == null) ? 0 : department_TC.hashCode());
+        result = prime * result + ((email == null) ? 0 : email.hashCode());
+        result = prime * result + ((phoneNumber == null) ? 0 : phoneNumber.hashCode());
+        result = prime * result + projectId;
+        result = prime * result + ((url == null) ? 0 : url.hashCode());
+        return result;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (this == obj)
+            return true;
+        if (obj == null)
+            return false;
+        if (getClass() != obj.getClass())
+            return false;
+        Contact other = (Contact) obj;
+        if (department == null) {
+            if (other.department != null)
+                return false;
+        } else if (!department.equals(other.department))
+            return false;
+        if (department_SC == null) {
+            if (other.department_SC != null)
+                return false;
+        } else if (!department_SC.equals(other.department_SC))
+            return false;
+        if (department_TC == null) {
+            if (other.department_TC != null)
+                return false;
+        } else if (!department_TC.equals(other.department_TC))
+            return false;
+        if (email == null) {
+            if (other.email != null)
+                return false;
+        } else if (!email.equals(other.email))
+            return false;
+        if (phoneNumber == null) {
+            if (other.phoneNumber != null)
+                return false;
+        } else if (!phoneNumber.equals(other.phoneNumber))
+            return false;
+        if (projectId != other.projectId)
+            return false;
+        if (url == null) {
+            if (other.url != null)
+                return false;
+        } else if (!url.equals(other.url))
+            return false;
+        return true;
     }
 
 }

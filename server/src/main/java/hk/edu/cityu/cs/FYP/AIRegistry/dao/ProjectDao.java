@@ -24,21 +24,15 @@ public interface ProjectDao {
 
     public String getProjectNameTC(int projectId);
 
-    public String getProjectnameSC(int projectId);
+    public String getProjectNameSC(int projectId);
 
-    public void setProjectname(int projectId,String desc);
+    public void setProjectName(int projectId,String desc);
 
-    public void setProjectnameTC(int projectId,String desc);
+    public void setProjectNameTC(int projectId,String desc);
 
-    public void setProjectnameSC(int projectId,String desc);
+    public void setProjectNameSC(int projectId,String desc);
 
     public Contact getContact(int projectId);
-
-    public void setPhone(Contact contact);
-
-    public void setDepartment(Contact contact);
-
-    public void setEmail(Contact contact);    
 
     public void setContact(Contact contact);
 

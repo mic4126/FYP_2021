@@ -6,6 +6,7 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import hk.edu.cityu.cs.FYP.AIRegistry.mapper.DetailMapper;
 import hk.edu.cityu.cs.FYP.AIRegistry.model.Detail;
 
 @Repository
@@ -19,20 +20,6 @@ public class DetailDaoImpl implements DetailDao {
         var session = sqlSessionFactory.openSession();
         var mapper = session.getMapper(DetailMapper.class);
         return mapper.getDetailsByProjectId(projectId);
-    }
-
-    @Override
-    public List<Detail> getAllDetailsByProjectIdTC(int projectId) {
-        var session = sqlSessionFactory.openSession();
-        var mapper = session.getMapper(DetailMapper.class);
-        return mapper.getDetailsByProjectIdTC(projectId);
-    }
-
-    @Override
-    public List<Detail> getAllDetailsByProjectIdSC(int projectId) {
-        var session = sqlSessionFactory.openSession();
-        var mapper = session.getMapper(DetailMapper.class);
-        return mapper.getDetailsByProjectIdSC(projectId);        
     }
 
     @Override

@@ -8,10 +8,6 @@ public interface DetailDao {
     
     public List<Detail> getAllDetailsByProjectId(int projectId);
 
-    public List<Detail> getAllDetailsByProjectIdTC(int projectId);
-
-    public List<Detail> getAllDetailsByProjectIdSC(int projectId);
-
     public void setDetailName(int detailId,String detailName);
 
     public void setDetailNameTC(int detailId,String detailName);

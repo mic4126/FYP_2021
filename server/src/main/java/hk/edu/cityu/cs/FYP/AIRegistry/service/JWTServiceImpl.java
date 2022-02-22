@@ -13,7 +13,6 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.security.core.Authentication;
 import org.springframework.stereotype.Service;
 
-import hk.edu.cityu.cs.FYP.AIRegistry.dao.UserDao;
 import hk.edu.cityu.cs.FYP.AIRegistry.model.LoginReq;
 import hk.edu.cityu.cs.FYP.AIRegistry.model.UserInfo;
 import io.jsonwebtoken.Claims;
@@ -24,10 +23,7 @@ import io.jsonwebtoken.security.Keys;
 public class JWTServiceImpl {
 
     
-    private AuthenticationManager authenticationManager;
-
-    @Autowired
-    private UserDao userDao;
+    private AuthenticationManager authenticationManager; 
 
     @Value("${jwt.key}")
     private String KEY;

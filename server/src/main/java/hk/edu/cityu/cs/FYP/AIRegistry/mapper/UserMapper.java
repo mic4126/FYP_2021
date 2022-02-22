@@ -1,4 +1,4 @@
-package hk.edu.cityu.cs.FYP.AIRegistry.dao;
+package hk.edu.cityu.cs.FYP.AIRegistry.mapper;
 
 import java.util.List;
 
@@ -41,7 +41,7 @@ public interface UserMapper {
             @Result(property = "userType", column = "userType"),
             @Result(property = "hashedPassword", column = "password"),
             @Result(property = "salt", column = "salt"),
-            @Result(property = "newPassword", column = "new_password"),
+            @Result(property = "newHashedPassword", column = "new_password"),
             @Result(property = "newSalt", column = "new_salt"),
             @Result(property = "projectIds", column = "username", many = @Many(select = "findProjectIdByusername")),
             @Result(property = "deleteDate", column = "delete_date")
@@ -95,7 +95,7 @@ public interface UserMapper {
             @Result(property = "userType", column = "userType"),
             @Result(property = "hashedPassword", column = "password"),
             @Result(property = "salt", column = "salt"),
-            @Result(property = "newPassword", column = "new_password"),
+            @Result(property = "newHashedPassword", column = "new_password"),
             @Result(property = "newSalt", column = "new_salt")
     })
     @Select("""
@@ -120,7 +120,7 @@ public interface UserMapper {
             @Result(property = "userType", column = "userType"),
             @Result(property = "hashedPassword", column = "password"),
             @Result(property = "salt", column = "salt"),
-            @Result(property = "newPassword", column = "new_password"),
+            @Result(property = "newHashedPassword", column = "new_password"),
             @Result(property = "newSalt", column = "new_salt")
     })
     @Select("""
@@ -136,7 +136,7 @@ public interface UserMapper {
             @Result(property = "userType", column = "userType"),
             @Result(property = "hashedPassword", column = "password"),
             @Result(property = "salt", column = "salt"),
-            @Result(property = "newPassword", column = "new_password"),
+            @Result(property = "newHashedPassword", column = "new_password"),
             @Result(property = "newSalt", column = "new_salt")
     })
     @Select("""
@@ -152,7 +152,7 @@ public interface UserMapper {
             @Result(property = "userType", column = "userType"),
             @Result(property = "hashedPassword", column = "password"),
             @Result(property = "salt", column = "salt"),
-            @Result(property = "newPassword", column = "new_password"),
+            @Result(property = "newHashedPassword", column = "new_password"),
             @Result(property = "newSalt", column = "new_salt")
     })
     @Select("""
@@ -170,7 +170,7 @@ public interface UserMapper {
 
     @Update("""
             UPDATE USER SET
-            `password` = `new_password`
+            `password` = `new_password`,
             `salt` = `new_salt`
             WHERE `username` = #{username}
             """)
@@ -184,7 +184,7 @@ public interface UserMapper {
             @Result(property = "userType", column = "userType"),
             @Result(property = "hashedPassword", column = "password"),
             @Result(property = "salt", column = "salt"),
-            @Result(property = "newPassword", column = "new_password"),
+            @Result(property = "newHashedPassword", column = "new_password"),
             @Result(property = "newSalt", column = "new_salt")
     })
     @Select("""

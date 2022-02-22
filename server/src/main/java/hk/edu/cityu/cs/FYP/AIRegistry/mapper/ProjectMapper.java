@@ -1,4 +1,4 @@
-package hk.edu.cityu.cs.FYP.AIRegistry.dao;
+package hk.edu.cityu.cs.FYP.AIRegistry.mapper;
 
 import java.util.List;
 

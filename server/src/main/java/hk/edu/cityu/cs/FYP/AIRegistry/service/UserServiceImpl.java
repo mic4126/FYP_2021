@@ -19,7 +19,6 @@ import hk.edu.cityu.cs.FYP.AIRegistry.dao.UserDao;
 import hk.edu.cityu.cs.FYP.AIRegistry.model.Project;
 import hk.edu.cityu.cs.FYP.AIRegistry.model.ResetPasswordInfo;
 import hk.edu.cityu.cs.FYP.AIRegistry.model.UserInfo;
-import hk.edu.cityu.cs.FYP.AIRegistry.model.UserType;
 
 @Service
 public class UserServiceImpl implements UserService, UserDetailsService {
@@ -99,12 +98,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         emailService.sendResetPassword(userInfo);
 
     }
-
-    @Override
-    public boolean login(String username, String password) {
-        throw new RuntimeException("Not Implemented");
-    }
-
+    
     @Transactional(rollbackFor = Exception.class)
     @Override
     public void createUser(UserInfo userInfo) throws MessagingException {
@@ -166,14 +160,14 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     @Transactional
     @Override
     public void useNewPasswordLogin(String username) {
+        userDao.setPasswordAsNewPassword(username);
         userDao.setNewPasswordAsNull(username);
 
     }
 
     @Transactional
     @Override
-    public void useOldPasswordLogin(String username) {
-        userDao.setPasswordAsNewPassword(username);
+    public void useOldPasswordLogin(String username) {        
         userDao.setNewPasswordAsNull(username);
 
     }

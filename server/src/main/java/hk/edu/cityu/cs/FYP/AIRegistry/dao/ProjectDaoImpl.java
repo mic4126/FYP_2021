@@ -7,11 +7,12 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import hk.edu.cityu.cs.FYP.AIRegistry.mapper.ProjectMapper;
 import hk.edu.cityu.cs.FYP.AIRegistry.model.Contact;
 import hk.edu.cityu.cs.FYP.AIRegistry.model.Project;
 
 @Repository
-public class ProjectDaoImple implements ProjectDao {
+public class ProjectDaoImpl implements ProjectDao {
 
     @Autowired
     SqlSessionFactory sqlSessionFactory;
@@ -69,21 +70,6 @@ public class ProjectDaoImple implements ProjectDao {
     }
 
     @Override
-    public void setPhone(Contact contact) {
-        throw new RuntimeException("Not Implemented");
-    }
-
-    @Override
-    public void setDepartment(Contact contact) {
-        throw new RuntimeException("Not Implemented");
-    }
-
-    @Override
-    public void setEmail(Contact contact) {
-        throw new RuntimeException("Not Implemented");
-    }
-
-    @Override
     public void setContact(Contact contact) {
         var session = sqlSessionFactory.openSession();
         var mapper = session.getMapper(ProjectMapper.class);
@@ -119,14 +105,14 @@ public class ProjectDaoImple implements ProjectDao {
     }
 
     @Override
-    public String getProjectnameSC(int projectId) {
+    public String getProjectNameSC(int projectId) {
         var session = sqlSessionFactory.openSession();
         var mapper = session.getMapper(ProjectMapper.class);
         return mapper.getProjectNameSC(projectId);
     }
 
     @Override
-    public void setProjectname(int projectId, String desc) {
+    public void setProjectName(int projectId, String desc) {
         var session = sqlSessionFactory.openSession();
         var mapper = session.getMapper(ProjectMapper.class);
         mapper.setProjectName(projectId, desc);
@@ -134,7 +120,7 @@ public class ProjectDaoImple implements ProjectDao {
     }
 
     @Override
-    public void setProjectnameTC(int projectId, String desc) {
+    public void setProjectNameTC(int projectId, String desc) {
         var session = sqlSessionFactory.openSession();
         var mapper = session.getMapper(ProjectMapper.class);
         mapper.setProjectNameTC(projectId, desc);
@@ -142,7 +128,7 @@ public class ProjectDaoImple implements ProjectDao {
     }
 
     @Override
-    public void setProjectnameSC(int projectId, String desc) {
+    public void setProjectNameSC(int projectId, String desc) {
         var session = sqlSessionFactory.openSession();
         var mapper = session.getMapper(ProjectMapper.class);
         mapper.setProjectNameSC(projectId, desc);
