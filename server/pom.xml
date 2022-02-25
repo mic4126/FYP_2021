@@ -16,7 +16,7 @@
 		<java.version>17</java.version>
 	</properties>
 	<dependencies>
-		
+
 		<dependency>
 			<groupId>org.mybatis.spring.boot</groupId>
 			<artifactId>mybatis-spring-boot-starter-test</artifactId>
@@ -132,6 +132,23 @@
 			<artifactId>mybatis-spring-boot-starter</artifactId>
 			<version>2.2.2</version>
 		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/com.icegreen/greenmail -->
+		<dependency>
+			<groupId>com.icegreen</groupId>
+			<artifactId>greenmail</artifactId>
+			<version>1.6.5</version>
+			<scope>test</scope>
+		</dependency>
+
+		<!-- https://mvnrepository.com/artifact/com.icegreen/greenmail-junit5 -->
+		<dependency>
+			<groupId>com.icegreen</groupId>
+			<artifactId>greenmail-junit5</artifactId>
+			<version>1.6.5</version>
+			<scope>test</scope>
+		</dependency>
+
 
 	</dependencies>
 

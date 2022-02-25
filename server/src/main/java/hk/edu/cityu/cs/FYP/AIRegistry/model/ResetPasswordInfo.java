@@ -1,9 +1,16 @@
 package hk.edu.cityu.cs.FYP.AIRegistry.model;
 
-public class ResetPasswordInfo {
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonProperty;
+
+public class ResetPasswordInfo {    
+    @JsonProperty
     private String email;
+    @JsonProperty
     private String username;
+    @JsonIgnore
     private String hashedPassword;
+    @JsonIgnore
     private String salt;
 
 
@@ -27,6 +34,7 @@ public class ResetPasswordInfo {
         return email;
     }
 
+    
     public void setEmail(String email) {
         this.email = email;
     }

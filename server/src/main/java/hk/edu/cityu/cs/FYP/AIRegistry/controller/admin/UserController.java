@@ -38,7 +38,7 @@ public class UserController {
     @PreAuthorize("hasRole('admin')")
     @PostMapping(path = "/user", consumes = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody ResponseEntity<?> createUser(@RequestBody UserInfo userInfo) {
-
+        LOGGER.info("create user called");
         try {
             userService.createUser(userInfo);
         } catch (UserAlreadyExistException e) {
@@ -86,6 +86,7 @@ public class UserController {
         return ResponseEntity.ok().build();
     }
 
+    @PreAuthorize("hasRole('admin')")
     @DeleteMapping(value = "/user/{username}")
     public @ResponseBody ResponseEntity<?> deleteUser(@PathVariable String username) {
 

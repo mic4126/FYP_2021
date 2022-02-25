@@ -121,6 +121,11 @@ public class AttachmentServiceImpl implements AttachmentService {
     @Override
     public boolean CanDeveloperDeleteAttachment(UserInfo user, int attachmentId) {
         var projectList = user.getProjectIds();
+        
+        if (projectList == null) {
+            return false;
+        }
+
         int atchProjectId = attachmentDao.getAttachmentProjectId(attachmentId);
 
         var it = projectList.iterator();

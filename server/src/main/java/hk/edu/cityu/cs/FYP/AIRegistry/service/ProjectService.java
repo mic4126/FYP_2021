@@ -14,13 +14,7 @@ public interface ProjectService {
 
     public void setDesc(int projectId, String desc, Lang lang);
 
-    public Contact getContact(int projectId);
-
-    public void updatePhone(int projectId, Contact contact);
-
-    public void updateEmail(int projectId, Contact contact);
-
-    public void updateDepartment(int projectId, Contact contact);
+    public Contact getContact(int projectId);   
 
     public void setContact(Contact contact);
 

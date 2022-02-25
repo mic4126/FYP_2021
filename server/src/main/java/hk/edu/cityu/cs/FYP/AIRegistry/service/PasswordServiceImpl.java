@@ -52,6 +52,7 @@ public class PasswordServiceImpl implements PasswordService {
         return password;
     }
 
+    @Override
     public String generateSalt() {
         SecureRandom random = new SecureRandom();
         byte bytes[] = new byte[20];
@@ -61,6 +62,7 @@ public class PasswordServiceImpl implements PasswordService {
         return token;
     }
 
+    @Override
     public String hashPassword(String password, String salt) {
         return encoder.encode(password + salt);
     }

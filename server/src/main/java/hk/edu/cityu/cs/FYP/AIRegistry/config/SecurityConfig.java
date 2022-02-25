@@ -42,11 +42,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
                 .mvcMatchers("/login").permitAll()
                 // .antMatchers("/admin/user/**").authenticated()
-                .mvcMatchers("/admin/user/**").authenticated()
                 // exclude reset password
-                .mvcMatchers(HttpMethod.POST, "/user/password",
-                        "/user/password/{username}")
+                .mvcMatchers(HttpMethod.POST, "/admin/user/password",
+                "/admin/user/password/{username}")
                 .permitAll()
+                .mvcMatchers("/admin/user/**").authenticated()
 
                 // guard all user api
                 // Attachment Controller related

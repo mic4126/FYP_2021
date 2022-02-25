@@ -98,7 +98,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
         emailService.sendResetPassword(userInfo);
 
     }
-    
+
     @Transactional(rollbackFor = Exception.class)
     @Override
     public void createUser(UserInfo userInfo) throws MessagingException {
@@ -132,11 +132,11 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
-        var user = userDao.findUserByUserName(username);
-        if (user == null) {
-            throw new UsernameNotFoundException("User not found exception");
-        }
-        return user;
+        // var user = userDao.findUserByUserName(username);
+        // if (user == null) {
+        //     throw new UsernameNotFoundException("User not found exception");
+        // }
+        return getUserInfo(username);
     }
 
     @Transactional(readOnly = true)

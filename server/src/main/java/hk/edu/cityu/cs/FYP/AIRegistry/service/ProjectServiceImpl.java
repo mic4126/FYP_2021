@@ -2,7 +2,6 @@ package hk.edu.cityu.cs.FYP.AIRegistry.service;
 
 import java.util.List;
 
-import org.apache.ibatis.session.SqlSessionFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
@@ -71,28 +70,7 @@ public class ProjectServiceImpl implements ProjectService {
     @Override
     public void setContact(Contact contact) {
         projectDao.setContact(contact);
-    }
-
-    @Transactional
-    @Override
-    public void updatePhone(int projectId, Contact contact) {
-        throw new RuntimeException("Not Implemented");
-
-    }
-
-    @Transactional
-    @Override
-    public void updateEmail(int projectId, Contact contact) {
-        throw new RuntimeException("Not Implemented");
-
-    }
-
-    @Transactional
-    @Override
-    public void updateDepartment(int projectId, Contact contact) {
-        throw new RuntimeException("Not Implemented");
-
-    }
+    }    
 
     @Transactional(rollbackFor = Exception.class)
     @Override
@@ -163,11 +141,11 @@ public class ProjectServiceImpl implements ProjectService {
     @Override
     public Project getProject(int projectId, Lang lang) {
         if (Lang.TC.equals(lang)) {
-            return projectDao.getProject(projectId);
+            return projectDao.getProjectTC(projectId);
         }
 
         if (Lang.SC.equals(lang)) {
-            return projectDao.getProject(projectId);
+            return projectDao.getProjectSC(projectId);
         }
 
         return projectDao.getProject(projectId);
@@ -199,6 +177,7 @@ public class ProjectServiceImpl implements ProjectService {
         return projectDao.getProjects();
     }
 
+    @Transactional(readOnly = true)
     @Override
     public List<Project> getAllProject(Lang lang) {
         if (Lang.TC.equals(lang)) {
