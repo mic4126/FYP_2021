@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.util.MultiValueMap;
@@ -31,6 +32,8 @@ public class ProjectController {
 
     @Autowired
     ProjectService projectService;
+
+    private static final String charset = " ;charset=UTF-8";
 
     @PreAuthorize("hasRole('admin')")
     @PostMapping(path = "")
@@ -78,7 +81,7 @@ public class ProjectController {
     public ResponseEntity<?> setProjectName(@RequestBody MultiValueMap<String, String> mvm,
             @PathVariable(name = "projectId") Integer projectId) {
 
-        if (projectId != null && projectId.intValue() == Integer.parseInt(mvm.getFirst("projectId"))) {
+        if (projectId != null && !(projectId.intValue() == Integer.parseInt(mvm.getFirst("projectId")))) {
             return ResponseEntity.badRequest().body("Project ID not match");
         }
         Lang langT = Lang.valueOf(mvm.getFirst("lang"));
@@ -132,7 +135,7 @@ public class ProjectController {
     @PutMapping(path = { "/{projectId}/contact" })
     public ResponseEntity<?> setContact(@PathVariable(name = "projectId") Integer projectId,
             @RequestBody Contact contact) {
-        if (projectId != null && projectId.intValue() == contact.getProjectId()) {
+        if (projectId != null && !(projectId.intValue() == contact.getProjectId())) {
             return ResponseEntity.badRequest().body("Project ID not match");
         }
         projectService.setContact(contact);

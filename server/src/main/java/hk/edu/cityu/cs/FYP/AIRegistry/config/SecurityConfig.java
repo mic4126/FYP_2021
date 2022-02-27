@@ -68,7 +68,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .mvcMatchers("/project/{projectId}/user").authenticated()
                 .mvcMatchers(HttpMethod.GET, "/project/{projectId}/tag").permitAll()
                 .mvcMatchers(HttpMethod.GET, "/project/desc", "/project/name", "/project/{projectId}/name",
-                        "/project/{projectId}/contact", "/project/contact")
+                "/project/{projectId}/contact", "/project/contact")
                 .permitAll()
                 .mvcMatchers(HttpMethod.GET, "/project").permitAll()
                 .mvcMatchers("/project/**").authenticated()
