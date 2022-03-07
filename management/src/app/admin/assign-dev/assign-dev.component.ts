@@ -27,7 +27,10 @@ export class AssignDevComponent implements OnInit {
 
   onProjectChange() {
     console.log("Project changed:" + this.selectProjectId);
-
+    if (!this.selectProjectId) {
+      this.projectDev = [];
+      return
+    }
     this.getProjectDevs();
   }
 
@@ -54,8 +57,8 @@ export class AssignDevComponent implements OnInit {
   onDevRemoved($event: any) {
     console.log($event);
     const user: UserInfo = <UserInfo>$event.value;
-    if (this.selectProjectId){
-      this.projectService.deleteDevFromProject(this.selectProjectId,user.username).subscribe(()=>{},()=>{
+    if (this.selectProjectId) {
+      this.projectService.deleteDevFromProject(this.selectProjectId, user.username).subscribe(() => { }, () => {
         this.getProjectDevs();
       })
     }

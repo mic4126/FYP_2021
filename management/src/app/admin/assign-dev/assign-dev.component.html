@@ -7,7 +7,7 @@
     </h3>
     <div class="row mb-5">
         <ng-select [items]="projects$|async" [closeOnSelect]="true" [(ngModel)]="selectProjectId"
-            bindLabel="projectName" bindValue="projectId" (change)="onProjectChange()">
+            bindLabel="projectName" bindValue="projectId" (change)="onProjectChange()" id="projectName-select">
         </ng-select>
     </div>
     <h3 class="row mb-5">
@@ -15,7 +15,7 @@
     </h3>
     <div class="row mb-5">
         <ng-select [items]="devs$|async" [closeOnSelect]="false" [multiple]="true" (add)="onDevAdd($event)"
-            (remove)="onDevRemoved($event)" bindLabel="username" [(ngModel)]="projectDev">
+            (remove)="onDevRemoved($event)" bindLabel="username" [(ngModel)]="projectDev" id="projectDev-select">
             <ng-template ng-option-tmp let-item="item" let-item$="item$" let-index="index">
                 <input id="item-{{index}}" type="checkbox" [ngModel]="item$.selected" /> {{item.username}}
             </ng-template>

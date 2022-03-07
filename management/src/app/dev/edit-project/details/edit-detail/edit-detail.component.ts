@@ -54,7 +54,7 @@ export class EditDetailComponent implements OnInit, OnChanges {
     this.editDetailForm.addControl('detailName_SC', this.fb.control(this.detail?.detailName_SC));
     this.editDetailForm.addControl('detailDesc', this.fb.control(this.detail?.detailDesc));
     this.editDetailForm.addControl('detailDesc_TC', this.fb.control(this.detail?.detailDesc_TC));
-    this.editDetailForm.addControl('detailDesc_SC', this.fb.control(this.detail?.detailName_SC));
+    this.editDetailForm.addControl('detailDesc_SC', this.fb.control(this.detail?.detailDesc_SC));
   }
 
   parseDetail() {

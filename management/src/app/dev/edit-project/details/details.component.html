@@ -38,12 +38,12 @@
             <div class="form-group">
                 <label for="tag" class="form-label">Detail Name(English)</label>
                 <div class="input-group">
-                    <input id="tag" class="form-control" type="text" formControlName="detailName">
+                    <input id="tag" class="form-control" type="text" formControlName="detailName" id="detail-name-input">
                 </div>
             </div>
         </form>
     </div>
     <div class="modal-footer">
-        <button type="button" class="btn btn-outline-dark" (click)="addDetailClicked()">Add</button>
+        <button type="button" class="btn btn-outline-dark" (click)="addDetailClicked()" id="add-detail-modal-btn">Add</button>
     </div>
 </ng-template>

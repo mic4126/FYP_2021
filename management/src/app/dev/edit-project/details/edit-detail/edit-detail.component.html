@@ -28,10 +28,11 @@
     </div>
     <div class="row">
         <div class="col">
-            <button type="submit" class="btn btn-primary">Update</button>
+            <button type="submit" class="btn btn-primary" id="update-detail-btn">Update</button>
         </div>
         <div class="col ms-auto">
-            <button type="" class="btn btn-danger float-end" (click)="onDeleteClick()">Delete</button>
+            <button type="" class="btn btn-danger float-end" (click)="onDeleteClick()"
+                id="delete-detail-btn">Delete</button>
         </div>
     </div>
 </form>
@@ -51,8 +52,8 @@
             </thead>
             <tbody>
                 <tr *ngFor="let atch of attachments$|async">
-                    <td><a [href]="'/api/project/attachment/'+atch.attachmentId" target="_blank">
-                            {{atch.origFileName}}.{{atch.origExt}}</a></td>
+                    <td><a [href]="'/api/project/attachment/'+atch.attachmentId"
+                            target="_blank">{{atch.origFileName}}.{{atch.origExt}}</a></td>
                     <td><button class="btn btn-danger" (click)="onDeleteAttachmen(atch.attachmentId)">Delete</button>
                     </td>
                 </tr>
@@ -80,6 +81,6 @@
         </form>
     </div>
     <div class="modal-footer">
-        <button type="button" class="btn btn-outline-dark" (click)="onAddAttachmentClick()">Add</button>
+        <button type="button" class="btn btn-outline-dark" id="add-atch-btn" (click)="onAddAttachmentClick()">Add</button>
     </div>
 </ng-template>

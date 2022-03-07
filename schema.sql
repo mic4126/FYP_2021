@@ -14,12 +14,10 @@
 
 
 -- 傾印 airegistry_test 的資料庫結構
-DROP DATABASE IF EXISTS `airegistry_test`;
 CREATE DATABASE IF NOT EXISTS `airegistry_test` /*!40100 DEFAULT CHARACTER SET utf8mb4 COLLATE utf8mb4_unicode_ci */;
 USE `airegistry_test`;
 
 -- 傾印  資料表 airegistry_test.attachment 結構
-DROP TABLE IF EXISTS `attachment`;
 CREATE TABLE IF NOT EXISTS `attachment` (
   `projectID` int(10) DEFAULT NULL,
   `detailID` int(11) DEFAULT NULL,
@@ -38,7 +36,6 @@ CREATE TABLE IF NOT EXISTS `attachment` (
 -- 取消選取資料匯出。
 
 -- 傾印  資料表 airegistry_test.auditlog 結構
-DROP TABLE IF EXISTS `auditlog`;
 CREATE TABLE IF NOT EXISTS `auditlog` (
   `sequence` int(11) NOT NULL AUTO_INCREMENT,
   `query` text COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -51,7 +48,6 @@ CREATE TABLE IF NOT EXISTS `auditlog` (
 -- 取消選取資料匯出。
 
 -- 傾印  資料表 airegistry_test.detail 結構
-DROP TABLE IF EXISTS `detail`;
 CREATE TABLE IF NOT EXISTS `detail` (
   `projectID` int(10) NOT NULL,
   `detailID` int(11) NOT NULL AUTO_INCREMENT,
@@ -70,7 +66,6 @@ CREATE TABLE IF NOT EXISTS `detail` (
 -- 取消選取資料匯出。
 
 -- 傾印  資料表 airegistry_test.project 結構
-DROP TABLE IF EXISTS `project`;
 CREATE TABLE IF NOT EXISTS `project` (
   `projectID` int(10) NOT NULL AUTO_INCREMENT,
   `projectName` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -92,7 +87,6 @@ CREATE TABLE IF NOT EXISTS `project` (
 -- 取消選取資料匯出。
 
 -- 傾印  資料表 airegistry_test.project_user 結構
-DROP TABLE IF EXISTS `project_user`;
 CREATE TABLE IF NOT EXISTS `project_user` (
   `projectID` int(10) NOT NULL,
   `username` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -105,7 +99,6 @@ CREATE TABLE IF NOT EXISTS `project_user` (
 -- 取消選取資料匯出。
 
 -- 傾印  資料表 airegistry_test.tag 結構
-DROP TABLE IF EXISTS `tag`;
 CREATE TABLE IF NOT EXISTS `tag` (
   `projectID` int(10) NOT NULL,
   `tag` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -119,7 +112,6 @@ CREATE TABLE IF NOT EXISTS `tag` (
 -- 取消選取資料匯出。
 
 -- 傾印  資料表 airegistry_test.user 結構
-DROP TABLE IF EXISTS `user`;
 CREATE TABLE IF NOT EXISTS `user` (
   `username` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
   `firstName` varchar(255) COLLATE utf8mb4_unicode_ci NOT NULL,
@@ -135,6 +127,233 @@ CREATE TABLE IF NOT EXISTS `user` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
 -- 取消選取資料匯出。
+
+-- 傾印  觸發器 airegistry_test.AttachmentInsertTrigger 結構
+SET @OLDTMP_SQL_MODE=@@SQL_MODE, SQL_MODE='STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION';
+DELIMITER //
+CREATE TRIGGER IF NOT EXISTS AttachmentInsertTrigger BEFORE INSERT ON `Attachment`
+FOR EACH ROW
+BEGIN
+    DECLARE original_query text;
+    DECLARE orig_sourceIP VARCHAR(255);
+    DECLARE orig_user VARCHAR(255);
+    SET original_query = (SELECT info FROM INFORMATION_SCHEMA.PROCESSLIST WHERE id = CONNECTION_ID());
+    SET orig_sourceIP = (SELECT `host` FROM INFORMATION_SCHEMA.PROCESSLIST WHERE id = CONNECTION_ID());
+    SET orig_user = (SELECT `user` FROM INFORMATION_SCHEMA.PROCESSLIST WHERE id = CONNECTION_ID());
+    
+    INSERT INTO `auditlog`(`query`,TIMESTAMP,sourceIP,sourceAccount) VALUES (original_query,NOW(),orig_sourceIP,orig_user);
+END//
+DELIMITER ;
+SET SQL_MODE=@OLDTMP_SQL_MODE;
+
+-- 傾印  觸發器 airegistry_test.AttachmentUpdateTrigger 結構
+SET @OLDTMP_SQL_MODE=@@SQL_MODE, SQL_MODE='STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION';
+DELIMITER //
+CREATE TRIGGER IF NOT EXISTS AttachmentUpdateTrigger BEFORE UPDATE ON `Attachment`
+FOR EACH ROW
+BEGIN
+    DECLARE original_query text;
+    DECLARE orig_sourceIP VARCHAR(255);
+    DECLARE orig_user VARCHAR(255);
+    SET original_query = (SELECT info FROM INFORMATION_SCHEMA.PROCESSLIST WHERE id = CONNECTION_ID());
+    SET orig_sourceIP = (SELECT `host` FROM INFORMATION_SCHEMA.PROCESSLIST WHERE id = CONNECTION_ID());
+    SET orig_user = (SELECT `user` FROM INFORMATION_SCHEMA.PROCESSLIST WHERE id = CONNECTION_ID());    
+    INSERT INTO `auditlog`(`query`,TIMESTAMP,sourceIP,sourceAccount) VALUES (original_query,NOW(),orig_sourceIP,orig_user);
+END//
+DELIMITER ;
+SET SQL_MODE=@OLDTMP_SQL_MODE;
+
+-- 傾印  觸發器 airegistry_test.DetailInsertTrigger 結構
+SET @OLDTMP_SQL_MODE=@@SQL_MODE, SQL_MODE='STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION';
+DELIMITER //
+CREATE TRIGGER IF NOT EXISTS DetailInsertTrigger BEFORE INSERT ON `Detail`
+FOR EACH ROW
+BEGIN
+    DECLARE original_query text;
+    DECLARE orig_sourceIP VARCHAR(255);
+    DECLARE orig_user VARCHAR(255);
+    SET original_query = (SELECT info FROM INFORMATION_SCHEMA.PROCESSLIST WHERE id = CONNECTION_ID());
+    SET orig_sourceIP = (SELECT `host` FROM INFORMATION_SCHEMA.PROCESSLIST WHERE id = CONNECTION_ID());
+    SET orig_user = (SELECT `user` FROM INFORMATION_SCHEMA.PROCESSLIST WHERE id = CONNECTION_ID());
+    
+    INSERT INTO `auditlog`(`query`,TIMESTAMP,sourceIP,sourceAccount) VALUES (original_query,NOW(),orig_sourceIP,orig_user);
+END//
+DELIMITER ;
+SET SQL_MODE=@OLDTMP_SQL_MODE;
+
+-- 傾印  觸發器 airegistry_test.DetailUpdateTrigger 結構
+SET @OLDTMP_SQL_MODE=@@SQL_MODE, SQL_MODE='STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION';
+DELIMITER //
+CREATE TRIGGER IF NOT EXISTS DetailUpdateTrigger BEFORE UPDATE ON `Detail`
+FOR EACH ROW
+BEGIN
+    DECLARE original_query text;
+    DECLARE orig_sourceIP VARCHAR(255);
+    DECLARE orig_user VARCHAR(255);
+    SET original_query = (SELECT info FROM INFORMATION_SCHEMA.PROCESSLIST WHERE id = CONNECTION_ID());
+    SET orig_sourceIP = (SELECT `host` FROM INFORMATION_SCHEMA.PROCESSLIST WHERE id = CONNECTION_ID());
+    SET orig_user = (SELECT `user` FROM INFORMATION_SCHEMA.PROCESSLIST WHERE id = CONNECTION_ID());    
+    INSERT INTO `auditlog`(`query`,TIMESTAMP,sourceIP,sourceAccount) VALUES (original_query,NOW(),orig_sourceIP,orig_user);
+END//
+DELIMITER ;
+SET SQL_MODE=@OLDTMP_SQL_MODE;
+
+-- 傾印  觸發器 airegistry_test.ProjectInsertTrigger 結構
+SET @OLDTMP_SQL_MODE=@@SQL_MODE, SQL_MODE='STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION';
+DELIMITER //
+CREATE TRIGGER IF NOT EXISTS ProjectInsertTrigger BEFORE INSERT ON `Project`
+FOR EACH ROW
+BEGIN
+    DECLARE original_query text;
+    DECLARE orig_sourceIP VARCHAR(255);
+    DECLARE orig_user VARCHAR(255);
+    SET original_query = (SELECT info FROM INFORMATION_SCHEMA.PROCESSLIST WHERE id = CONNECTION_ID());
+    SET orig_sourceIP = (SELECT `host` FROM INFORMATION_SCHEMA.PROCESSLIST WHERE id = CONNECTION_ID());
+    SET orig_user = (SELECT `user` FROM INFORMATION_SCHEMA.PROCESSLIST WHERE id = CONNECTION_ID());
+    
+    INSERT INTO `auditlog`(`query`,TIMESTAMP,sourceIP,sourceAccount) VALUES (original_query,NOW(),orig_sourceIP,orig_user);
+END//
+DELIMITER ;
+SET SQL_MODE=@OLDTMP_SQL_MODE;
+
+-- 傾印  觸發器 airegistry_test.ProjectUpdateTrigger 結構
+SET @OLDTMP_SQL_MODE=@@SQL_MODE, SQL_MODE='STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION';
+DELIMITER //
+CREATE TRIGGER IF NOT EXISTS ProjectUpdateTrigger BEFORE UPDATE ON `Project`
+FOR EACH ROW
+BEGIN
+    DECLARE original_query text;
+    DECLARE orig_sourceIP VARCHAR(255);
+    DECLARE orig_user VARCHAR(255);
+    SET original_query = (SELECT info FROM INFORMATION_SCHEMA.PROCESSLIST WHERE id = CONNECTION_ID());
+    SET orig_sourceIP = (SELECT `host` FROM INFORMATION_SCHEMA.PROCESSLIST WHERE id = CONNECTION_ID());
+    SET orig_user = (SELECT `user` FROM INFORMATION_SCHEMA.PROCESSLIST WHERE id = CONNECTION_ID());    
+    INSERT INTO `auditlog`(`query`,TIMESTAMP,sourceIP,sourceAccount) VALUES (original_query,NOW(),orig_sourceIP,orig_user);
+END//
+DELIMITER ;
+SET SQL_MODE=@OLDTMP_SQL_MODE;
+
+-- 傾印  觸發器 airegistry_test.ProjectUserDeleteTrigger 結構
+SET @OLDTMP_SQL_MODE=@@SQL_MODE, SQL_MODE='STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION';
+DELIMITER //
+CREATE TRIGGER IF NOT EXISTS ProjectUserDeleteTrigger BEFORE DELETE ON `Project_User`
+FOR EACH ROW
+BEGIN
+    DECLARE original_query text;
+    DECLARE orig_sourceIP VARCHAR(255);
+    DECLARE orig_user VARCHAR(255);
+    SET original_query = (SELECT info FROM INFORMATION_SCHEMA.PROCESSLIST WHERE id = CONNECTION_ID());
+    SET orig_sourceIP = (SELECT `host` FROM INFORMATION_SCHEMA.PROCESSLIST WHERE id = CONNECTION_ID());
+    SET orig_user = (SELECT `user` FROM INFORMATION_SCHEMA.PROCESSLIST WHERE id = CONNECTION_ID());    
+    INSERT INTO `auditlog`(`query`,TIMESTAMP,sourceIP,sourceAccount) VALUES (original_query,NOW(),orig_sourceIP,orig_user);
+END//
+DELIMITER ;
+SET SQL_MODE=@OLDTMP_SQL_MODE;
+
+-- 傾印  觸發器 airegistry_test.ProjectUserInsertTrigger 結構
+SET @OLDTMP_SQL_MODE=@@SQL_MODE, SQL_MODE='STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION';
+DELIMITER //
+CREATE TRIGGER IF NOT EXISTS ProjectUserInsertTrigger BEFORE INSERT ON `Project_User`
+FOR EACH ROW
+BEGIN
+    DECLARE original_query text;
+    DECLARE orig_sourceIP VARCHAR(255);
+    DECLARE orig_user VARCHAR(255);
+    SET original_query = (SELECT info FROM INFORMATION_SCHEMA.PROCESSLIST WHERE id = CONNECTION_ID());
+    SET orig_sourceIP = (SELECT `host` FROM INFORMATION_SCHEMA.PROCESSLIST WHERE id = CONNECTION_ID());
+    SET orig_user = (SELECT `user` FROM INFORMATION_SCHEMA.PROCESSLIST WHERE id = CONNECTION_ID());
+    
+    INSERT INTO `auditlog`(`query`,TIMESTAMP,sourceIP,sourceAccount) VALUES (original_query,NOW(),orig_sourceIP,orig_user);
+END//
+DELIMITER ;
+SET SQL_MODE=@OLDTMP_SQL_MODE;
+
+-- 傾印  觸發器 airegistry_test.ProjectUserUpdateTrigger 結構
+SET @OLDTMP_SQL_MODE=@@SQL_MODE, SQL_MODE='STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION';
+DELIMITER //
+CREATE TRIGGER IF NOT EXISTS ProjectUserUpdateTrigger BEFORE UPDATE ON `Project_User`
+FOR EACH ROW
+BEGIN
+    DECLARE original_query text;
+    DECLARE orig_sourceIP VARCHAR(255);
+    DECLARE orig_user VARCHAR(255);
+    SET original_query = (SELECT info FROM INFORMATION_SCHEMA.PROCESSLIST WHERE id = CONNECTION_ID());
+    SET orig_sourceIP = (SELECT `host` FROM INFORMATION_SCHEMA.PROCESSLIST WHERE id = CONNECTION_ID());
+    SET orig_user = (SELECT `user` FROM INFORMATION_SCHEMA.PROCESSLIST WHERE id = CONNECTION_ID());    
+    INSERT INTO `auditlog`(`query`,TIMESTAMP,sourceIP,sourceAccount) VALUES (original_query,NOW(),orig_sourceIP,orig_user);
+END//
+DELIMITER ;
+SET SQL_MODE=@OLDTMP_SQL_MODE;
+
+-- 傾印  觸發器 airegistry_test.TagInsertTrigger 結構
+SET @OLDTMP_SQL_MODE=@@SQL_MODE, SQL_MODE='STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION';
+DELIMITER //
+CREATE TRIGGER IF NOT EXISTS TagInsertTrigger BEFORE INSERT ON `Tag`
+FOR EACH ROW
+BEGIN
+    DECLARE original_query text;
+    DECLARE orig_sourceIP VARCHAR(255);
+    DECLARE orig_user VARCHAR(255);
+    SET original_query = (SELECT info FROM INFORMATION_SCHEMA.PROCESSLIST WHERE id = CONNECTION_ID());
+    SET orig_sourceIP = (SELECT `host` FROM INFORMATION_SCHEMA.PROCESSLIST WHERE id = CONNECTION_ID());
+    SET orig_user = (SELECT `user` FROM INFORMATION_SCHEMA.PROCESSLIST WHERE id = CONNECTION_ID());
+    
+    INSERT INTO `auditlog`(`query`,TIMESTAMP,sourceIP,sourceAccount) VALUES (original_query,NOW(),orig_sourceIP,orig_user);
+END//
+DELIMITER ;
+SET SQL_MODE=@OLDTMP_SQL_MODE;
+
+-- 傾印  觸發器 airegistry_test.TagUpdateTrigger 結構
+SET @OLDTMP_SQL_MODE=@@SQL_MODE, SQL_MODE='STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION';
+DELIMITER //
+CREATE TRIGGER IF NOT EXISTS TagUpdateTrigger BEFORE DELETE ON `Tag`
+FOR EACH ROW
+BEGIN
+    DECLARE original_query text;
+    DECLARE orig_sourceIP VARCHAR(255);
+    DECLARE orig_user VARCHAR(255);
+    SET original_query = (SELECT info FROM INFORMATION_SCHEMA.PROCESSLIST WHERE id = CONNECTION_ID());
+    SET orig_sourceIP = (SELECT `host` FROM INFORMATION_SCHEMA.PROCESSLIST WHERE id = CONNECTION_ID());
+    SET orig_user = (SELECT `user` FROM INFORMATION_SCHEMA.PROCESSLIST WHERE id = CONNECTION_ID());    
+    INSERT INTO `auditlog`(`query`,TIMESTAMP,sourceIP,sourceAccount) VALUES (original_query,NOW(),orig_sourceIP,orig_user);
+END//
+DELIMITER ;
+SET SQL_MODE=@OLDTMP_SQL_MODE;
+
+-- 傾印  觸發器 airegistry_test.UserInsertTrigger1 結構
+SET @OLDTMP_SQL_MODE=@@SQL_MODE, SQL_MODE='STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION';
+DELIMITER //
+CREATE TRIGGER UserInsertTrigger1 BEFORE INSERT ON `user`
+FOR EACH ROW
+BEGIN
+    DECLARE original_query text;
+    DECLARE orig_sourceIP VARCHAR(255);
+    DECLARE orig_user VARCHAR(255);
+    SET original_query = (SELECT info FROM INFORMATION_SCHEMA.PROCESSLIST WHERE id = CONNECTION_ID());
+    SET orig_sourceIP = (SELECT `host` FROM INFORMATION_SCHEMA.PROCESSLIST WHERE id = CONNECTION_ID());
+    SET orig_user = (SELECT `user` FROM INFORMATION_SCHEMA.PROCESSLIST WHERE id = CONNECTION_ID());
+    
+    INSERT INTO `auditlog`(`query`,TIMESTAMP,sourceIP,sourceAccount) VALUES (original_query,NOW(),orig_sourceIP,orig_user);
+END//
+DELIMITER ;
+SET SQL_MODE=@OLDTMP_SQL_MODE;
+
+-- 傾印  觸發器 airegistry_test.UserUpdateTrigger 結構
+SET @OLDTMP_SQL_MODE=@@SQL_MODE, SQL_MODE='STRICT_TRANS_TABLES,ERROR_FOR_DIVISION_BY_ZERO,NO_AUTO_CREATE_USER,NO_ENGINE_SUBSTITUTION';
+DELIMITER //
+CREATE TRIGGER UserUpdateTrigger BEFORE UPDATE ON `user`
+FOR EACH ROW
+BEGIN
+    DECLARE original_query text;
+    DECLARE orig_sourceIP VARCHAR(255);
+    DECLARE orig_user VARCHAR(255);
+    SET original_query = (SELECT info FROM INFORMATION_SCHEMA.PROCESSLIST WHERE id = CONNECTION_ID());
+    SET orig_sourceIP = (SELECT `host` FROM INFORMATION_SCHEMA.PROCESSLIST WHERE id = CONNECTION_ID());
+    SET orig_user = (SELECT `user` FROM INFORMATION_SCHEMA.PROCESSLIST WHERE id = CONNECTION_ID());    
+    INSERT INTO `auditlog`(`query`,TIMESTAMP,sourceIP,sourceAccount) VALUES (original_query,NOW(),orig_sourceIP,orig_user);
+END//
+DELIMITER ;
+SET SQL_MODE=@OLDTMP_SQL_MODE;
 
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
 /*!40014 SET FOREIGN_KEY_CHECKS=IFNULL(@OLD_FOREIGN_KEY_CHECKS, 1) */;

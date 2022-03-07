@@ -26,7 +26,7 @@ public class ProjectServiceImpl implements ProjectService {
     ProjectDao projectDao;
 
     @Autowired
-    ProjectUserDao projectUserDao; 
+    ProjectUserDao projectUserDao;
 
     @Transactional(readOnly = true)
     @Override
@@ -70,7 +70,7 @@ public class ProjectServiceImpl implements ProjectService {
     @Override
     public void setContact(Contact contact) {
         projectDao.setContact(contact);
-    }    
+    }
 
     @Transactional(rollbackFor = Exception.class)
     @Override
@@ -114,13 +114,11 @@ public class ProjectServiceImpl implements ProjectService {
 
         if (Lang.TC.equals(lang)) {
             projectDao.setProjectNameTC(projectId, projectName);
-        }
-
-        if (Lang.SC.equals(lang)) {
+        } else if (Lang.SC.equals(lang)) {
             projectDao.setProjectNameSC(projectId, projectName);
+        } else{
+            projectDao.setProjectName(projectId, projectName);
         }
-
-        projectDao.setProjectName(projectId, projectName);
     }
 
     @Transactional
