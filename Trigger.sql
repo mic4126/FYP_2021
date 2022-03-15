@@ -212,3 +212,22 @@ BEGIN
 END;
 |
 DELIMITER ;
+
+DELIMITER |
+
+CREATE TRIGGER IF NOT EXISTS AttachmentProjectIDCheckTrigger BEFORE INSERT ON `attachment`
+FOR EACH ROW
+BEGIN
+	IF (NEW.detailID <> NULL) THEN
+		BEGIN
+			DECLARE detailsProjectID INT;
+			SET detailsProjectID = (SELECT projectId FROM detail WHERE detailId = NEW.detailId );
+			IF detailsProjectID <> NEW.projectId THEN
+				SIGNAL SQLSTATE VALUE '45001'
+				SET MESSAGE_TEXT = 'ProjectId checks failed';
+			END IF;
+		END;
+	END IF;
+END;
+|
+DELIMITER ;

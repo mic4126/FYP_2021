@@ -21,6 +21,17 @@ public class Project {
     @JsonProperty("detail")
     private List<Detail> details;
 
+    @JsonProperty("enabled")
+    private boolean enabled;
+
+    public boolean isEnabled() {
+        return enabled;
+    }
+
+    public void setEnabled(boolean enabled) {
+        this.enabled = enabled;
+    }
+
     public String getProjectName() {
         return projectName;
     }

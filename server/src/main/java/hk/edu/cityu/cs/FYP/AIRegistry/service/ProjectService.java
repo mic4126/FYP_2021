@@ -45,4 +45,10 @@ public interface ProjectService {
     public List<Project> getAllProject();
 
     public List<Project> getAllProject(Lang lang);
+
+    public void disableProject(int projectId);
+
+    public void enableProject(int projectId);
+
+    public boolean getProjectStatus(int projectId);
 }

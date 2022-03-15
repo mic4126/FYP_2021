@@ -151,4 +151,25 @@ public class ProjectController {
         return ResponseEntity.ok(projects);
     }
 
+    @IsProjectDeveloperOrAdmin
+    @GetMapping(path = "/{projectId}/status")
+    public ResponseEntity<?> getProjectStatus(@PathVariable int projectId) {
+        var status = projectService.getProjectStatus(projectId);
+        return ResponseEntity.ok(status);
+    }
+
+    @IsProjectDeveloperOrAdmin
+    @PutMapping(path = "/{projectId}/status/enable")
+    public ResponseEntity<?> enableProject(@PathVariable int projectId) {
+        projectService.enableProject(projectId);
+        return ResponseEntity.ok().build();
+    }
+
+    @IsProjectDeveloperOrAdmin
+    @PutMapping(path = "/{projectId}/status/disable")
+    public ResponseEntity<?> disableProject(@PathVariable int projectId) {
+        projectService.disableProject(projectId);
+        return ResponseEntity.ok().build();
+    }
+
 }

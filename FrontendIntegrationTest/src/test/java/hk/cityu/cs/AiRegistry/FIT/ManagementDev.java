@@ -592,6 +592,38 @@ public class ManagementDev extends BaseTest {
         assertThat(photoDelBtns).hasSize(2);
     }
 
+    @Test
+    public void enableDisableProjectTest(ChromeDriver driver) throws InterruptedException{
+        String username = "dev";
+        String password = "123";
+
+        Utils.login(username, password, driver);
+        
+        // Enter page
+        driver.findElement(By.xpath("//a[contains(text(),'測試測試')]")).click();
+        Thread.sleep(1000);
+
+        driver.findElement(By.id("project-status")).click();
+        Thread.sleep(1000);
+
+        driver.navigate().refresh();
+        Thread.sleep(1000);
+
+        var status = driver.findElement(By.id("project-status")).isSelected();
+        assertThat(status).isFalse();
+
+        driver.findElement(By.id("project-status")).click();
+        Thread.sleep(1000);
+
+        driver.navigate().refresh();
+        Thread.sleep(1000);
+
+        status = driver.findElement(By.id("project-status")).isSelected();
+        assertThat(status).isTrue();
+        
+
+    }
+
     @Nested
     class AddAttachmentTest {
 

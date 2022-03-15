@@ -248,10 +248,32 @@ public class ProjectMapperTest extends BaseMappertest {
     }
 
     @Test
-    void searchProjectTest(){
+    void searchProjectTest() {
         String query = "測試測試";
         var projectList = projectMapper.searchProject(query);
         assertThat(projectList).hasSizeGreaterThanOrEqualTo(1);
         assertThat(projectList).contains(15);
+    }
+
+    @Test
+    void getProjectStatusTest() {
+        var status = projectMapper.getProjectStatus(15);
+        assertThat(status).isTrue();
+    }
+
+    @Test
+    void enableProjectTest() {
+        int projectId = 15;
+        projectMapper.enableProject(projectId);
+        var status = projectMapper.getProjectStatus(projectId);
+        assertThat(status).isTrue();
+    }
+
+    @Test
+    void disableProjectTest() {
+        int projectId = 15;
+        projectMapper.disableProject(projectId);
+        var status = projectMapper.getProjectStatus(projectId);
+        assertThat(status).isFalse();
     }
 }

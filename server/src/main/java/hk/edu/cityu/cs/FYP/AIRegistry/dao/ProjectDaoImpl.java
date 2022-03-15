@@ -205,4 +205,26 @@ public class ProjectDaoImpl implements ProjectDao {
         return mapper.getProjectsTC();
     }
 
+    @Override
+    public void enableProject(int projectId) {
+        var session = sqlSessionFactory.openSession();
+        var mapper = session.getMapper(ProjectMapper.class);
+        mapper.enableProject(projectId);
+    }
+
+    @Override
+    public void disableProject(int projectId) {
+        var session = sqlSessionFactory.openSession();
+        var mapper = session.getMapper(ProjectMapper.class);
+        mapper.disableProject(projectId);
+    }
+
+    @Override
+    public boolean getProjectStatus(int projectId) {
+        var session = sqlSessionFactory.openSession();
+        var mapper = session.getMapper(ProjectMapper.class);
+        return mapper.getProjectStatus(projectId);
+        
+    }
+
 }

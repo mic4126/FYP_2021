@@ -236,6 +236,8 @@ INSERT INTO `user` (`username`, `firstName`, `lastName`, `userType`, `password`,
 	('dev6', 'admin', 'nimda', 'dev', '$2a$10$xA5VhIc4u9sl9Mmyqrpj6uX78npxUvTdegkM1uArGzYSczQc6mVX6', '', NULL, NULL, NULL, 'mic4126@gmail.com');
 /*!40000 ALTER TABLE `user` ENABLE KEYS */;
 
+UPDATE project SET `enabled` = 1;
+
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
 /*!40014 SET FOREIGN_KEY_CHECKS=IFNULL(@OLD_FOREIGN_KEY_CHECKS, 1) */;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;

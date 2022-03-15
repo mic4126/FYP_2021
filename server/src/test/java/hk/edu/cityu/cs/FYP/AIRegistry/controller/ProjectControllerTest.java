@@ -292,62 +292,79 @@ public class ProjectControllerTest extends BaseControllerTest {
     }
 
     @Test
-    void getAllProjectsTest() throws Exception{
+    void getAllProjectsTest() throws Exception {
         var requestBuilder = get("/project");
         var jsonContent = """
-        [{"projectId":15,"projectName":"測試測試","projectDesc":"Lorem_ipsum","contact":null,"detail":null},{"projectId":16,"projectName":"test1","projectDesc":null,"contact":null,"detail":null},{"projectId":18,"projectName":"test2","projectDesc":null,"contact":null,"detail":null},{"projectId":19,"projectName":"test5","projectDesc":null,"contact":null,"detail":null},{"projectId":20,"projectName":"test3","projectDesc":"test projectID 20 eng","contact":null,"detail":null},{"projectId":21,"projectName":"TESTPROJECT","projectDesc":null,"contact":null,"detail":null}]
-        """;
+                [{"projectId":15,"projectName":"測試測試","projectDesc":"Lorem_ipsum","contact":null,"detail":null},{"projectId":16,"projectName":"test1","projectDesc":null,"contact":null,"detail":null},{"projectId":18,"projectName":"test2","projectDesc":null,"contact":null,"detail":null},{"projectId":19,"projectName":"test5","projectDesc":null,"contact":null,"detail":null},{"projectId":20,"projectName":"test3","projectDesc":"test projectID 20 eng","contact":null,"detail":null},{"projectId":21,"projectName":"TESTPROJECT","projectDesc":null,"contact":null,"detail":null}]
+                """;
         mvc.perform(requestBuilder)
-        .andDo(print())
-        .andExpect(status().isOk())
-        .andExpect(content().json(jsonContent))
-        ;
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(content().json(jsonContent));
 
     }
 
     @Test
-    void getAllProjectsTest_ENG() throws Exception{
+    void getAllProjectsTest_ENG() throws Exception {
         var requestBuilder = get("/project");
         requestBuilder.param("lang", "ENG");
         var jsonContent = """
-        [{"projectId":15,"projectName":"測試測試","projectDesc":"Lorem_ipsum","contact":null,"detail":null},{"projectId":16,"projectName":"test1","projectDesc":null,"contact":null,"detail":null},{"projectId":18,"projectName":"test2","projectDesc":null,"contact":null,"detail":null},{"projectId":19,"projectName":"test5","projectDesc":null,"contact":null,"detail":null},{"projectId":20,"projectName":"test3","projectDesc":"test projectID 20 eng","contact":null,"detail":null},{"projectId":21,"projectName":"TESTPROJECT","projectDesc":null,"contact":null,"detail":null}]
-        """;
+                [{"projectId":15,"projectName":"測試測試","projectDesc":"Lorem_ipsum","contact":null,"detail":null},{"projectId":16,"projectName":"test1","projectDesc":null,"contact":null,"detail":null},{"projectId":18,"projectName":"test2","projectDesc":null,"contact":null,"detail":null},{"projectId":19,"projectName":"test5","projectDesc":null,"contact":null,"detail":null},{"projectId":20,"projectName":"test3","projectDesc":"test projectID 20 eng","contact":null,"detail":null},{"projectId":21,"projectName":"TESTPROJECT","projectDesc":null,"contact":null,"detail":null}]
+                """;
         mvc.perform(requestBuilder)
-        .andDo(print())
-        .andExpect(status().isOk())
-        .andExpect(content().json(jsonContent))
-        ;
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(content().json(jsonContent));
 
     }
 
     @Test
-    void getAllProjectsTest_TC() throws Exception{
+    void getAllProjectsTest_TC() throws Exception {
         var requestBuilder = get("/project");
         requestBuilder.param("lang", "TC");
         var jsonContent = """
-        [{"projectId":15,"projectName":"測試","projectDesc":"繁中測試","contact":null,"detail":null},{"projectId":16,"projectName":null,"projectDesc":null,"contact":null,"detail":null},{"projectId":18,"projectName":null,"projectDesc":null,"contact":null,"detail":null},{"projectId":19,"projectName":null,"projectDesc":null,"contact":null,"detail":null},{"projectId":20,"projectName":null,"projectDesc":"test projectID 20 tc","contact":null,"detail":null},{"projectId":21,"projectName":null,"projectDesc":null,"contact":null,"detail":null}]
-        """;
+                [{"projectId":15,"projectName":"測試","projectDesc":"繁中測試","contact":null,"detail":null},{"projectId":16,"projectName":null,"projectDesc":null,"contact":null,"detail":null},{"projectId":18,"projectName":null,"projectDesc":null,"contact":null,"detail":null},{"projectId":19,"projectName":null,"projectDesc":null,"contact":null,"detail":null},{"projectId":20,"projectName":null,"projectDesc":"test projectID 20 tc","contact":null,"detail":null},{"projectId":21,"projectName":null,"projectDesc":null,"contact":null,"detail":null}]
+                """;
         mvc.perform(requestBuilder)
-        .andDo(print())
-        .andExpect(status().isOk())
-        .andExpect(content().json(jsonContent))
-        ;
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(content().json(jsonContent));
 
     }
 
     @Test
-    void getAllProjectsTest_SC() throws Exception{
+    void getAllProjectsTest_SC() throws Exception {
         var requestBuilder = get("/project");
         requestBuilder.param("lang", "SC");
         var jsonContent = """
-        [{"projectId":15,"projectName":"測試測試","projectDesc":"簡中簡中簡中","contact":null,"detail":null},{"projectId":16,"projectName":null,"projectDesc":null,"contact":null,"detail":null},{"projectId":18,"projectName":null,"projectDesc":null,"contact":null,"detail":null},{"projectId":19,"projectName":null,"projectDesc":null,"contact":null,"detail":null},{"projectId":20,"projectName":null,"projectDesc":"test projectID 20 sc","contact":null,"detail":null},{"projectId":21,"projectName":null,"projectDesc":null,"contact":null,"detail":null}]
-        """;
+                [{"projectId":15,"projectName":"測試測試","projectDesc":"簡中簡中簡中","contact":null,"detail":null},{"projectId":16,"projectName":null,"projectDesc":null,"contact":null,"detail":null},{"projectId":18,"projectName":null,"projectDesc":null,"contact":null,"detail":null},{"projectId":19,"projectName":null,"projectDesc":null,"contact":null,"detail":null},{"projectId":20,"projectName":null,"projectDesc":"test projectID 20 sc","contact":null,"detail":null},{"projectId":21,"projectName":null,"projectDesc":null,"contact":null,"detail":null}]
+                """;
         mvc.perform(requestBuilder)
-        .andDo(print())
-        .andExpect(status().isOk())
-        .andExpect(content().json(jsonContent))
-        ;
+                .andDo(print())
+                .andExpect(status().isOk())
+                .andExpect(content().json(jsonContent));
 
+    }
+
+    @WithUserDetails("dev")
+    @Test
+    void getProjectStatusTest() throws Exception {
+        var requestBuilder = get("/project/15/status");
+        mvc.perform(requestBuilder).andExpect(status().isOk()).andDo(print());
+    }
+
+    @WithUserDetails("dev")
+    @Test
+    void enableProjectTest() throws Exception {
+        var requestBuilder = put("/project/15/status/enable");
+        mvc.perform(requestBuilder).andExpect(status().isOk()).andDo(print());
+    }
+
+    @WithUserDetails("dev")
+    @Test
+    void disableProjectTest() throws Exception {
+        var requestBuilder = put("/project/15/status/disable");
+        mvc.perform(requestBuilder).andExpect(status().isOk()).andDo(print());
     }
 
     private String ParamToString(Map<String, String> params) {

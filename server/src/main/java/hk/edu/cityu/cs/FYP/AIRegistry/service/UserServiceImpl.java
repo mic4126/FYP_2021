@@ -131,12 +131,14 @@ public class UserServiceImpl implements UserService, UserDetailsService {
     @Transactional(readOnly = true)
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        UserDetails userInfo;
+        try {
+            userInfo = getUserInfo(username);
+        } catch (NullPointerException e) {
+            throw new UsernameNotFoundException(username, e.getCause());
+        }
 
-        // var user = userDao.findUserByUserName(username);
-        // if (user == null) {
-        //     throw new UsernameNotFoundException("User not found exception");
-        // }
-        return getUserInfo(username);
+        return userInfo;
     }
 
     @Transactional(readOnly = true)
@@ -167,7 +169,7 @@ public class UserServiceImpl implements UserService, UserDetailsService {
 
     @Transactional
     @Override
-    public void useOldPasswordLogin(String username) {        
+    public void useOldPasswordLogin(String username) {
         userDao.setNewPasswordAsNull(username);
 
     }

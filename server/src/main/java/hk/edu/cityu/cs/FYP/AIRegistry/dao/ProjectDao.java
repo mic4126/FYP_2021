@@ -60,4 +60,9 @@ public interface ProjectDao {
 
     public List<Project> getProjectsTC();
 
+    public void enableProject(int projectId);
+
+    public void disableProject(int projectId);
+
+    public boolean getProjectStatus(int projectId);
 }

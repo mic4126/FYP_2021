@@ -254,4 +254,26 @@ public class ProjectDaoImplTest extends BaseTest {
         assertThat(projectList).hasSizeGreaterThanOrEqualTo(1);
         assertThat(projectList).contains(15);
     }
+
+    @Test
+    void getProjectStatusTest() {
+        var status = projectDaoImpl.getProjectStatus(15);
+        assertThat(status).isTrue();
+    }
+
+    @Test
+    void enableProjectTest() {
+        int projectId = 15;
+        projectDaoImpl.enableProject(projectId);
+        var status = projectDaoImpl.getProjectStatus(projectId);
+        assertThat(status).isTrue();
+    }
+
+    @Test
+    void disableProjectTest() {
+        int projectId = 15;
+        projectDaoImpl.disableProject(projectId);
+        var status = projectDaoImpl.getProjectStatus(projectId);
+        assertThat(status).isFalse();
+    }
 }

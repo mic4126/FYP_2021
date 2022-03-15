@@ -187,13 +187,13 @@ INSERT INTO `detail` (`projectID`, `detailID`, `detailName`, `detailDesc`, `deta
 -- 正在傾印表格  airegistry_test.project 的資料：~6 rows (近似值)
 DELETE FROM `project`;
 /*!40000 ALTER TABLE `project` DISABLE KEYS */;
-INSERT INTO `project` (`projectID`, `projectName`, `desc`, `email`, `phoneNumber`, `department`, `projectName_TC`, `projectName_SC`, `desc_TC`, `desc_SC`, `deleted`, `url`, `department_TC`, `department_SC`) VALUES
-	(15, '測試測試', 'Lorem_ipsum', 'ab.com@abc.com', '12345678', '321', '測試', '測試測試', '繁中測試', '簡中簡中簡中', NULL, 'example.com', '123', '456'),
-	(16, 'test1', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-	(18, 'test2', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-	(19, 'test5', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL),
-	(20, 'test3', 'test projectID 20 eng', NULL, NULL, NULL, NULL, NULL, 'test projectID 20 tc', 'test projectID 20 sc', NULL, NULL, NULL, NULL),
-	(21, 'TESTPROJECT', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL);
+INSERT INTO `project` (`projectID`, `projectName`, `desc`, `email`, `phoneNumber`, `department`, `projectName_TC`, `projectName_SC`, `desc_TC`, `desc_SC`, `deleted`, `url`, `department_TC`, `department_SC`,`enabled`) VALUES
+	(15, '測試測試', 'Lorem_ipsum', 'ab.com@abc.com', '12345678', '321', '測試', '測試測試', '繁中測試', '簡中簡中簡中', NULL, 'example.com', '123', '456',1),
+	(16, 'test1', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL,1),
+	(18, 'test2', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL,1),
+	(19, 'test5', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL,1),
+	(20, 'test3', 'test projectID 20 eng', NULL, NULL, NULL, NULL, NULL, 'test projectID 20 tc', 'test projectID 20 sc', NULL, NULL, NULL, NULL,1),
+	(21, 'TESTPROJECT', NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL, NULL,1);
 /*!40000 ALTER TABLE `project` ENABLE KEYS */;
 
 -- 正在傾印表格  airegistry_test.project_user 的資料：~11 rows (近似值)

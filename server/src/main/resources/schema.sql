@@ -83,6 +83,7 @@ CREATE TABLE IF NOT EXISTS `project` (
   `url` text COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `department_TC` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
   `department_SC` varchar(255) COLLATE utf8mb4_unicode_ci DEFAULT NULL,
+  `enabled` int(1) DEFAULT NULL,
   PRIMARY KEY (`projectID`)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 

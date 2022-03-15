@@ -304,4 +304,26 @@ public class ProjectServiceTest extends BaseTest {
             s.assertThat(project.getProjectDesc()).isEqualTo("簡中簡中簡中");
         });
     }
+
+    @Test
+    void getProjectStatusTest() {
+        var status = projectService.getProjectStatus(15);
+        assertThat(status).isTrue();
+    }
+
+    @Test
+    void enableProjectTest() {
+        int projectId = 15;
+        projectService.enableProject(projectId);
+        var status = projectDaoImpl.getProjectStatus(projectId);
+        assertThat(status).isTrue();
+    }
+
+    @Test
+    void disableProjectTest() {
+        int projectId = 15;
+        projectService.disableProject(projectId);
+        var status = projectDaoImpl.getProjectStatus(projectId);
+        assertThat(status).isFalse();
+    }
 }

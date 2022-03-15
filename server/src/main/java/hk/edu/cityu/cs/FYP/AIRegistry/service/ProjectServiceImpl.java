@@ -116,7 +116,7 @@ public class ProjectServiceImpl implements ProjectService {
             projectDao.setProjectNameTC(projectId, projectName);
         } else if (Lang.SC.equals(lang)) {
             projectDao.setProjectNameSC(projectId, projectName);
-        } else{
+        } else {
             projectDao.setProjectName(projectId, projectName);
         }
     }
@@ -178,15 +178,40 @@ public class ProjectServiceImpl implements ProjectService {
     @Transactional(readOnly = true)
     @Override
     public List<Project> getAllProject(Lang lang) {
+
+        List<Project> projects;
         if (Lang.TC.equals(lang)) {
-            return projectDao.getProjectsTC();
+            projects = projectDao.getProjectsTC();
         }
 
-        if (Lang.SC.equals(lang)) {
-            return projectDao.getProjectsSC();
+        else if (Lang.SC.equals(lang)) {
+            projects = projectDao.getProjectsSC();
         }
 
-        return projectDao.getProjects();
+        else {
+            projects = projectDao.getProjects();
+        }
+        return projects;
+    }
+
+    @Transactional
+    @Override
+    public void disableProject(int projectId) {
+        projectDao.disableProject(projectId);
+        
+    }
+    @Transactional
+    @Override
+    public void enableProject(int projectId) {
+        projectDao.enableProject(projectId);
+        
+    }
+
+    @Transactional(readOnly = true)
+    @Override
+    public boolean getProjectStatus(int projectId) {
+        var status = projectDao.getProjectStatus(projectId);
+        return status;
     }
 
 }

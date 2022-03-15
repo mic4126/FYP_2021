@@ -71,6 +71,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 "/project/{projectId}/contact", "/project/contact")
                 .permitAll()
                 .mvcMatchers(HttpMethod.GET, "/project").permitAll()
+                .mvcMatchers("/project/{projectId}/status").authenticated()
+                .mvcMatchers("/project/{projectId}/status/**").authenticated()
                 .mvcMatchers("/project/**").authenticated()
                 // Search Controller
                 .mvcMatchers("/search").permitAll()
