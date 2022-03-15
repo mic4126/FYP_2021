@@ -4,7 +4,6 @@ import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.util.MultiValueMap;
@@ -31,9 +30,7 @@ import hk.edu.cityu.cs.FYP.AIRegistry.service.ProjectService;
 public class ProjectController {
 
     @Autowired
-    ProjectService projectService;
-
-    private static final String charset = " ;charset=UTF-8";
+    ProjectService projectService;    
 
     @PreAuthorize("hasRole('admin')")
     @PostMapping(path = "")

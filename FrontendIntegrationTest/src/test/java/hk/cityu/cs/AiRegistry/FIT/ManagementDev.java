@@ -1,8 +1,8 @@
 package hk.cityu.cs.AiRegistry.FIT;
 
 import static hk.cityu.cs.AiRegistry.FIT.Utils.clearAndEnterString;
-import static hk.cityu.cs.AiRegistry.FIT.Utils.scrollToElement;
 import static hk.cityu.cs.AiRegistry.FIT.Utils.genTempFile;
+import static hk.cityu.cs.AiRegistry.FIT.Utils.scrollToElement;
 import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.SoftAssertions.assertSoftly;
 
@@ -13,7 +13,6 @@ import java.nio.file.Path;
 import java.time.Duration;
 import java.util.HashMap;
 
-import org.checkerframework.checker.units.qual.Temperature;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
 import org.junit.jupiter.api.Test;

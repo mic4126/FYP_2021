@@ -33,11 +33,5 @@ public class TagServiceImpl implements TagService{
         tagDao.deleteTag(tag);    
     }
 
-    @Transactional
-    @Override
-    public void sortTag(int projectId, List<String> tagList) {
-        throw new RuntimeException("Not implemented");
-        
-    }
     
 }

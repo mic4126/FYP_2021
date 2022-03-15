@@ -12,6 +12,4 @@ public interface TagService {
 
     public void deleteTag(Tag tag);
 
-    public void sortTag(int projectId, List<String> tagList);
-
 }

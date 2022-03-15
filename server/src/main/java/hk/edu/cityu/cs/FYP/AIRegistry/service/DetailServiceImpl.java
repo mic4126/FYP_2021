@@ -7,7 +7,6 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import hk.edu.cityu.cs.FYP.AIRegistry.dao.DetailDao;
-import hk.edu.cityu.cs.FYP.AIRegistry.model.AttachmentUpload;
 import hk.edu.cityu.cs.FYP.AIRegistry.model.Detail;
 import hk.edu.cityu.cs.FYP.AIRegistry.model.Lang;
 
@@ -47,17 +46,6 @@ public class DetailServiceImpl implements DetailService {
         detailDao.setDetailDesc(detailId, desc);
     }
 
-    @Transactional
-    @Override
-    public void addAttachment(int detailId, AttachmentUpload attachment) {
-        throw new RuntimeException("Not implemented");
-    }
-
-    @Override
-    public void deleteAttachment(int detailId, String Attachment) {
-        throw new RuntimeException("Not implemented");
-
-    }
 
     @Transactional(readOnly = true)
     @Override

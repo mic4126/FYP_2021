@@ -20,15 +20,11 @@ import org.springframework.security.test.context.support.WithUserDetails;
 import org.springframework.test.web.servlet.MockMvc;
 
 import hk.edu.cityu.cs.FYP.AIRegistry.service.EmailService;
-import hk.edu.cityu.cs.FYP.AIRegistry.service.UserService;
 
 public class UserControllerTest extends BaseControllerTest {
 
     @Autowired
     private MockMvc mvc;
-
-    @Autowired
-    private UserService userService;
 
     @MockBean
     private EmailService emailService;

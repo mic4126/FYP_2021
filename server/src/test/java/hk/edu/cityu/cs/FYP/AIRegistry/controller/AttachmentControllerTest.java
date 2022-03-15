@@ -1,11 +1,9 @@
 package hk.edu.cityu.cs.FYP.AIRegistry.controller;
 
-import static org.assertj.core.api.Assertions.assertThat;
 import static org.assertj.core.api.SoftAssertions.assertSoftly;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.multipart;
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
 import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.content;
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
@@ -15,8 +13,6 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.charset.StandardCharsets;
 
-import org.assertj.core.api.SoftAssertions;
-import org.junit.jupiter.api.AfterAll;
 import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Nested;
@@ -30,7 +26,6 @@ import org.springframework.web.multipart.MultipartFile;
 
 import hk.edu.cityu.cs.FYP.AIRegistry.dao.AttachmentDao;
 import hk.edu.cityu.cs.FYP.AIRegistry.model.AttachmentUpload;
-import hk.edu.cityu.cs.FYP.AIRegistry.service.AttachmentService;
 
 public class AttachmentControllerTest extends BaseControllerTest {
     @Autowired
@@ -38,9 +33,6 @@ public class AttachmentControllerTest extends BaseControllerTest {
 
     @Autowired
     private AttachmentDao attachmentDao;
-
-    @Autowired
-    private AttachmentService attachmentService;
 
     private static String STORAGEBASEDIRECTORY_STATIC;
 

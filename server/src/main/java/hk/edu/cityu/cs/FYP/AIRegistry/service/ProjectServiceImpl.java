@@ -10,7 +10,6 @@ import hk.edu.cityu.cs.FYP.AIRegistry.Exception.AdminCannotAddToProjectException
 import hk.edu.cityu.cs.FYP.AIRegistry.dao.ProjectDao;
 import hk.edu.cityu.cs.FYP.AIRegistry.dao.ProjectUserDao;
 import hk.edu.cityu.cs.FYP.AIRegistry.dao.UserDao;
-import hk.edu.cityu.cs.FYP.AIRegistry.model.AttachmentUpload;
 import hk.edu.cityu.cs.FYP.AIRegistry.model.Contact;
 import hk.edu.cityu.cs.FYP.AIRegistry.model.Lang;
 import hk.edu.cityu.cs.FYP.AIRegistry.model.Project;
@@ -121,19 +120,7 @@ public class ProjectServiceImpl implements ProjectService {
         }
     }
 
-    @Transactional
-    @Override
-    public void addPhoto(int projectId, AttachmentUpload attachment) {
-        throw new RuntimeException("Not Implemented");
-
-    }
-
-    @Transactional
-    @Override
-    public void deletePhoto(int projectId, String attachmentID) {
-        throw new RuntimeException("Not Implemented");
-
-    }
+  
 
     @Transactional(readOnly = true)
     @Override

@@ -2,7 +2,6 @@ package hk.edu.cityu.cs.FYP.AIRegistry.service;
 
 import java.util.List;
 
-import hk.edu.cityu.cs.FYP.AIRegistry.model.AttachmentUpload;
 import hk.edu.cityu.cs.FYP.AIRegistry.model.Contact;
 import hk.edu.cityu.cs.FYP.AIRegistry.model.Lang;
 import hk.edu.cityu.cs.FYP.AIRegistry.model.Project;
@@ -29,10 +28,6 @@ public interface ProjectService {
     public String getProjectName(int projectId, Lang lang);
 
     public void setProjectName(int projectId, String projectName, Lang lang);
-
-    public void addPhoto(int projectId, AttachmentUpload attachment);
-
-    public void deletePhoto(int projectId, String attachmentID);
 
     public Project getProject(int projectId, Lang lang);
 
