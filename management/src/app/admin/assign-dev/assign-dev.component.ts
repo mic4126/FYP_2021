@@ -1,7 +1,10 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, OnInit } from '@angular/core';
 import { Observable } from 'rxjs';
+import { Notice, NOTICE_TYPE_ENUM } from 'src/app/model/notice.model';
 import { Project } from 'src/app/model/Project.model';
 import { UserInfo } from 'src/app/model/UserInfo.model';
+import { NoticeService } from 'src/app/services/notice.service';
 import { ProjectService } from 'src/app/services/project.service';
 import { UserService } from 'src/app/services/user.service';
 
@@ -18,7 +21,7 @@ export class AssignDevComponent implements OnInit {
   projectDev: UserInfo[] = [];
   devs$: Observable<UserInfo[]> | null = null;
 
-  constructor(private projectService: ProjectService, private userService: UserService) {
+  constructor(private projectService: ProjectService, private userService: UserService, private noticeService: NoticeService) {
     this.projects$ = this.projectService.getAllProject();
   }
 
@@ -47,8 +50,10 @@ export class AssignDevComponent implements OnInit {
     console.log($event);
     const user: UserInfo = $event
     if (this.selectProjectId) {
-      this.projectService.addDevToProject(this.selectProjectId, user.username).subscribe(() => { }, () => {
-        this.getProjectDevs();
+      this.projectService.addDevToProject(this.selectProjectId, user.username).subscribe({
+        error: (e: HttpErrorResponse) => {
+          this.getProjectDevs()        
+        }
       })
 
     }
@@ -58,9 +63,12 @@ export class AssignDevComponent implements OnInit {
     console.log($event);
     const user: UserInfo = <UserInfo>$event.value;
     if (this.selectProjectId) {
-      this.projectService.deleteDevFromProject(this.selectProjectId, user.username).subscribe(() => { }, () => {
-        this.getProjectDevs();
-      })
+      this.projectService.deleteDevFromProject(this.selectProjectId, user.username)
+        .subscribe({
+          error: () => {
+            this.getProjectDevs();
+          }
+        })
     }
   }
 

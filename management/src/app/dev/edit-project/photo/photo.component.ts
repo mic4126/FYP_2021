@@ -4,6 +4,7 @@ import { NgbModal, NgbModalOptions, NgbModalRef } from '@ng-bootstrap/ng-bootstr
 import { Observable } from 'rxjs';
 import { Attachment } from 'src/app/model/Attachment.model';
 import { AttachmentService } from 'src/app/services/attachment.service';
+import { NoticeService } from 'src/app/services/notice.service';
 
 @Component({
   selector: 'app-photo',
@@ -20,7 +21,9 @@ export class PhotoComponent implements OnInit {
 
   addPhotoModalRef: NgbModalRef | null = null;
 
-  constructor(private attachmentService: AttachmentService, private modalService: NgbModal) { }
+  constructor(private attachmentService: AttachmentService,
+    private modalService: NgbModal,
+    private ns: NoticeService) { }
 
   ngOnInit(): void {
     this.getPhotos();
@@ -31,9 +34,17 @@ export class PhotoComponent implements OnInit {
   }
 
   deletePhoto(attachmentId: number) {
-    this.attachmentService.deleteAttachment(attachmentId).subscribe(() => {
-      this.getPhotos()
-    })
+    this.attachmentService.deleteAttachment(attachmentId).subscribe(
+      {
+        next: () => {
+          this.getPhotos()
+          this.ns.success("Photo deleted.")
+        },
+        error: () => {
+          this.getPhotos()
+          this.ns.error("Photo failed to delete.")
+        }
+      })
   }
 
   onFileChange(file: FileList | null) {
@@ -50,10 +61,17 @@ export class PhotoComponent implements OnInit {
   }
 
   onAddPhotoClick() {
-    this.attachmentService.addProjectAttachment(this.projectId, this.uploadPhoto).subscribe(() => {
-      this.getPhotos();
-      this.addPhotoModalRef?.close()
-    })
+    this.attachmentService.addProjectAttachment(this.projectId, this.uploadPhoto)
+      .subscribe({
+        next: () => {
+          this.getPhotos();
+          this.addPhotoModalRef?.close()
+          this.ns.success("Photo added successfully.")
+        },
+        error: () => {
+          this.ns.success("Photo failed to add. Please try again.")
+        }
+      })
   }
 
 

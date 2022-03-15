@@ -3,6 +3,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { Project } from 'src/app/model/Project.model';
 import { Tag } from 'src/app/model/Tag.model';
+import { NoticeService } from 'src/app/services/notice.service';
 import { ProjectService } from 'src/app/services/project.service';
 
 @Component({
@@ -19,13 +20,16 @@ export class EditTagComponent implements OnInit {
 
   addTagForm: FormGroup
 
-  constructor(private projectService: ProjectService, private modalService: NgbModal, private fb: FormBuilder) {
+  constructor(private projectService: ProjectService,
+    private modalService: NgbModal, private fb: FormBuilder,
+    private ns: NoticeService) {
     this.addTagForm = this.fb.group({
       tag: ['', [Validators.required]],
       tagTC: ['', [Validators.required]],
       tagSC: ['', [Validators.required]],
       projectId: ['', [Validators.required]]
     })
+
   }
 
   ngOnInit(): void {
@@ -37,11 +41,15 @@ export class EditTagComponent implements OnInit {
   }
 
   addTag() {
-    const tag:Tag = this.addTagForm.value;
+    if (!this.addTagForm.valid) {
+      return
+    }
+    const tag: Tag = this.addTagForm.value;
     console.log(tag);
     this.projectService.addTag(tag).subscribe(() => {
       this.addTagModelRef?.close();
       this.getTags()
+      this.ns.success("Tag added");
     })
   }
 
@@ -50,11 +58,22 @@ export class EditTagComponent implements OnInit {
     this.addTagForm.controls['projectId'].setValue(this.projectId);
   }
 
-  deleteTag(tag:Tag){
+  deleteTag(tag: Tag) {
     console.log(tag);
-    this.projectService.deleteTag(tag).subscribe(() =>{
-      this.getTags();
-    })
+    this.projectService.deleteTag(tag).subscribe(
+      {
+        next: () => {
+          this.getTags();
+          this.ns.success("Tag deleted.");
+        },
+        error: () => {
+          this.ns.success("Tag failed to deleted.");
+          this.getTags();
+        }
+      }
+    )
   }
+
+
 
 }

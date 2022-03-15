@@ -3,6 +3,9 @@
         Contact
     </h3>
     <div class="card-body">
+        <div class="alert alert-danger" *ngIf="contactForm.hasError('email') && contactForm.touched">
+            All field is required
+        </div>
         <form [formGroup]="contactForm" (ngSubmit)="onSubmit()">
             <div class="input-group mb-3">
                 <span class="input-group-text" id="">Email</span>

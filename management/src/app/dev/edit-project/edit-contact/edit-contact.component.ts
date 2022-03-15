@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Contact } from 'src/app/model/Contact.model';
+import { NoticeService } from 'src/app/services/notice.service';
 import { ProjectService } from 'src/app/services/project.service';
 
 @Component({
@@ -13,7 +14,10 @@ export class EditContactComponent implements OnInit {
   @Input() projectId: number = -1;
   contactForm: FormGroup;
 
-  constructor(private fb: FormBuilder, private projectService: ProjectService) {
+  constructor(private fb: FormBuilder,
+    private projectService: ProjectService,
+    private ns: NoticeService
+  ) {
     this.contactForm = fb.group({
       'email': ['', [Validators.email]],
       'department': ['', []],
@@ -42,6 +46,7 @@ export class EditContactComponent implements OnInit {
     const contact: Contact = this.contactForm.value
     this.projectService.setContact(contact).subscribe(() => {
       console.log("Contact updated");
+      this.ns.success("Contact updated");
     })
 
   }

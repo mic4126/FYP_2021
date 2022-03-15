@@ -7,7 +7,7 @@ import { AppComponent } from './app.component';
 import { LoginComponent } from './login/login.component';
 import { IndexComponent } from './index/index.component';
 import { JwtModule } from '@auth0/angular-jwt';
-import { HttpClientModule } from '@angular/common/http';
+import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ForgetPasswordComponent } from './forget-password/forget-password.component';
 import { HomeComponent } from './home/home.component';
 import { HomeRoutingModule } from './home/home-routing.module';
@@ -29,6 +29,9 @@ import { EditDetailComponent } from './dev/edit-project/details/edit-detail/edit
 import { PhotoComponent } from './dev/edit-project/photo/photo.component';
 import { ChangeUserInfoComponent } from './common/change-user-info/change-user-info.component';
 import { ChangePasswordComponent } from './common/change-password/change-password.component';
+import { NoticeComponent } from './common/notice/notice.component';
+import { ErrorInterceptor } from './interceptor/error.interceptor';
+import { ProjectStatusComponent } from './dev/edit-project/project-status/project-status.component';
 
 export function jwtGetter() {
   return localStorage.getItem("jwt");
@@ -55,14 +58,16 @@ export function jwtGetter() {
     EditDetailComponent,
     PhotoComponent,
     ChangeUserInfoComponent,
-    ChangePasswordComponent
+    ChangePasswordComponent,
+    NoticeComponent,
+    ProjectStatusComponent
   ],
   imports: [
     BrowserModule,
     ReactiveFormsModule,
     HttpClientModule,
     HomeModule,
-    NgSelectModule, 
+    NgSelectModule,
     FormsModule,
     JwtModule.forRoot({
       config: {
@@ -77,7 +82,11 @@ export function jwtGetter() {
     AppRoutingModule,
     NgbModule,
   ],
-  providers: [],
+  providers: [{
+    provide: HTTP_INTERCEPTORS,
+    useClass: ErrorInterceptor,
+    multi: true
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

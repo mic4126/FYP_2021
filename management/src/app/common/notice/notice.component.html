@@ -1,0 +1,7 @@
+<div *ngFor="let n of notices" [ngClass]="getCSS(n)">
+    <a class="btn-close mx-2" (click)="removeNotice(n)">
+    </a>
+    <div class="mx-auto text-center">
+        {{n.message}}
+    </div>
+</div>

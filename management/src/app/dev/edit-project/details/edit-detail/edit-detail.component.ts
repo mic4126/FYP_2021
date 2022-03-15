@@ -6,6 +6,7 @@ import { Attachment } from 'src/app/model/Attachment.model';
 import { Detail } from 'src/app/model/Detail.model';
 import { AttachmentService } from 'src/app/services/attachment.service';
 import { DetailService } from 'src/app/services/detail.service';
+import { NoticeService } from 'src/app/services/notice.service';
 
 @Component({
   selector: 'app-edit-detail',
@@ -27,9 +28,13 @@ export class EditDetailComponent implements OnInit, OnChanges {
 
   attachments$: Observable<Attachment[]> = new Observable<Attachment[]>();
 
-  constructor(private detailService: DetailService, private fb: FormBuilder,
-    private accrodionService: NgbAccordion, private modalService: NgbModal,
-    private attachmentService: AttachmentService) {
+  constructor(private detailService: DetailService,
+    private fb: FormBuilder,
+    private accrodionService: NgbAccordion,
+    private modalService: NgbModal,
+    private attachmentService: AttachmentService,
+    private ns: NoticeService
+  ) {
     this.addAttachmentForm = fb.group({ file: ['', [Validators.required]] })
   }
 
@@ -108,9 +113,15 @@ export class EditDetailComponent implements OnInit, OnChanges {
     this.addAttachmentModalRef = this.modalService.open(content)
   }
 
-  onDeleteAttachmen(attachmentId:number){
-    this.attachmentService.deleteAttachment(attachmentId).subscribe(()=>{
-      this.getDetailAttachments()
+  onDeleteAttachmen(attachmentId: number) {
+    this.attachmentService.deleteAttachment(attachmentId).subscribe({
+      next: () => {
+        this.getDetailAttachments()
+        this.ns.success("Attachment deleted.")
+      },
+      error: () =>{
+        this.ns.error("Attachment failed to deleted.")
+      }
     })
   }
 

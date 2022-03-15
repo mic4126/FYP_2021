@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { UserInfo } from 'src/app/model/UserInfo.model';
 import { AuthService } from 'src/app/services/auth.service';
+import { NoticeService } from 'src/app/services/notice.service';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -13,13 +14,16 @@ export class ChangeUserInfoComponent implements OnInit {
 
   userInfo: UserInfo = new Object() as UserInfo;
   changeUserInfoForm: FormGroup;
-  constructor(private userService: UserService, private authService: AuthService, private fb: FormBuilder) {
+  constructor(private userService: UserService,
+    private authService: AuthService,
+    private fb: FormBuilder,
+    private ns: NoticeService) {
     this.changeUserInfoForm = fb.group({
       "username": ['', []],
       "email": ['', [Validators.required, Validators.email]],
       "firstName": ['', [Validators.required]],
       "lastName": ['', [Validators.required]],
-      "password":['',[Validators.required]]
+      "password": ['', [Validators.required]]
     })
     this.changeUserInfoForm.controls["username"].disable();
   }
@@ -42,8 +46,17 @@ export class ChangeUserInfoComponent implements OnInit {
     }
     this.changeUserInfoForm.controls["username"].enable();
     const newUserInfo: UserInfo = this.changeUserInfoForm.value
-    this.userService.updateUserInfo(newUserInfo.username, newUserInfo).subscribe(
-      () => { this.setUserInfo() }
+    this.userService.updateUserInfo(newUserInfo.username, newUserInfo).subscribe({
+      next: () => {
+        this.setUserInfo()
+        this.ns.success("User info updated.")
+      },
+      error: () => {
+        // this.setUserInfo()
+        this.ns.error("User info failed to update.")
+      }
+
+    }
     )
   }
 

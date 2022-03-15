@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
+import { NoticeService } from 'src/app/services/notice.service';
 import { UserService } from 'src/app/services/user.service';
 
 @Component({
@@ -17,7 +18,9 @@ export class ChangePasswordComponent implements OnInit {
     newPasswordCheck: new FormControl('', [Validators.required])
   })
 
-  constructor(private authService: AuthService, private userService: UserService) { }
+  constructor(private authService: AuthService,
+    private userService: UserService,
+    private ns: NoticeService) { }
 
   ngOnInit(): void {
     this.changePasswordForm.get('username')?.setValue(this.authService.getUserInfo().username)
@@ -27,8 +30,14 @@ export class ChangePasswordComponent implements OnInit {
     if (!this.changePasswordForm.valid) {
       return
     }
-    this.userService.changeUserPassword(this.authService.getUserInfo().username, this.changePasswordForm.value).subscribe(() => {
-      this.authService.logout()
+    this.userService.changeUserPassword(this.authService.getUserInfo().username, this.changePasswordForm.value).subscribe({
+      next: () => {
+        this.authService.logout()
+        this.ns.success("Password updated")
+      },
+      error: () => {
+        this.ns.error("Password failed to update")
+      }
     })
   }
 

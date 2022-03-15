@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Observable } from 'rxjs';
 import { UserInfo } from 'src/app/model/UserInfo.model';
+import { NoticeService } from 'src/app/services/notice.service';
 import { ProjectService } from 'src/app/services/project.service';
 import { UserService } from 'src/app/services/user.service';
 
@@ -16,7 +17,10 @@ export class CreateProjectComponent implements OnInit {
   selectedDevs = [];
   createProjectForm: FormGroup
 
-  constructor(private userService: UserService, private projectService: ProjectService, private fb: FormBuilder) {
+  constructor(private userService: UserService,
+    private projectService: ProjectService,
+    private fb: FormBuilder,
+    private ns: NoticeService) {
     this.createProjectForm = fb.group({
       "projectName": ['', [Validators.required]]
     })
@@ -33,11 +37,19 @@ export class CreateProjectComponent implements OnInit {
     console.log(this.selectedDevs);
 
     if (this.createProjectForm.valid && this.selectedDevs.length > 0) {
-      this.projectService.createProject(projectName, this.selectedDevs).subscribe( (projectid) =>{
-        console.log("PRojectID:"+projectid);
-        this.createProjectForm.reset();
-        this.selectedDevs = [];
-      })
+      this.projectService.createProject(projectName, this.selectedDevs).subscribe(
+        {
+          next: (projectid) => {
+            console.log("ProjectID:" + projectid);
+            this.createProjectForm.reset();
+            this.selectedDevs = [];
+            this.ns.success("New project created.")
+          },
+          error: (e: any) => {
+            this.ns.error("Failed to create project.")
+          }
+
+        })
     }
 
   }

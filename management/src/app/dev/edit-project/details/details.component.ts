@@ -4,6 +4,7 @@ import { NgbModal, NgbModalRef } from '@ng-bootstrap/ng-bootstrap';
 import { Observable } from 'rxjs';
 import { Detail } from 'src/app/model/Detail.model';
 import { DetailService } from 'src/app/services/detail.service';
+import { NoticeService } from 'src/app/services/notice.service';
 import { ProjectService } from 'src/app/services/project.service';
 
 @Component({
@@ -19,7 +20,10 @@ export class DetailsComponent implements OnInit {
 
   addDetailForm: FormGroup = new FormGroup({});
 
-  constructor(private projectService: ProjectService, private detailService: DetailService, private modalService: NgbModal) {
+  constructor(private projectService: ProjectService,
+    private detailService: DetailService,
+    private modalService: NgbModal,
+    private ns: NoticeService) {
 
   }
 
@@ -39,6 +43,7 @@ export class DetailsComponent implements OnInit {
     this.detailService.addDetail(newDetail.projectId, newDetail.detailName).subscribe(() => {
       this.getNewDetails();
       this.addDetailModalRef?.close()
+      this.ns.success("New detail added.");
     })
 
   }

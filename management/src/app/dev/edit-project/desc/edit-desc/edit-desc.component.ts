@@ -1,6 +1,7 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup } from '@angular/forms';
 import { LANG } from 'src/app/model/Lang';
+import { NoticeService } from 'src/app/services/notice.service';
 import { ProjectService } from 'src/app/services/project.service';
 import { LanguageServiceMode } from 'typescript';
 
@@ -16,7 +17,9 @@ export class EditDescComponent implements OnInit {
   descFormGroup: FormGroup;
   descTextArea: FormControl;
 
-  constructor(private fb: FormBuilder, private projectService: ProjectService) {
+  constructor(private fb: FormBuilder,
+    private projectService: ProjectService,
+    private ns: NoticeService) {
     this.descFormGroup = fb.group({
       "descTextArea": ['', []]
     })
@@ -24,18 +27,28 @@ export class EditDescComponent implements OnInit {
   }
 
   ngOnInit(): void {
+    this.setDescFromDB();
+
+  }
+
+  private setDescFromDB() {
     this.projectService.getProjectDesc(this.projectId, this.lang).subscribe((resp) => {
       this.descTextArea.setValue(resp);
-    })
-
+    });
   }
 
   onDescSubmit() {
     if (this.descFormGroup.dirty) {
       const desc = <string>this.descTextArea.value
-      this.projectService.setProjectDesc(this.projectId,this.lang, desc).subscribe( () =>{
-        console.log("Success updated "+  this.lang +" description");
-        
+      this.projectService.setProjectDesc(this.projectId, this.lang, desc).subscribe({
+        next: () => {
+          console.log("Success updated " + this.lang + " description");
+          this.ns.success("Description updated.")
+        },
+        error: () => {
+          this.ns.error("Description failed to update.");
+          this.setDescFromDB();
+        }
       })
     }
   }

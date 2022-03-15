@@ -1,31 +1,44 @@
 import { Injectable } from '@angular/core';
-import { HttpClient, HttpResponse } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse, HttpResponse } from '@angular/common/http';
 import * as Globals from 'src/app/globals'
 import { JwtHelperService } from '@auth0/angular-jwt';
 import { tap } from 'rxjs';
 import { shareReplay } from 'rxjs/operators';
 import { JWTUserInfo } from 'src/app/model/UserInfo.model';
 import { Router } from '@angular/router';
+import { NoticeService } from './notice.service';
+import { Notice, NOTICE_TYPE_ENUM } from '../model/notice.model';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  constructor(private http: HttpClient, private jwtHelper: JwtHelperService, private router: Router) { }
+  constructor(private http: HttpClient, private jwtHelper: JwtHelperService, private router: Router, private noticeService: NoticeService) { }
 
   login(username: string, password: string) {
     console.log(`Tring to login as username:${username}`);
 
     return this.http.post(`${Globals.API_ROOT}/login`, { username: username, password: password }, { 'responseType': 'text' }).pipe(
-      // tap(console.log),
+      tap(console.log),
       tap((resp) => { localStorage.setItem("jwt", resp) }),
       tap((resp) => { this.setUserInfo(resp) }),
       shareReplay()
-    ).subscribe(() => { this.router.navigateByUrl("/home/index") })
+    ).subscribe({
+      next: (resp) => {
+        this.router.navigateByUrl("/home/index")
+
+      },
+      error: (e: HttpErrorResponse) => {
+        console.log(e);
+        var n: Notice = { type: NOTICE_TYPE_ENUM.ERROR, message: "Password or Username error" };
+        this.noticeService.addNotice(n);
+      }
+    })
+
   }
 
-  logout(){
+  logout() {
     localStorage.removeItem('jwt');
     this.router.navigate(['/login']);
   }

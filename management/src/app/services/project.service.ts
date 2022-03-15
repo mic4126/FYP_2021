@@ -103,4 +103,16 @@ export class ProjectService {
     return this.http.request('delete', `${Globals.API_ROOT}/project/${tag.projectId}/tag`, { body: tag })
   }
 
+  getProjectStatus(projectId: number) {
+    return this.http.get(`${Globals.API_ROOT}/project/${projectId}/status`).pipe(tap(console.log))
+  }
+
+  enableProject(projectId: number) {
+    return this.http.put(`${Globals.API_ROOT}/project/${projectId}/status/enable`,"")
+  }
+
+  disableProject(projectId: number) {
+    return this.http.put(`${Globals.API_ROOT}/project/${projectId}/status/disable`,"")
+  }
+
 }
