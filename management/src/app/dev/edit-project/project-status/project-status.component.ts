@@ -2,6 +2,7 @@ import { HttpResponse } from '@angular/common/http';
 import { Component, Input, OnInit } from '@angular/core';
 import { FormControl } from '@angular/forms';
 import { pairwise } from 'rxjs';
+import { FRONTEND_PROJECT_LINK } from 'src/app/globals';
 import { NoticeService } from 'src/app/services/notice.service';
 import { ProjectService } from 'src/app/services/project.service';
 
@@ -16,9 +17,12 @@ export class ProjectStatusComponent implements OnInit {
 
   projectStautsControl: FormControl = new FormControl();
 
+  frontendLink = ""
+
   constructor(private projectService: ProjectService, private ns: NoticeService) { }
 
   ngOnInit(): void {
+    this.frontendLink = `${FRONTEND_PROJECT_LINK}${this.projectId}`
     this.initFormControl();
     this.projectStautsControl.valueChanges.pipe(pairwise())
       .subscribe(([old, newValue]) => {

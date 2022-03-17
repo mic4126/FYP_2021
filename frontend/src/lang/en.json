@@ -11,7 +11,8 @@
     "project.contact.department":"Responsible Bureau/Department",
     "project.contact.email":"Email",
     "project.contact.tel":"Telephone",
-    "searchResult.All":"All"
+    "searchResult.All":"All",
+    "project.linkToService":"Link To Service"
 
 
 }

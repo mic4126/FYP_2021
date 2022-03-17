@@ -34,7 +34,7 @@ const ProjectDetail = (props: any) => {
             console.log(resp);
             setDesc(resp.data)
         })
-    }, [requestLang])
+    }, [requestLang,projectID])
 
     const [projectName, setProjectName] = useState("")
     useEffect(() => {
@@ -48,7 +48,7 @@ const ProjectDetail = (props: any) => {
             console.log("Project Name: " + resp.data);
             setProjectName(resp.data)
         })
-    }, [requestLang])
+    }, [requestLang,projectID])
 
     const [contact, setContact] = useState(new Object() as Contact)
     useEffect(() => {
@@ -61,7 +61,7 @@ const ProjectDetail = (props: any) => {
             console.log(resp.data);
             setContact(resp.data)
         })
-    }, [])
+    }, [projectID,requestLang])
 
     const [attachments, setAttachments] = useState([] as Attachment[])
     useEffect(() => {
@@ -70,7 +70,7 @@ const ProjectDetail = (props: any) => {
             console.log(resp.data);
             setAttachments(resp.data)
         })
-    }, [])
+    }, [projectID])
 
 
 
@@ -107,7 +107,7 @@ const ProjectDetail = (props: any) => {
                     <div className="card my-2">
                         <div className="card-body">
                             <h2 className="card-title">
-                                Link to Service
+                                <FormattedMessage id="project.linkToService" defaultMessage={"Link to Service"}/>
                             </h2>
                             <a href={contact.url}>{contact.url}</a>
                         </div>
