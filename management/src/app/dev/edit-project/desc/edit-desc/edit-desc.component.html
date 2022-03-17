@@ -1,6 +1,7 @@
 
-<div class="container" >
-    <form action="" [formGroup]="descFormGroup" (ngSubmit)="onDescSubmit()">
+
+<div class="container card"  style="border-top:0px;">
+    <form action="" [formGroup]="descFormGroup" (ngSubmit)="onDescSubmit()" class="card-body">
         <textarea name="" [id]="'desc-textarea-'+lang" cols="30" rows="10" class="form-control my-2" formControlName="descTextArea">
             
         </textarea>

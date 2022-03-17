@@ -18,7 +18,7 @@ const routes: Routes = [{
   canActivate: [LoginGuard],
   canActivateChild: [LoginGuard],
   children: [
-    { path: 'index', component: IndexComponent },
+    { path: 'index', component: IndexComponent,canActivate:[LoginGuard] },
     { path: 'create-user', component: CreateUserComponent, canActivate: [AdminGuard] },
     { path: 'create-project', component: CreateProjectComponent, canActivate: [AdminGuard] },
     { path: 'delete-user', component: DeleteUserComponent, canActivate: [AdminGuard] },
