@@ -10,7 +10,6 @@ import { JwtModule } from '@auth0/angular-jwt';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ForgetPasswordComponent } from './forget-password/forget-password.component';
 import { HomeComponent } from './home/home.component';
-import { HomeRoutingModule } from './home/home-routing.module';
 import { HomeModule } from './home/home.module';
 import { CreateUserComponent } from './admin/create-user/create-user.component';
 import { CreateProjectComponent } from './admin/create-project/create-project.component';
@@ -32,6 +31,7 @@ import { ChangePasswordComponent } from './common/change-password/change-passwor
 import { NoticeComponent } from './common/notice/notice.component';
 import { ErrorInterceptor } from './interceptor/error.interceptor';
 import { ProjectStatusComponent } from './dev/edit-project/project-status/project-status.component';
+import { ForgetPasswordModule } from './forget-password/forget-password.module';
 
 export function jwtGetter() {
   return localStorage.getItem("jwt");
@@ -42,7 +42,6 @@ export function jwtGetter() {
     AppComponent,
     LoginComponent,
     IndexComponent,
-    ForgetPasswordComponent,
     HomeComponent,
     CreateUserComponent,
     CreateProjectComponent,

@@ -9,7 +9,11 @@ import { LoginComponent } from './login/login.component';
 const routes: Routes = [
   { path: "login", component: LoginComponent },
   { path: "", component: LoginComponent },
-  { path: "forgetpassword", component: ForgetPasswordComponent }
+  {
+    path: "forgetpassword", loadChildren: () =>
+      import('./forget-password/forget-password.module')
+        .then(m => m.ForgetPasswordModule)
+  }
 ];
 
 @NgModule({
