@@ -29,19 +29,11 @@ export function jwtGetter() {
     AppComponent,
     IndexComponent,
     HomeComponent,
-    CreateUserComponent,
-    CreateProjectComponent,
-    DeleteUserComponent,
-    AssignDevComponent,
-    ChangeUserInfoComponent,
   ],
   imports: [
     BrowserModule,
-    ReactiveFormsModule,
-    HttpClientModule,
+    HttpClientModule,    
     HomeModule,
-    NgSelectModule,
-    FormsModule,
     JwtModule.forRoot({
       config: {
         tokenGetter: jwtGetter,
@@ -52,7 +44,6 @@ export function jwtGetter() {
         ]
       }
     }),
-    NgbModule,
     NoticeModule,
     AppRoutingModule,
 
