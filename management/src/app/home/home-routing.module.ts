@@ -18,14 +18,18 @@ const routes: Routes = [{
   canActivate: [LoginGuard],
   canActivateChild: [LoginGuard],
   children: [
-    { path: 'index', component: IndexComponent,canActivate:[LoginGuard] },
+    { path: 'index', component: IndexComponent, canActivate: [LoginGuard] },
     { path: 'create-user', component: CreateUserComponent, canActivate: [AdminGuard] },
     { path: 'create-project', component: CreateProjectComponent, canActivate: [AdminGuard] },
     { path: 'delete-user', component: DeleteUserComponent, canActivate: [AdminGuard] },
     { path: 'assign-dev', component: AssignDevComponent, canActivate: [AdminGuard] },
     { path: 'edit-project', component: EditProjectComponent, canActivate: [DevGuard] },
     { path: 'change-info', component: ChangeUserInfoComponent, canActivate: [LoginGuard] },
-    { path: 'change-password', component: ChangePasswordComponent, canActivate: [LoginGuard] }
+    {
+      path: 'change-password', canActivate: [LoginGuard],
+      loadChildren: () => import('../common/change-password/change-password.module')
+      .then(m => m.ChangePasswordModule)
+    }
   ]
 }];
 

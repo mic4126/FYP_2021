@@ -4,8 +4,8 @@ import { Notice } from 'src/app/model/notice.model';
 import { NoticeService } from 'src/app/services/notice.service';
 
 const defaultClassList = ["alert"]
-// const defaultTimeout = 1000 * 10 //10 * 1000ms = 10s
-const defaultTimeout = -1 //10 * 1000ms = 10s
+const defaultTimeout = 1000 * 10 //10 * 1000ms = 10s
+// const defaultTimeout = -1 //10 * 1000ms = 10s
 @Component({
   selector: 'app-notice',
   templateUrl: './notice.component.html',
