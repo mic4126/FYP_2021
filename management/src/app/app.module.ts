@@ -15,19 +15,9 @@ import { CreateProjectComponent } from './admin/create-project/create-project.co
 import { NgSelectModule } from '@ng-select/ng-select';
 import { DeleteUserComponent } from './admin/delete-user/delete-user.component';
 import { AssignDevComponent } from './admin/assign-dev/assign-dev.component';
-import { EditProjectComponent } from './dev/edit-project/edit-project.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import { DescComponent } from './dev/edit-project/desc/desc.component';
-import { EditDescComponent } from './dev/edit-project/desc/edit-desc/edit-desc.component';
-import { EditProjectNameComponent } from './dev/edit-project/edit-project-name/edit-project-name.component';
-import { EditContactComponent } from './dev/edit-project/edit-contact/edit-contact.component';
-import { EditTagComponent } from './dev/edit-project/edit-tag/edit-tag.component';
-import { DetailsComponent } from './dev/edit-project/details/details.component';
-import { EditDetailComponent } from './dev/edit-project/details/edit-detail/edit-detail.component';
-import { PhotoComponent } from './dev/edit-project/photo/photo.component';
 import { ChangeUserInfoComponent } from './common/change-user-info/change-user-info.component';
 import { ErrorInterceptor } from './interceptor/error.interceptor';
-import { ProjectStatusComponent } from './dev/edit-project/project-status/project-status.component';
 import { NoticeModule } from './common/notice/notice.module';
 
 export function jwtGetter() {
@@ -37,23 +27,12 @@ export function jwtGetter() {
 @NgModule({
   declarations: [
     AppComponent,
-    LoginComponent,
     IndexComponent,
     HomeComponent,
     CreateUserComponent,
     CreateProjectComponent,
     DeleteUserComponent,
     AssignDevComponent,
-    EditProjectComponent,
-    DescComponent,
-    EditDescComponent,
-    EditProjectNameComponent,
-    EditContactComponent,
-    EditTagComponent,
-    DetailsComponent,
-    EditDetailComponent,
-    PhotoComponent,
-    ProjectStatusComponent,
     ChangeUserInfoComponent,
   ],
   imports: [
