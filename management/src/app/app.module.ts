@@ -32,6 +32,7 @@ import { NoticeComponent } from './common/notice/notice.component';
 import { ErrorInterceptor } from './interceptor/error.interceptor';
 import { ProjectStatusComponent } from './dev/edit-project/project-status/project-status.component';
 import { ForgetPasswordModule } from './forget-password/forget-password.module';
+import { NoticeModule } from './common/notice/notice.module';
 
 export function jwtGetter() {
   return localStorage.getItem("jwt");
@@ -57,8 +58,7 @@ export function jwtGetter() {
     EditDetailComponent,
     PhotoComponent,
     ChangeUserInfoComponent,
-    ChangePasswordComponent,
-    NoticeComponent,
+    ChangePasswordComponent,    
     ProjectStatusComponent
   ],
   imports: [
@@ -78,8 +78,10 @@ export function jwtGetter() {
         ]
       }
     }),
-    AppRoutingModule,
     NgbModule,
+    NoticeModule,
+    AppRoutingModule,
+
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,

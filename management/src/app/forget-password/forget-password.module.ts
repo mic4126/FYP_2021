@@ -7,6 +7,7 @@ import { ReactiveFormsModule, FormsModule } from '@angular/forms';
 import { NgSelectModule } from '@ng-select/ng-select';
 import { HomeModule } from '../home/home.module';
 import { ForgetPasswordComponent } from './forget-password.component';
+import { NoticeModule } from '../common/notice/notice.module';
 
 
 @NgModule({
@@ -19,6 +20,7 @@ import { ForgetPasswordComponent } from './forget-password.component';
     HomeModule,
     NgSelectModule,
     FormsModule,
+    NoticeModule,    
   ]
 })
 export class ForgetPasswordModule { }
