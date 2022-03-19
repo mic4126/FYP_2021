@@ -18,7 +18,7 @@ const Tags = (props: any) => {
             console.log(resp.data);
             setTagData(resp.data);
         })
-    }, [])
+    }, [projectID])
 
     const tagClickhandler = (e: React.MouseEvent<HTMLButtonElement>) => {
         console.log(e.currentTarget.dataset.tag);

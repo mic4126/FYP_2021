@@ -24,7 +24,7 @@ const Detail = (props: any) => {
 
         })
 
-    }, [])
+    }, [projectID])
 
     const [attachments, setAttachments] = useState([] as Attachment[])
     useEffect(() => {
@@ -33,7 +33,7 @@ const Detail = (props: any) => {
             console.log(resp.data);
             setAttachments(resp.data)
         })
-    }, [])
+    }, [projectID])
 
     const listdetailChild = (data: Detail[]) => {
         return data.map((d, index) => {

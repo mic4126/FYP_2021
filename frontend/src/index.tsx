@@ -10,6 +10,7 @@ import axios from 'axios';
 import { IntlProvider } from 'react-intl';
 import en from './lang/en.json';
 import zhTW from './lang/zh-TW.json'
+import zhSC from './lang/zh-SC.json'
 import { Context } from 'react-intl/src/components/injectIntl';
 import { LangContext } from './context/lang-context';
 
@@ -28,6 +29,9 @@ function IndexPage(props: any) {
         break;
       case 'en':
         setLangFile(en);
+        break;
+      case 'zh-SC':
+        setLangFile(zhSC);
         break;
       default:
         setLangFile(en);

@@ -32,9 +32,9 @@ const SearchResult = (props: any) => {
             }
             )
         }
-    }, [requestLang])
+    }, [requestLang, query])
 
-    
+
     useEffect(() => {
         if (tag) {
 
@@ -50,7 +50,7 @@ const SearchResult = (props: any) => {
             }
             )
         }
-    }, [requestLang])
+    }, [requestLang, tag])
 
     const listResult = (searchResult: SearchResult[]) => {
         if (queryDone) {
@@ -100,13 +100,13 @@ const SearchResult = (props: any) => {
     )
 
     function getSearchDisplay(): React.ReactNode {
-        if (query){
+        if (query) {
             return query
         }
-        if (tagDisplay){
+        if (tagDisplay) {
             return tagDisplay
         }
-        return <FormattedMessage id="searchResult.All" defaultMessage={"ALL"}/>
+        return <FormattedMessage id="searchResult.All" defaultMessage={"ALL"} />
     }
 }
 
