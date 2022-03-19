@@ -2,16 +2,24 @@
 spring.datasource.url=
 spring.datasource.username=
 spring.datasource.password=
+spring.datasource.hikari.maximumPoolSize=
+
 
 # configurating mail server
 spring.mail.host=
 spring.mail.port=
 spring.mail.username=
 spring.mail.password=
-#sender address of reset/init password email
+
 airegistry.mail.sender=
 
-#Attachment storage directory
 airegistry.storage.directory=
-#Key for signing jwt token (At least 32 char)
+
 jwt.key=
+
+server.servlet.context-path=/api
+
+server.servlet.encoding.charset=UTF-8
+server.servlet.encoding.force-response=true
+server.servlet.encoding.enabled=true
+server.servlet.encoding.force=true

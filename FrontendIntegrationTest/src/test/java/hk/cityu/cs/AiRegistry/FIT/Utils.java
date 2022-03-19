@@ -35,7 +35,7 @@ public class Utils {
 
     public static void scrollToElement(WebDriver driver, WebElement element) throws InterruptedException {
         ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true)", element);
-        Thread.sleep(500);
+        Thread.sleep(2000);
     }
 
     public static void clearAndEnterString(WebElement element, String data) {
