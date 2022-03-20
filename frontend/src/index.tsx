@@ -13,6 +13,8 @@ import zhTW from './lang/zh-TW.json'
 import zhSC from './lang/zh-SC.json'
 import { Context } from 'react-intl/src/components/injectIntl';
 import { LangContext } from './context/lang-context';
+import CookieConsent from "react-cookie-consent";
+
 
 
 function IndexPage(props: any) {
@@ -48,8 +50,18 @@ function IndexPage(props: any) {
       <LangContext.Provider value={{ lang: locale, updateLang: setLocale }}>
         <IntlProvider locale={locale} messages={langFile}>
           <BrowserRouter>
+
             <Header locale={locale} setLocale={setLocale} />
             <IndexRouter locale={locale} />
+            <CookieConsent
+              disableStyles={true}
+              buttonClasses="btn btn-primary"
+              containerClasses="alert alert-warning col-lg-12 gdpr"
+              contentClasses="text-capitalize"
+            >
+              This website uses cookies to enhance the user experience.{" "}
+              <span style={{ fontSize: "10px" }}></span>
+            </CookieConsent>
           </BrowserRouter>
         </IntlProvider>
       </LangContext.Provider>
