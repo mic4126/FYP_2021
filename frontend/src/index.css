@@ -16,3 +16,9 @@ div .gdpr{
   position: sticky;
   margin-bottom: 0px;  
 }
+
+p.card-text{
+  max-height: 10rem;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}

@@ -94,7 +94,7 @@ const SearchResult = (props: any) => {
     return (
 
         <div className="container">
-            <h1>Search Result - {getSearchDisplay()}</h1>
+            <h1><FormattedMessage id="search.searchResult" defaultMessage={"Search Result"}></FormattedMessage> - {getSearchDisplay()}</h1>
             {listResult(searchResult)}
         </div>
     )

@@ -1,6 +1,7 @@
 package hk.edu.cityu.cs.FYP.AIRegistry.controller.admin;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -140,11 +141,15 @@ public class ProjectController {
     }
 
     @GetMapping(path = "")
-    public ResponseEntity<?> getAllProjects(@RequestParam(required = false) Lang lang) {
+    public ResponseEntity<?> getAllProjects(@RequestParam(required = false) Lang lang,@RequestParam(required = false) Boolean all) {
         if (lang == null) {
             lang = Lang.ENG;
         }
         List<Project> projects = projectService.getAllProject(lang);
+        if (null == all || all.equals(false)){
+            // filter disabled project
+            projects = projects.stream().filter(Project::isEnabled).collect(Collectors.toList());
+        }
         return ResponseEntity.ok(projects);
     }
 

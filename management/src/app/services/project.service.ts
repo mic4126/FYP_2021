@@ -23,7 +23,7 @@ export class ProjectService {
   }
 
   getAllProject() {
-    return this.http.get<Project>(`${Globals.API_ROOT}/project`).pipe(tap(console.log))
+    return this.http.get<Project>(`${Globals.API_ROOT}/project?all=true`).pipe(tap(console.log))
   }
 
   getProjectDevelopers(projectId: number): Observable<UserInfo[]> {

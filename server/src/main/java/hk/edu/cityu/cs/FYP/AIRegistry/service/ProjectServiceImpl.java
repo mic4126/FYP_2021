@@ -1,6 +1,8 @@
 package hk.edu.cityu.cs.FYP.AIRegistry.service;
 
 import java.util.List;
+import java.util.stream.Collector;
+import java.util.stream.Collectors;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -120,8 +122,6 @@ public class ProjectServiceImpl implements ProjectService {
         }
     }
 
-  
-
     @Transactional(readOnly = true)
     @Override
     public Project getProject(int projectId, Lang lang) {
@@ -185,13 +185,14 @@ public class ProjectServiceImpl implements ProjectService {
     @Override
     public void disableProject(int projectId) {
         projectDao.disableProject(projectId);
-        
+
     }
+
     @Transactional
     @Override
     public void enableProject(int projectId) {
         projectDao.enableProject(projectId);
-        
+
     }
 
     @Transactional(readOnly = true)

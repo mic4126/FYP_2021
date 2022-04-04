@@ -1,5 +1,6 @@
 package hk.edu.cityu.cs.FYP.AIRegistry.service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.stream.Collectors;
 
@@ -25,7 +26,10 @@ public class SearchServiceImpl implements SearchService {
     @Override
     public List<Project> search(String query, Lang lang) {
         var projectIds = projectDao.searchProject(query);
-        List<Project> projects;
+        List<Project> projects = new ArrayList<Project>();
+        if (projectIds.size() == 0) {
+            return projects;
+        }
         if (Lang.TC.equals(lang)) {
             projects = projectDao.getProjectsTC(projectIds);
         } else if (Lang.SC.equals(lang)) {
@@ -42,7 +46,10 @@ public class SearchServiceImpl implements SearchService {
     @Override
     public List<Project> searchTag(String tag, Lang lang) {
         var projectIds = tagDao.searchByTag(tag);
-        List<Project> projects;
+        List<Project> projects = new ArrayList<Project>();
+        if (projectIds.size() == 0) {
+            return projects;
+        }
         if (Lang.TC.equals(lang)) {
             projects = projectDao.getProjectsTC(projectIds);
         } else if (Lang.SC.equals(lang)) {

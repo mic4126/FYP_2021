@@ -7,7 +7,7 @@ import useDetailName from "../util/useDetailLang";
 
 const listAttachment = (attachments: Attachment[]) => {
     return attachments.map((atch) => {
-        return <a href={"/api/project/attachment/" + atch.attachmentId} key={'atch-'+atch.attachmentId}>{atch.origFileName + "." + atch.origExt}</a>
+        return <a href={"/api/project/attachment/" + atch.attachmentId} key={'atch-' + atch.attachmentId}>{atch.origFileName + "." + atch.origExt}</a>
     })
 }
 
@@ -18,11 +18,16 @@ export default function DetailChild(props: any) {
         axios.get<Attachment[]>(`/project/detail/${d.detailId}/attachment`, {
         }).then(resp => {
             console.log(resp.data);
+            if(!resp.data.length){
+                setHideAttachment("hide")
+            }
             setAttachments(resp.data)
         })
     }, [d.detailId])
 
     const detailLang = useDetailName();
+
+    const [hideAttachemnt, setHideAttachment] = useState("");
 
     return (
         <Accordion.Item eventKey={d.detailId + '-detail'} key={d.detailId + '-item'}>
@@ -33,10 +38,10 @@ export default function DetailChild(props: any) {
                 <h3 className="my-2">
                     <FormattedMessage id="detail.desc" defaultMessage="Description" />
                 </h3>
-                <pre>
+                <div>
                     {d[detailLang.desc]}
-                </pre>
-                <h3 className="my-2">
+                </div>
+                <h3 className={"my-2 " + hideAttachemnt}>
                     <FormattedMessage id="detail.attachment" defaultMessage="Attachment" />
                 </h3>
                 {listAttachment(attachments)}

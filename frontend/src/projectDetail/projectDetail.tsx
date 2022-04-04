@@ -1,11 +1,9 @@
-import React, { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import Carousel from 'react-bootstrap/Carousel'
-import logo from './../logo.svg';
 import Detail from "./Detail";
 import { useSearchParams } from 'react-router-dom'
 import Tags from './Tags'
 import axios from "axios";
-import { LangContext } from "../context/lang-context";
 import useRequestLang from "../util/useRequestLang";
 import { FormattedMessage } from "react-intl";
 import { Contact } from "../modal/Contact.model";
@@ -34,7 +32,7 @@ const ProjectDetail = (props: any) => {
             console.log(resp);
             setDesc(resp.data)
         })
-    }, [requestLang,projectID])
+    }, [requestLang, projectID])
 
     const [projectName, setProjectName] = useState("")
     useEffect(() => {
@@ -48,7 +46,7 @@ const ProjectDetail = (props: any) => {
             console.log("Project Name: " + resp.data);
             setProjectName(resp.data)
         })
-    }, [requestLang,projectID])
+    }, [requestLang, projectID])
 
     const [contact, setContact] = useState(new Object() as Contact)
     useEffect(() => {
@@ -61,14 +59,20 @@ const ProjectDetail = (props: any) => {
             console.log(resp.data);
             setContact(resp.data)
         })
-    }, [projectID,requestLang])
+    }, [projectID, requestLang])
 
     const [attachments, setAttachments] = useState([] as Attachment[])
+    const [photoClass, setPhotoClass] = useState("" as string)
     useEffect(() => {
         axios.get<Attachment[]>(`project/${projectID}/attachment`, {
         }).then(resp => {
             console.log(resp.data);
-            setAttachments(resp.data)
+            if (resp.data.length) {
+                setPhotoClass("")
+                setAttachments(resp.data)
+            } else {
+                setPhotoClass("hide");
+            }
         })
     }, [projectID])
 
@@ -81,21 +85,23 @@ const ProjectDetail = (props: any) => {
                 <div className="col container"></div>
                 <div className="col-xxl-9">
                     <h1>{projectName}</h1>
-                    <Carousel variant="dark" className="">
-                        {
-                            attachments.map((atch) => {
-                                return (
-                                    <Carousel.Item key={"atch" + atch.attachmentId}>
-                                        <img
-                                            className="d-block mx-auto"
-                                            src={`/api/project/attachment/${atch.attachmentId}`}
-                                            alt=""
-                                        />
-                                    </Carousel.Item>
-                                )
-                            })
-                        }
-                    </Carousel>
+                    <div id="photo" className={photoClass}>
+                        <Carousel variant="dark" className="">
+                            {
+                                attachments.map((atch) => {
+                                    return (
+                                        <Carousel.Item key={"atch" + atch.attachmentId}>
+                                            <img
+                                                className="d-block mx-auto"
+                                                src={`/api/project/attachment/${atch.attachmentId}`}
+                                                alt=""
+                                            />
+                                        </Carousel.Item>
+                                    )
+                                })
+                            }
+                        </Carousel>
+                    </div>
 
                     <div className="card my-2">
                         <div className="card-body w-100">
@@ -107,7 +113,7 @@ const ProjectDetail = (props: any) => {
                     <div className="card my-2">
                         <div className="card-body">
                             <h2 className="card-title">
-                                <FormattedMessage id="project.linkToService" defaultMessage={"Link to Service"}/>
+                                <FormattedMessage id="project.linkToService" defaultMessage={"Link to Service"} />
                             </h2>
                             <a href={contact.url}>{contact.url}</a>
                         </div>

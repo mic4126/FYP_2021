@@ -223,8 +223,12 @@ public class ProjectDaoImpl implements ProjectDao {
     public boolean getProjectStatus(int projectId) {
         var session = sqlSessionFactory.openSession();
         var mapper = session.getMapper(ProjectMapper.class);
-        return mapper.getProjectStatus(projectId);
-        
+        try {
+            return mapper.getProjectStatus(projectId);
+        } catch (NullPointerException ex) {
+            return false;
+        }
+
     }
 
 }

@@ -12,7 +12,8 @@
     "project.contact.email":"Email",
     "project.contact.tel":"Telephone",
     "searchResult.All":"All",
-    "project.linkToService":"Link To Service"
+    "project.linkToService":"Link To Service",
+    "search.searchResult":"Search Result"
 
 
 }
