@@ -13,5 +13,6 @@
     "project.contact.tel": "电话",
     "searchResult.All": "全部",
     "project.linkToService": "服务链接",
-    "search.searchResult": "搜索结果"
+    "search.searchResult": "搜索结果",
+    "tag.tag":"标签"
 }

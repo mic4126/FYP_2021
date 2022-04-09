@@ -1,5 +1,6 @@
 import axios from "axios";
 import React, { useEffect, useState } from "react";
+import { FormattedMessage } from "react-intl";
 import { Navigate, useNavigate } from "react-router";
 import { createSearchParams } from "react-router-dom";
 import { Tag } from "../modal/Tag.model";
@@ -38,7 +39,7 @@ const Tags = (props: any) => {
         <div className="container col">
             <div className="card">
                 <div className="card-body">
-                    <h5 className="card-title">Tags:</h5>
+                    <h5 className="card-title"><FormattedMessage defaultMessage={"Tags:"} id="tag.tag"></FormattedMessage></h5>
                     <div className="d-flex flex-wrap col">
                         {listTag(tagData)}
                     </div>
